@@ -1,0 +1,1410 @@
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+DATA RECOVERY BOOK V1.0
+FOREWORD
+----------------------------------------------------------------------------------------------------------------------
+The core of information age is the information technology, while the core of the information
+technology consists in the information process and storage. Along with the rapid development of
+the information and the popularization of the personal computer, people find information more
+and more useful and need it ever more than the past. Owning to the massive data, there is a huge
+challenge to the data storage technology. So how to save so many documents and how to visit
+document as fast as possible become the key point. We know we need storage devices to save data,
+while there are so many kinds of storage devices and modes to save data. What’s more, when
+saving the data and information, it is more important to ensure the storage security as well as the
+accuracy, usability, reliability of data. Often, what is invaluable is that invisible data.
+CONTENTS
+----------------------------------------------------------------------------------------------------------------------
+Ⅰ.Elementary knowledge of data recovery..................................................................................3
+1.Connotation of data................................................................................................................3
+2.The essence of data recovery .................................................................................................3
+3.The scope of data recovery ....................................................................................................3
+4.The principle of data recovery ...............................................................................................4
+Ⅱ.Data loss......................................................................................................................................4
+1.Software reason......................................................................................................................4
+2.Hardware reason ....................................................................................................................5
+Ⅲ.Data Protecting Technologies....................................................................................................6
+1.SMART Technology ..............................................................................................................6
+2.SPS.........................................................................................................................................6
+3.DFT........................................................................................................................................6
+4.Floppy disk array technology.................................................................................................6
+5.SAN........................................................................................................................................7
+6.NAS........................................................................................................................................7
+7.Backup ...................................................................................................................................7
+Ⅳ.Elementary knowledge of hard disk.........................................................................................7
+1.History of hard disk development..........................................................................................8
+2.Main technical specification and parameter of hard disk.......................................................9
+3.Physical structure of hard disk .............................................................................................11
+4.Logical organization of hard disk.........................................................................................13
+5.Connection synopsis of hard disk ........................................................................................16
+Ⅴ.Hard disk data organization ...................................................................................................16
+1.Primary formatting of hard disk...........................................................................................16
+2.Advanced formatting of hard disk........................................................................................18
+3.Data storage region of hard disk ..........................................................................................20
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+1
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Ⅵ.Common Cases of Partition Recovery....................................................................................23
+1.MBR Recovery ....................................................................................................................23
+2.Recovery of Partition ...........................................................................................................25
+3.Partition Table Doctor..........................................................................................................25
+4.The FAT table recovery........................................................................................................33
+Ⅶ.Case Study.................................................................................................................................35
+1. Introduction of Data Recovery Wizard 3.0 .........................................................................35
+2. Matters needs attention before recovery .............................................................................35
+3. Deletedrecovery ..................................................................................................................36
+4.FormatRecovery...................................................................................................................42
+5.Recover encrypt/compressed files in NTFS.........................................................................43
+6.RAW RECOVERY ..............................................................................................................44
+7. Recovery when parts of partitions are lost:.........................................................................45
+8. Data recovery in dynamic volume ......................................................................................49
+9. Data recovery on inaccessible partition. .............................................................................49
+10. File recovery on RAW partition ........................................................................................55
+11. Data recovery when all the partitions are lost ...................................................................55
+12．Data recovery when GHOST Image restore failed..........................................................59
+13. After Partition Magic size revision/ combination/ division of partitions fails, how to
+recover the lost data?...............................................................................................................59
+14. When using Data Recovery Wizard 3.0 to recover files, there is some strange sound in
+HD. How to handle it? ............................................................................................................59
+15. HD cannot be detected in BIOS, how to recover data by Data Recovery Wizard 3.0 ......59
+16. There is not enough space in hard disk to save the recovered files, nor there is removable
+storage device, how to handle it? ............................................................................................59
+17. How to recover data in other storage devices (eg: floppy disk, flash drive, removable disk
+etc)?.........................................................................................................................................60
+18. To recover image file, how can I know it can really recover the data before I buy Data
+Recovery Wizard 3.0 ? ............................................................................................................62
+19. There are so many files recovered, how can I find the files I want fast? ..........................63
+20. I have recovered some files, but I cannot rightly open them.............................................65
+21. In what occasion I cannot rightly recover data?................................................................65
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+2
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Elementary
+Ⅰ.Elementary knowledge of data recovery
+1.Connotation of data
+Connotation of data is comprehensive, it includes not only multi-media files such as data
+documents, images, voices that stored in file system or data base, but also hardware information,
+network addresses and network services, which are used to deposit and manage those information.
+2.The essence of data recovery
+Data recovery means retrieving lost, deleted, unusable or inaccessible data that lost for various
+reasons.
+Data recovery not only restores lost files but also recovers corrupted data.
+On the basis of different lost reason, we can adopt different data recovery methods. There are
+software and hardware reasons that cause data loss, while we can recover data by software and
+hardware ways.
+Being different from prevention and backup, data recovery is the remedial measure. The best way
+to insure the security of your data is prevention and backup regularly. To operate and use your data
+according to the normative steps, you can reduce the danger of data loss to the lowest.
+3.The scope of data recovery
+There are so many forms and phenomenon on data problem, we can divide the objects or scope of
+data recovery according to different symptoms.
+System problem
+The main symptom is that you cannot enter the system or the system is abnormal or computer
+closes down. There are complex reasons for this, thus we need adopt different processing methods.
+Reasons for this symptom may be the key file of system is lost or corrupted, there is some bad
+track on hard disk, the hard disk is damaged, MBR or DBR is lost, or the CMOS setting is
+incorrect and so on.
+Bad track of hard disk
+There are logic and physical bad track. Logic bad track is mainly caused by incorrect operation,
+and it can be restored by software. While physical bad track is caused by physical damage, which
+is real damage, we can restore it by changing the partition or sector. When there is physical bad
+track, you’d better backup your data for fear that the data can not be used any more because of the
+bad track.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+3
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Partition problem
+If partition can not be identified and accessed, or partition is identified as unformatted, partition
+recovery tools such as Partition Table Doctor can be used to recover data.
+Files loss
+If files are lost because of deletion, format or Ghost clone error, files restoring tools such as Data
+Recovery Wizard can be used to recover data.
+Password loss
+If files, system password, database or account is lost, some special decryption tools that
+correspond to certain data form such as Word, Winzip can be used.
+Files repair
+For some reasons, some files can not be accessed or used, or the contents are full of troubled
+characters, the contents are changed so as they can not be read. In this condition, some special
+files restoring tools can be tried to restore the files.
+4.The principle of data recovery
+Data recovery is a process of finding and recovering data, in which there may be some risk, for no
+all situations can be anticipated or prearranged. It means maybe there will be some unexpected
+things happen. So you need reduce the danger in data recovery to the lowest:
+Backup all the data in your hard disk
+Prevent the equipment from being damaged again
+Don’t write anything to the device on which you want to recover data
+Try to get detailed information on how the data lost and the losing process
+Backup the data recovered in time.
+Ⅱ.Data loss
+Actually, there are various reasons that cause data loss; software, hardware, factitious, natural,
+intended, unintended, all may cause data loss or damage on storage devices.
+Generally, There are two main reasons for data problem: software and hardware whose
+corresponding reasons are software reason and hardware reason.
+1.Software reason
+Virus, format, mis-partition, mis-clone, mis-operation, network deletion, power-cut during
+operation all may be the software reasons. The symptoms are usually mis-operation, read error,
+can not find or open file, report no partition, not formatted, password lost and troubled characters.
+A: Computer Viruses: some malicious virus programs will destroy data, overwrite, or erase the
+data contents.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+4
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+B: Mis-format: fast or completely format partition, thus changing the file system form (NTFS,
+FAT32) of partition.
+C: Mis-Clone: when backing up the hard disk, mis-clone or overlay the original data on hard disk.
+For these, we can use software tools to recover it. So called soft recovery means data can be
+recovered by software, not referring to hardware fixing operation for its fault is not because of
+hardware failure.
+The following are prompts that system can not start up normally:
+Invalid Partition Table: Invalid partition table information.
+Missing Operating System: “55AA” mark in DOS boot sector lost or DBR corrupted.
+Disk Boot Failure: System file read failure.
+
+Bad or missing command interpreter: Can not find command.com file or ‘COMMAND.COM’ file
+corrupted.
+Invalid system disk: DOS boot record corrupted.
+Type the name of the command, Interpreter: DOS partition mark in partition table error or
+‘COMMAND.COM’ file lost, corrupted.
+Error Loading Operating System: Main boot startup program read boot sector unsuccessfully.
+Not found any active partition in HDD: Active partition mark in partition table changed as inactive
+partition mark.
+2.Hardware reason
+Sometimes data loss is because of hardware, such as bad sector in hard disk, power cut, head
+damage, circuit panel problem, etc.
+When your hardware has some problems, you probably will find: the speed of hardware become
+slow, you cannot operate successfully; you cannot read data, etc, which are most often physical
+bad track failures.
+Correspondingly, data recovery in hardware fix is considered as hard recovery, such as memory
+medium damage, track damage, hard disk scrape, head damage, electric machinery damage, chip
+burnout and so on..
+The most distinct feature or difference between soft recovery and hard recovery is whether the
+memory medium itself can be normally accessed by fixing or replacing parts.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+5
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Ⅲ.Data Protecting Technologies
+Data security and fault freedom of storage are paid more and more attention. People are attaching
+more and more importance to developing new technologies to protect data.
+1.SMART Technology
+SMART, also called Self-Monitoring Analysis and Report Technology, mainly protects HD from
+losing data when there is some problems on the HD. SMART drive can reduce the risk of data
+loss, it alarms to predict and remind thus enhancing the data security.
+2.SPS
+Shake Protecting System, can prevent the head from shaking thus enhancing the anti-knock
+characteristics of HD, avoiding damages caused by shake.
+3.DFT
+DFT, a kind of IBM data protecting technology, can check hard disk via using DFT program to
+access the DFT micro codes in hard disk. By DFT, users can conveniently check the HD
+operation.
+4.Floppy disk array technology
+Originally ‘Redundant Arrays of Inexpensive Disks’. A project at the computer science department
+of the University of California at Berkeley, under the direction of Professor Katz, in conjunction
+with Professor John Ousterhout and Professor David Patterson.
+The project is reaching its culmination with the implementation of a prototype disk array file
+server with a capacity of 40 GBytes and a sustained bandwidth of 80 MBytes/second. The server
+is being interfaced to a 1 Gb/s local area network. A new initiative, which is part of the Sequoia
+2000 Project, seeks to construct a geographically distributed storage system spanning disk arrays
+and automated libraries of optical disks and tapes. The project will extend the interleaved storage
+techniques so successfully applied to disks to tertiary storage devices. A key element of the
+research will be to develop techniques for managing latency in the I/O and network paths.
+The original (‘Inexpensive’) term referred to the 3.5 and 5.25 inch disks used for the first RAID
+system but no longer applies.
+The following standard RAID specifications exist:
+RAID 0 Non-redundant striped array
+RAID 1 Mirrored arrays
+RAID 2 Parallel array with ECC
+RAID 3 Parallel array with parity
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+6
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+RAID 4 Striped array with parity
+RAID 5 Striped array with rotating parity
+The basic idea of RAID (Redundant Array of Independent Disks) is to combine multiple
+inexpensive disk drives into an array of disk drives to obtain performance, capacity and reliability
+that exceeds that of a single large drive. The array of drives appears to the host computer as a
+single logical drive. The Mean Time Between Failure (MTBF) of the array is equal to the MTBF
+of an individual drive, divided by the number of drives in the array. Because of this, the MTBF of
+a non-redundant array (RAID 0) is too low for mission-critical systems. However, disk arrays can
+be made fault-tolerant by redundantly storing information in various ways.
+5.SAN
+SAN, called Storage Area Network or Network behind servers, is specialized, high speed network
+attaching servers and storage devices. A SAN allows "any to any" connection across the network,
+using interconnect elements such as routers, gateways, hubs and swithes. It eliminates the
+traditional dedicated connection between a server and storage, and concept that the server
+effectively "owns and manages" the storage devices. It also eliminates any restriction to amount of
+data that a server can access, currently limited by the number of storage devices, which can be
+attached to the individual server. Instead, a SAN introduces the flexibility of networking to enable
+one server or many heterogeneous servers to share a common storage "utility", which may
+comprise many storage devices, including disk, tape, and optical storage. And, the storage utility
+may be located far from the servers which use it.
+6.NAS
+NAS is Network Attached Storage. It can store the quick-increased information
+.Backup means to prepare a spare copy of a file, file system, or other resource for use in the event
+of failure or loss of the original. This essential precaution is neglected by most new computer
+users until the first time they experience a disk crash or accidentally delete the only copy of the
+file they have been working on for the last six months. Ideally the backup copies should be kept at
+a different site or in a fire safe since, though your hardware may be insured against fire, the data
+on it is almost certainly neither insured nor easily replaced.
+7.Backup
+Backup in time may reduce the danger and disaster to the lowest, thus data security can be most
+ensured. In different situations, there are different ways. Both backing up important data of system
+with hardware and backing up key information with cloning mirror data to different storage device
+can work well.
+Ⅳ.Elementary knowledge of hard disk
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+7
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+1.History of hard disk development
+The hard disk drive has short and fascinating history. In 24 years it evolved from a monstrosity
+with fifty two-foot diameter disks holding five MBytes (5,000,000 bytes) of data to today's drives
+measuring 3 /12 inches wide and an inch high (and smaller) holding 400 GBytes (400,000,000,000
+bytes/characters). Here, then, is the short history of this marvelous device.
+Before the disk drive there were drums... In 1950 Engineering Research Associates of
+Minneapolis built the first commercial magnetic drum storage unit for the U.S. Navy, the ERA
+110. It could store one million bits of data and retrieve a word in 5 thousandths of a second..
+In 1956 IBM invented the first computer disk storage system, the 305 RAMAC (Random Access
+Method of Accounting and Control). This system could store five MBytes. It had fifty, 24-inch
+diameter disks!
+By 1961 IBM had invented the first disk drive with air bearing heads and in 1963 they introduced
+the removable disk pack drive.
+In 1970 the eight inch floppy disk drive was introduced by IBM. My first floppy drives were
+made by Shugart who was one of the "dirty dozen" who left IBM to start their own companies. In
+1981 two Shugart 8 inch floppy drives with enclosure and power supply cost me about
+$350.00. They were for my second computer. My first computer had no drives at all.
+In 1973 IBM shipped the model 3340 Winchester sealed hard disk drive, the predecessor of all
+current hard disk drives. The 3340 had two spindles each with a capacity of 30 MBytes, and the
+term "30/30 Winchester" was thus coined.
+In 1980, Seagate Technology introduced the first hard disk drive for microcomputers, the
+ST506. It was a full height (twice as high as most current 5 1/4" drives) 5 1/4" drive, with a
+stepper motor, and held 5 Mbytes. My first hard disk drive was an ST506. I cannot remember
+exactly how much it cost, but it plus its enclosure, etc. was well over a thousand dollars. It took
+me three years to fill the drive. Also, in 1980 Phillips introduced the first optical laser drive. In
+the early 80's, the first 5 1/4" hard disks with voice coil actuators (more on this later) started
+shipping in volume, but stepper motor drives continued in production into the early 1990's. In
+1981, Sony shipped the first 3 1/2" floppy drives.
+In 1983 Rodime made the first 3.5 inch rigid disk drive. The first CD-ROM drives were shipped in
+1984, and "Grolier's Electronic Encyclopedia," followed in 1985. The 3 1/2" IDE drive started its
+existence as a drive on a plug-in expansion board, or "hard card." The hard card included the drive
+on the controller which, in turn, evolved into Integrated Device Electronics (IDE) hard disk drive,
+where the controller became incorporated into the printed circuit on the bottom of the hard disk
+drive. Quantum made the first hard card in 1985.
+In 1986 the first 3 /12" hard disks with voice coil actuators were introduced by Conner in volume,
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+8
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+but half (1.6") and full height 5 1/4" drives persisted for several years. In 1988 Conner
+introduced the first one inch high 3 1/2" hard disk drives. In the same year PrairieTek shipped the
+first 2 1/2" hard disks.
+In 1997 Seagate introduced the first 7,200 RPM, Ultra ATA hard disk drive for desktop computers
+and in February of this year they introduced the first 15,000 RPM hard disk drive, the Cheetah
+X15. Milestones for IDE DMA, ATA/33, and ATA/66 drives follow:
+1994 DMA, Mode 2 at 16.6 MB/s
+1997 Ultra ATA/33 at 33.3 MB/s
+1999 Ultra ATA/66 at 66.6 MB/s
+6/20/00 IBM triples the capacity of the world's smallest hard disk drive. This drive holds one
+gigabyte on a disk which is the size of an American quarter. The world's first gigabyte-capacity
+disk drive, the IBM 3380, introduced in 1980, was the size of a refrigerator, weighed 550 pounds
+(about 250 kg), and had a price tag of $40,000.
+2.Main technical specification and parameter of hard disk
+Capacity
+We can see the capacity in two aspects: the total capacity and the capacity of one disk. The whole
+capacity is made up of each disk capacity.
+If we increase the disk capacity, we would not only improve the disk capacity, improve the speed
+of transmission, but also cut the cost down.
+Rotate speed.
+Rotate speed is the speed disk rotate. It is measured by RPM (Round Per Minute).The rotate speed
+of IDE hard disk are 5400RPM, 7200RPM etc.
+Average Seek Time
+The average seek time gives a good measure of the speed of the drive in a multi-user environment
+where successive read/write request are largely uncorrelated.
+Ten ms is common for a hard disk and 200 ms for an eight-speed CD-ROM.
+Average Latency
+The hard disk platters are spinning around at high speed, and the spin speed is not synchronized to
+the process that moves the read/write heads to the correct cylinder on a random access on the hard
+disk. Therefore, at the time that the heads arrive at the correct cylinder, the actual sector that is
+needed may be anywhere. After the actuator assembly has completed its seek to the correct track,
+the drive must wait for the correct sector to come around to where the read/write heads are located.
+This time is called latency. Latency is directly related to the spindle speed of the drive and such is
+influenced solely by the drive's spindle characteristics. This operation page discussing spindle
+speeds also contains information relevant to latency.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+9
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Conceptually, latency is rather simple to understand; it is also easy to calculate. The faster the disk
+is spinning, the quicker the correct sector will rotate under the heads, and the lower latency will be.
+Sometimes the sector will be at just the right spot when the seek is completed, and the latency for
+that access will be close to zero. Sometimes the needed sector will have just passed the head and
+in this "worst case", a full rotation will be needed before the sector can be read. On average,
+latency will be half the time it takes for a full rotation of the disk.
+Average Access Time
+Access time is the metric that represents the composite of all the other specifications reflecting
+random performance positioning in the hard disk. As such, it is the best figure for assessing overall
+positioning performance, and you'd expect it to be the specification most used by hard disk
+manufacturers and enthusiasts alike. Depending on your level of cynicism then, you will either be
+very surprised or not surprised much at all, to learn that it is rarely even discussed. Ironically, in
+the world of CD-ROMs and other optical storage it is the figure that is universally used for
+comparing positioning speed. I am really not sure why this discrepancy exists.
+Perhaps the problem is that access time is really a derived figure, comprised of the other
+positioning performance specifications. The most common definition is:
+Access Time = Command Overhead Time + Seek Time + Settle Time + Latency
+The speed with which data can be transmitted from one device to another. Data rates are often
+measured in megabits (million bits) or megabytes (million bytes) per second. These are usually
+abbreviated as Mbps and MBps, respectively.
+Buffer Size（Cache）
+A small fast memory holding recently accessed data, designed to speed up subsequent access to
+the same data. Most often applied to processor-memory access but also used for a local copy of
+data accessible over a network etc.
+When data is read from, or written to, main memory a copy is also saved in the cache, along with
+the associated main memory address. The cache monitors addresses of subsequent reads to see if
+the required data is already in the cache. If it is (a cache hit) then it is returned immediately and
+the main memory read is aborted (or not started). If the data is not cached (a cache miss) then it is
+fetched from main memory and also saved in the cache.
+The cache is built from faster memory chips than main memory so a cache hit takes much less
+time to complete than a normal memory access. The cache may be located on the same integrated
+circuit as the CPU, in order to further reduce the access time. In this case it is often known as
+primary cache since there may be a larger, slower secondary cache outside the CPU chip.
+The most important characteristic of a cache is its hit rate - the fraction of all memory accesses
+which are satisfied from the cache. This in turn depends on the cache design but mostly on its size
+relative to the main memory. The size is limited by the cost of fast memory chips.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+10
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+The hit rate also depends on the access pattern of the particular program being run (the sequence
+of addresses being read and written). Caches rely on two properties of the access patterns of most
+programs: temporal locality - if something is accessed once, it is likely to be accessed again soon,
+and spatial locality - if one memory location is accessed then nearby memory locations are also
+likely to be accessed. In order to exploit spatial locality, caches often operate on several words at a
+time, a "cache line" or "cache block". Main memory reads and writes are whole cache lines.
+When the processor wants to write to main memory, the data is first written to the cache on the
+assumption that the processor will probably read it again soon. Various different policies are used.
+In a write-through cache, data is written to main memory at the same time as it is cached. In a
+write-back cache it is only written to main memory when it is forced out of the cache.
+If all accesses were writes then, with a write-through policy, every write to the cache would
+necessitate a main memory write, thus slowing the system down to main memory speed. However,
+statistically, most accesses are reads and most of these will be satisfied from the cache.
+Write-through is simpler than write-back because an entry that is to be replaced can just be
+overwritten in the cache as it will already have been copied to main memory whereas write-back
+requires the cache to initiate a main memory write of the flushed entry followed (for a processor
+read) by a main memory read. However, write-back is more efficient because an entry may be
+written many times in the cache without a main memory access.
+When the cache is full and it is desired to cache another line of data then a cache entry is selected
+to be written back to main memory or "flushed". The new line is then put in its place. Which entry
+is chosen to be flushed is determined by a "replacement algorithm".
+Some processors have separate instruction and data caches. Both can be active at the same time,
+allowing an instruction fetch to overlap with a data read or write. This separation also avoids the
+possibility of bad cache conflict between say the instructions in a loop and some data in an array
+which is accessed by that loop.
+Noise & Temperature
+It comes from motor. So motor is the key to reduce the noise and temperature. If you can keep the
+temperature of hard disk down, then you can keep your hard disk effective.
+3.Physical structure of hard disk
+HD consists of platter, control circuit board and interface parts.
+A hard disk is a sealed unit containing a number of platters in a stack. Hard disks may be mounted
+in a horizontal or a vertical position. In this description, the hard drive is mounted horizontally.
+Electromagnetic read/write heads are positioned above and below each platter. As the platters spin,
+the drive heads move in toward the center surface and out toward the edge. In this way, the drive
+heads can reach the entire surface of each platter.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+11
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Making Tracks
+On a hard disk, data is stored in thin, concentric bands. A drive head, while in one position can
+read or write a circular ring, or band called a track. There can be more than a thousand tracks on a
+3.5-inch hard disk. Sections within each track are called sectors. A sector is the smallest physical
+storage unit on a disk, and is almost always 512 bytes (0.5 kB) in size.
+The figure below shows a hard disk with two platters.
+Figure 3-1 Parts of a Hard Drive
+The structure of older hard drives (i.e. prior to Windows 95) will refer to a cylinder/ head/ sector
+notation. A cylinder is formed while all drive heads are in the same position on the disk. The
+tracks, stacked on top of each other form a cylinder. This scheme is slowly being eliminated with
+modern hard drives. All new disks use a translation factor to make their actual hardware layout
+appear continuous, as this is the way that operating systems from Windows 95 onward like to
+work..
+
+To the operating system of a computer, tracks are logical rather than physical in structure, and are
+established when the disk is low-level formatted. Tracks are numbered, starting at 0 (the outermost
+edge of the disk), and going up to the highest numbered track, typically 1023, (close to the center).
+Similarly, there are 1,024 cylinders (numbered from 0 to 1023) on a hard disk.
+
+The stack of platters rotate at a constant speed. The drive head, while positioned close to the center
+of the disk reads from a surface that is passing by more slowly than the surface at the outer edges
+of the disk. To compensate for this physical difference, tracks near the outside of the disk are
+less-densely populated with data than the tracks near the center of the disk. The result of the
+different data density is that the same amount of data can be read over the same period of time,
+from any drive head position.
+The disk space is filled with data according to a standard plan. One side of one platter contains
+space reserved for hardware track-positioning information and is not available to the operating
+system. Thus, a disk assembly containing two platters has three sides available for data.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+12
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Track-positioning data is written to the disk during assembly at the factory. The system disk
+controller reads this data to place the drive heads in the correct sector position.
+4.Logical organization of hard disk
+Sectors and Clusters
+A sector, being the smallest physical storage unit on the disk, is almost always 512 bytes in size
+because 512 is a power of 2 (2 to the power of 9). The number 2 is used because there are two
+states in the most basic of computer languages - on and off.
+Each disk sector is labelled using the factory track-positioning data. Sector identification data is
+written to the area immediately before the contents of the sector and identifies the starting address
+of the sector.
+The optimal method of storing a file on a disk is in a contiguous series, i.e. all data in a stream
+stored end-to-end in a single line. As many files are larger than 512 bytes, it is up to the file
+system to allocate sectors to store the file’s data. For example, if the file size is 800 bytes, two 512
+k sectors are allocated for the file. A cluster is typically the same size as a sector. These two
+sectors with 800 bytes of data are called two clusters.
+They are called clusters because the space is reserved for the data contents. This process protects
+the stored data from being over-written. Later, if data is appended to the file and its size grows to
+1600 bytes, another two clusters are allocated, storing the entire file within four clusters.
+Figure 3-2 Sectors and Clusters
+If contiguous clusters are not available (clusters that are adjacent to each other on the disk), the
+second two clusters may be written elsewhere on the same disk or within the same cylinder or on a
+different cylinder - wherever the file system finds two sectors available. A file stored in this
+non-contiguous manner is considered to be fragmented. Fragmentation can slow down system
+performance if the file system must direct the drive heads to several different addresses to find all
+the data in the file you want to read. The extra time for the heads to travel to a number of
+addresses causes a delay before the entire file is retrieved.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+13
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+
+Cluster size can be changed to optimize file storage. A larger cluster size reduces the potential for
+fragmentation, but increases the likelihood that clusters will have unused space. Using clusters
+larger than one sector reduces fragmentation, and reduces the amount of disk space needed to store
+the information about the used and unused areas on the disk.
+Most disks used in personal computers today rotate at a constant angular velocity. The tracks near
+the outside of the disk are less densely populated with data than the tracks near the center of the
+disk. Thus, a fixed amount of data can be read in a constant period of time, even though the speed
+of the disk surface is faster on the tracks located further away from the center of the disk..
+
+Modern disks reserve one side of one platter for track positioning information, which is written to
+the disk at the factory during disk assembly. It is not available to the operating system. The disk
+controller uses this information to fine tune the head locations when the heads move to another
+location on the disk. When a side contains the track position information, that side cannot be used
+for data. Thus, a disk assembly containing two platters has three sides that are available for data.
+Hard disk interfaces
+Hard disks also come in several flavors such as IDE (actually ATA), SCSI and SATA, as do optical
+drives. ATA is the most common interface used today. SCSI disks can usually be found on servers.
+IDE
+Integrated Drive Electronics, more commonly called by its acronym IDE, is an interface for hard
+drives. IDE is a marketing term; the real standard is called ATA.
+EIDE (Enhanced IDE) or ATA-2 was later developed and increased transfer speed, added 32-bit
+transactions and DMA support.
+ATA
+ATA stands for Advanced Technology Attachment. The ATA -term is commonly used
+interchangeably with IDE. The older and more common paraller ATA (P-ATA) is currently being
+replaced by serial ATA (SATA).
+Most PCs have two IDE controllers on the motherboard. One IDE controller can support two
+devices, so four storage devices is usually the maximum. Paraller ATA interface uses ribbon cables
+with 40 -pin connectors to connect the hard drives to the motherboard. The cable has usually three
+connectors. Of these one is connected to the motherboard and the rest two are left for hard drives.
+If two hard drives are connected to the same controller, one must be defined as master and the
+other one as slave. This is done with jumpers.
+ATA-2 is the real standard for what is widely known as EIDE. ATA-2 introduced higher speed data
+transfer modes: PIO Modes 3 and 4 plus Multiword DMA Mode 1 and 2. These modes allow the
+ATA interface to run data transfers up to about 16MB/second.
+SATA
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+14
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Serial ATA, also known as SATA or S-ATA, is a bus used to communicate between the CPU and
+internal storage devices such as hard drives and optical drives. It is designed to eventually replace
+the ATA (also known as IDE) bus. Traditional ATA is beginning to be referred to as Parrellel ATA,
+P-ATA, or PATA to avoid confusion.
+
+The main difference between SATA and PATA is in the cabling. SATA does away with the
+master/slave relationship of PATA (hence the difference in names), as well as PATA's ungainly
+ribbon cables. Instead, SATA has much slimmer and easier to manage cables, which will enable
+better airflow through cases. The connectors are keyed, preventing connectors from being plugged
+upside down. Truly native SATA drives will have different power connectors also.
+A third advantage of SATA is hotplugging.
+Currently, SATA has a transfer rate of 150 MB/s, which is only 17 MB/s more than standard PATA.
+However, with the introduction of SATA II, this is expected to go up to 300 MB/s, with 600 MB/s
+being released sometime around 2007. The faster bus isn't expected to affect performance in the
+short term, since hard drive performance is usually bottlenecked by the moving parts of the drive.
+During the transitional period before true native SATA drives are released, most SATA drives
+actually have onboard PATA controllers, which connect to SATA by a bridge. This generally
+causes a 30-50% performance drop. Also, PATA power connectors are still being used.
+DMA
+DMA (Direct Memory Access) is a function of the memory bus in the computer that lets
+connected devices like hard disks transfer data to the memory without the intervention of the CPU,
+thus speeding up the transfer. This is superior to the way PIO works.
+
+There are two distinct types of direct memory access, DMA and bus mastering DMA. The plain
+DMA relies on the DMA controller on the motherboard to grab the system bus and transfer the
+data. In bus mastering DMA all this is done by the logic on the interface card itself. Bus mastering
+allows the hard disk and memory to work without relying on the old DMA controller built into the
+system, or needing any support from the CPU.
+USB
+USB (Universal Serial Bus) is a hardware bus using a serial protocol used by many different
+hardware devices and supported in most computers/mainboards. Originally developed by Compaq,
+Intel, NEC and Microsoft. It allows many devices to be connected to the bus at the same time, the
+theoretical maxmium is 127 devices. The maximum data transfer bandwidth is about 12Mbit/s
+(USB2.0 supports 480 Mbit/sec).
+Firewire is a less known alternative to USB that (at its time) was better then USB for media
+related tasks. As of USB2 there have been significant increases, specifically more bandwidth.
+SCSI
+SCSI - Small Computer System Interface. Pronounced "scuzzy". It's a specification for a hardware
+interface for connecting devices such as hard disks and scanners to a computer.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+15
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Most PCs have an ATA(IDE) bus instead of SCSI for connecting internal hard disks. SCSI is seen
+more often in servers, as it tends to be faster and more reliable (though more expensive). Another
+advantage of SCSI controller is that it requires only one IRQ and can hadle usually at least 7
+devices whereas ATA can handle only 2.
+Typically, you put a SCSI card in your computer, and then connect internal hard disks with a
+ribbon cable to some connector on the card. Also, the card will have an external connector which
+you might also be using simultaneously.
+5.Connection synopsis of hard disk
+Fiber Channel
+Fibre Channel Hard Disk Drive
+The Enterprise Virtual Array supports any combination of five different Fibre Channel Hard Disk
+Drives (HDD) with multiple capacity points and two different rotational speeds. Three drive
+capacity points are supported at 36 GB, 72 GB, and 146 GB. Two rotational speeds are supported
+at 10,000 RPM and 15,000 RPM.
+The following individual drive capacity/rotational speed combinations are available:
+146GB 10,000 RPM Fibre Channel HDD
+72GB 15,000 RPM Fibre Channel HDD
+72GB 10,000 RPM Fibre Channel HDD
+36GB 15,000 RPM Fibre Channel HDD
+36GB 10,000 RPM Fibre Channel HDD
+Five different Fibre Channel HDDs for the Enterprise Virtual Array provides tremendous
+flexibility to the target customer base by allowing mixing and matching of capacity and
+performance to application needs. Application areas seen as potential markets include OLTP, ERP,
+and any other applications requiring large amounts of online storage.
+IEEE
+Also called Firewire. it is a less known alternative to USB that (at its time) was better then USB
+for media related tasks. As of USB2 there have been significant increases, specifically more
+bandwidth.
+Intermediate
+Ⅴ.Hard disk data organization
+1.Primary formatting of hard disk
+Before restoring data, hard disk usually needs low-level format, partition, high-level format to be
+used. The function is establishing certain data logical structure on physical hard disk. Usually hard
+disk is divided into 5 regions: MBR, DBR, DIR, FAT and DATA (Here we do not introduce FAT
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+16
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+and NTFS file system), which altogether store and manage data.
+Low level format
+After setting parameter of hard disk in CMOS Setting, why the hard disk is still unusable? That’s
+about Cylinder, Header and Sector. When hard disk is firstly made in the factory, it usually is
+“blank”. Only after partitioning tracks and sectors, we can save data on hard disk (Now, before
+leaving the factory, many disks have been low-level formatted. So you may need not do the
+operation, but it is not unnecessary.)
+Main functions of low level format
+Low level format can also be called physical format, whose functions are to detect the magnetic
+media, to partition tracks, to partition sectors for each track, and to arrange the order of
+partitions in track according to the interleave the customer choose. Its main functions are as
+following:
+¾ Test the hard disk media
+¾ Partition tracks for hard disk
+¾ Arrange sectors for each track according to the specified interleave
+¾ Set the sector ID to each track and finish setting sectors
+¾ Test the hard disk surface, mark “bad” to the damaged track and sector
+¾ Write a certain ASC to each sector of hard disk Ⅱ
+Hard disk is an important storage resource in computer system. Do not low-level format the hard
+disk unless it is the only thing possible. For hard disk being used, you need back up important data
+before low level format; even if back up is unnecessary, it may take much time to partition,
+high-level format, and install system and application programs. Usually, low level format can be
+used in the following cases:
+1 When you have bought a new hard disk or hard disk adapter, you’d better low level format it
+again, which is for the better matching of hard disk and hard disk adapter.
+2 “Bad” sectors, which result from long-time operation, often cause “sector not found” error in
+DOS. This is because of the loss of sector ID. Sector ID is used to distinguish the sectors. It is
+marked onto disk as the magnetization map, which however, may dribble away for long-time
+storage or use. Low level format is the only way for computer users to refresh sector ID in
+disk. This assignment cannot be done by high level format.
+3 Appropriate set of interleave can fasten data transfer. In most conditions, low level format is
+the only way to change the interleave.
+4 When there are always inexplicable problems, you can take low level format into
+consideration.
+Ways to low-level format
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+17
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+There are many ways to low-level format. In early time, it can be completed in CMOS or by some
+special disk tools, or by writing some short programs in Debug. Nowadays, people usually use
+special tools provided free by hard disk manufacturers.
+2.Advanced formatting of hard disk
+High-level format
+After partitioning the hard disk, some “independent” logical drivers are founded. If now we start
+system from the floppy drive, enter DOS, then you can see the drive letters of DOS partition,
+which is on behalf of logical driver, for instance “C:”, “D:” and so on. The system commonly
+arranges letters according to alphabet. Now let’s try to enter “C:” or “D:” after that we can see the
+system prompt that “DISK MEDIA ERROR”. Why? These logical disks are empty; to use them,
+we need create file system. The whole process is high-level format of logic disk. The high-level
+format certainly aims at the logic disk, neither physical disk nor certain directory. For file system
+is corresponding to logic disk, we can say that high-level format aims at file system. In this article,
+logical disk means logical drive.
+Format partition
+High-level format of DOS logic disk can be completed by “format” command. Main functions of
+high-level format are as following:
+Assign logical serial numbers for sectors (serial numbers in partition) from cylinder that assigned
+by each logical drive
+
+Establish DBR in basic partition, and load 3 system files of DOS if there is “/S” parameter in the
+command.
+Establish file allocation table (FAT) in each logical disk.
+Establish File Directory Table (FDT) that is corresponding to root directory and data area.
+If you carry out high-level format by “Format” command, please pay attention to following 4
+items.
+1. To already activated basic DOS partition (generally it is disk C), you need the following
+command:
+Format C:/s
+By this command, you may install DOS system files after high-level format, to make this logical
+disk to become the boot disk. Certainly, you may also use “SYS” command to send system files
+after high-level format, that is complete the boot disk and file transmission by the following two
+commands:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+18
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Format C：
+SYS C：
+Continuously using these two commands equals to “Format C:/S” command.
+2. For other logical disk, we only need to carry out the following commands:
+Format ［ d: ］
+ “d” is the logical disk drive.
+3. Before format, on the screen it may appear the following prompt information:
+WARNING: ALL DATA ON THE DISK
+DRIVE C: WILL BE LOST !
+Proceed with Format (Y/N) ? _
+This information is warning user: The format will cause all data lose! Then, if user choose “Y”,
+then the high-level format officially carries on, if user choose “N”, then nothing will happened and
+exit.
+4. For the using disk without adjusting the partition, also may carry on the fast format, the
+command is:
+Format C: /Q
+The full command of “Format” in Windows 2000 is as following shows:
+Format hard disk partition in Windows
+In explore of Windows, everything is displayed by graphics, and different forms (partition) are
+expressed by different colors. Click the right key in the corresponding partition, and choose
+“format”, you may also choose fast format, complete format and so on.
+Format hard disk partition by Partition Magic
+In Partition Magic, everything is displayed by graphics, and different forms (partition) are
+expressed by different colors. Click the right key in the corresponding partition, and choose
+“format”. In the dialogue box, there will be a prompt indicating this operation may destroy your
+own data, and in the box you may also choose different format.
+Format hard disk by various hard disks special-purpose tool in hard disk factory
+Low level format tool provided by various hard disks factory can help hard disk breakthrough
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+19
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+hard disk capacity limit, as well as complete low level format, the high-level format and make
+partitions. After partitions are done, you can choose corresponding options step by step.
+Attention: To partitions with data, backup the data before format.
+High-level format establish the file system, after format, it may carry on write in and read out
+operations with file as unit.
+3.Data storage region of hard disk
+In command to know hard disk better, we must have a simple understanding of hard disk
+construction. (NTFS uses different file management technology with FAT16 and the FAT32 file
+system, here we only introduce FAT16 and FAT32) The hard disk data may divide into 5 parts
+approximately according to its different characteristics and functions: MBR area, DBR area, FAT
+area, DIR area and DATA area. Among them, MBR is founded by the partition software, while
+DBR area, FAT area, DIR area and DATA area are founded by high-level format procedure. When
+file system writes in data, it just rewrites corresponding FAT area, DIR area and DATA area. Also
+it is the result which these 5 regions affect together. Only by this way, hard disk can be managed
+methodically. Here are some introductions to the 5 regions.
+MBR:
+The first physical sector (cylinder 0, head 0, sector 1) of the first hard drive in the system (the first
+hard drive with the BIOS device number 0x80); each hard drive contains an MBR, but not every
+BIOS can start the corresponding operation system from every hard drive. When booting from the
+hard drive, the BIOS or a special Firmware loads the contents of the MBR to a fixed address in the
+memory and allows it to take control. This code then loads either the operation system from a
+bootable hard drive partition, or from a complex boot loader, such as LILO.
+Short for DOS Boot Record, it is the sector at cylinder 0, column 1, and sector 1 of a hard disk.
+DBR is the first sector that the operation system visits. It contains a boot program and a BPB
+(BIOS Parameter Block). The main task of the boot program is to determine whether the first two
+files in root directory of this partition are the boot files of operation system, when MBR hands
+over the system mastery to it. Take an example of DOS, i.e. IO.SYS and MSDOS.SYS. DOS of
+low edition requests that these two files are the first two files, and located at the section start of the
+root directory, covering the first two directory items (the high edition does not have this
+requirement.). Moreover, Windows and DOS are families; therefore, Windows follows the same
+management manner, except for the filenames. If it does exist, then reads IO.SYS in the memory,
+and hands over mastery to IO.SYS. BPB parameter block records the start sector, ending sector,
+file storage form, descriptor of hard disk media, size of root directory, number of FAT and size of
+allocated cell.
+File Allocation Table (FAT) is a file system that was developed for MS-DOS and is the primary
+file system for consumer versions of Microsoft Windows up to and including Windows ME. The
+FAT file system is considered relatively uncomplicated, and because of that, it is a popular format
+for floppy disks; moreover, it is supported by virtually all existing operation systems for personal
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+20
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+computers, and because of that, it is often used to share data between several operation systems
+booting on the same computer (a multi-boot environment). It is also used on solid-state memory
+cards and other similar devices. It has a serious drawback in that when files are deleted and new
+files written to the media, the files can become scattered over the entire media making reading and
+writing a slow process. De-fragmentation is one solution to this, but is often a lengthy process in
+itself and has to be repeated regularly to keep the FAT file system clean.
+FAT is also called 12-bit FAT, the file allocation table (FAT) for a floppy disk. The location of
+files on a floppy disk are listed in a one-column table in the FAT. Because the width of each entry
+in a floppy disk column is 12 bits, the FAT is called FAT12. As a file system for floppy disks, it
+had a number of limitations: no support for hierarchical directories, cluster addresses were “only”
+12-bits long (which made the code manipulating the FAT a bit tricky) and the disk size was stored
+as a 16-bit count of sectors, which limited the size to 32MB.
+The FAT file system, as is the case with most file systems, does not utilize individual sectors, and
+there are several performance reasons for this. By using individual sectors, the process of
+managing disks becomes overly cumbersome since files are being broken into 512-byte pieces. If
+you were to take a 20 GB disk volume set up with 512 byte sectors and manage them individually,
+the disk would have over 40 million individual sectors. Just keeping track of this many pieces of
+information is both time, as well as resource, consuming. While some operation systems do
+allocate specific sector storage, they also require some advanced intelligence to do so. Bear in
+mind how old the FAT file system is, as it was designed many years ago as merely a simple file
+system, without the capability to managed individual sectors.
+In order for FAT to manage files with some form of efficiency is to group sectors into larger
+blocks referred to as clusters, or allocation units. Cluster size, however, is not a predetermined size,
+but rather is determined by the size of the disk volume itself, with small volumes (disk sizes)
+resulting in smaller clusters, and larger volumes (disk sizes) using larger cluster sizes. For the
+most part, a cluster ranges in size from 4 sectors or 2,048 bytes to 64 sectors or 32,768 bytes. You
+should be aware that you may, on some occasions, find 128-sector clusters in use at 65,536 bytes
+per cluster, as well as some floppy disks with smaller clusters that is usual at just 1 sector per
+cluster. In all cases, the sectors in a cluster are continuous, therefore each cluster is a continuous
+block of space on the disk.
+Cluster sizing, and therefore partition or volume size, as they are directly related, have an
+important impact on performance and disk utilization. In all cases, cluster size is determined at the
+time a disk volume is partitioned. Certain third-party partitioning utilities such as Partition Magic
+by PowerQuest can alter the cluster size of an existing partition within specific parameters.
+However, this aside, once the partition size is selected, so are the cluster sizes fixed.
+FAT 16 means that file allocation table that uses 16 bits for addressing clusters. It is commonly
+used with DOS and Windows 95 systems. A 16-bit DOS and Windows file system (see FAT) that
+varies cluster sizes based on hard drive size. Cluster sizes range from 4K (for drives up to 127MB),
+to 4K (255MB drives), 8K (511MB drives), 16K (1GB drives). and 32K (for drives up to 2GB).
+The ultimate capacity of a FAT16 partition is 2GB.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+21
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+FAT 32 is a disk file allocation system from Microsoft that uses 32-bit values for FAT entries
+instead of 16-bit values used by the original FAT system, enabling partition sizes up to 2TB
+(terabytes). FAT32 first appeared in Windows 95B and is also found in Windows 98 and
+Windows NT 5.0.
+In order to overcome the volume size limit of FAT16 while still allowing memory-constrained
+DOS real-mode code to handle the format, Microsoft decided to implement a newer generation of
+FAT, known as FAT32, with 32-bit cluster numbers, of which 28 bits are currently used.
+In theory, this should support a total of approximately 268,435,438 (< 228) clusters, allowing for
+drive sizes in the range of 2 terabytes. However, due to limitations in Microsoft's scandisk utility,
+the FAT is not allowed to grow beyond 4,177,920 (< 224) clusters, placing the volume limit at
+124.55 gigabytes, unless “scandisk” is not needed. Windows 2000 and XP placed a limit on the
+size of FAT32 partitions they can create at 32 GB, Microsoft says this is by design but does not
+explain why, and those versions of Windows are quite capable of reading and writing larger
+FAT32 partitions created by other means. FAT32 was introduced with Windows 95 OSR2. The
+many changes it incorporated made it a major improvement.
+The maximum possible file size for a FAT32 volume is 4 GB minus 1 byte (232-1 bytes). For most
+users, this has become the most nagging limit of FAT32 as of 2005, since video capture and
+editing applications can easily exceed this limit, as can the system swap file.
+32-bit File Allocation Table File System Not the same as VFAT or FAT, which are both 16-bit file
+systems.
+DIR
+Means Directory, also called FDT，File Directory Table. DIR is the root sector, following after
+the second FAT (backup FAT). It records each start cell, files. Operation system can locate files
+according to the outset of FAT and FAT.
+DATA
+DATA area is the real place where data is stored. It is after DIR, covering the most space of hard
+disk.
+The location of the 5 areas is as following:
+
+Usually, MBR covers 63 sectors (actually it covers only one); DBR covers 32 sectors (actually it
+covers the first and the sixth sectors. The first sector works while the sixth is backup of the first);
+FAT1=FAT2. The length of FAT will change according to the size of partition and the number of
+sectors. DIR changes the most. In early time system, DIR has fixed length of 32 sectors while each
+file directory covers 32 bytes. As a result, there are at most 512 items under root directory. Floppy
+disk can only contain 112 items, or there would be no file or directory created under root directory.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+22
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Afterward, the limitation is broken. From then on, there will be no single root directory, which
+becomes part of DATA. Even, root directory files are not right after FAT. They can be in any
+position in DATA.
+Ⅵ.Common Cases of Partition Recovery
+1.MBR Recovery
+On condition that there is no problem with hardware, the first step is MBR recovery. MBR
+recovery is simple because it is system data. Though it may be created by different software and
+the code might be different, the method is the same. Even if multi-system boot, it is not hard. You
+can backup the data to be recovered after the system boot turn to be normal, and then restore the
+multi system boot.
+Recover MBR by fdisk
+The simplest way to recover MBR is Fdisk, whose command is simple too; you can use
+“Fdisk/MBR”. Please note that, the hard disk to be operated should be connected on mater IDE
+interface as the master hard disk. As to other connection way, we need appoint the interface
+location of IDE device in form of “Fdisk/CMBR”.
+The command syntax of Fdisk command line is “Fdisk/parameter switch”. Besides that obtained
+by “FDISK/？”, there are some hidden parameters information:
+/ACTOK
+Parameter Function: not to check bad sectors on disk surface
+Details: It can speed up partition operation.
+/CMBR
+Parameter Function: to re-create MBR of appointed disk
+Details: Equals to /MBR parameter, except that it can appoint certain disk
+/EXT
+Parameter Function: to create extend partition.
+Details: Creates extend partition on the currency disk , which used to create logical
+partition.
+/FPRMT
+Parameter Function: to check the usage of FAT16 and FAT32 in interactive mode.
+Details: When /FPRMT parameter is added, there will be no query of that whether
+supports high- capacity hard disk; while there will be a query that it uses
+FAT16 or FAT32 when creating a new partition.
+/LO
+Parameter Function: to rebuild logical partition.
+Details: Used to create logical disk, /LOG and /EXT should work together.
+/LOGO
+Parameter Function: to create logical partition with FAT16
+/MBR
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+23
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Parameter Function: to re-create MBR of master disk
+Details: to clear the system booting choice recorded in MBR after uninstalling Windows
+NT or Windows 2000
+/PRI
+Parameter Function: to create primary partition and activate it.
+Details: e to create primary partition, and the partition will be set active automatically.
+/PRIO
+Parameter Function: to create primary partition of FAT16 and activate it.
+/Q
+Parameter Function: not to restart computer when ending Fdisk
+Details: unnecessary to restart computer after changing the partition table.
+/STATUS
+Parameter Function: to display details of current partition
+Details: When there is no logical partition in extend partition, the extend partition will not be
+displayed.
+/X
+Parameter Function: no LBA attribute
+Details: there would be no partition with LBA attribute.
+It makes handier to use Fdisk with these parameters. However, to hide the parameter will be more
+dangerous, which calls for more caution.
+Uses Fixmbr to restore MBR
+Provided by Microsoft, Fixmbr is a MBR recovery tool, which determines hard disk partition
+and re-construct MBR through overall search.
+Only when using Windows 2000 recovery console that we can use Fixmbr. Windows 2000
+recovery console can boot from Windows install CD. Fixmbr only revises MBR; it does not
+write other sectors, which is safe. You can get help information of Fixmbr as following when
+using Fixmbr/？.
+The parameter “DriveNo” is to write a new MBR (driver). The device name can be obtained
+from output of the map command. For example, device name:
+/Device/HardDisk0
+The following command is to write a new MBR to the appointed device:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+24
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+fixmar /Device/HardDisk0
+Attention: If we do not assign DriverNo, the new MBR will be written in booting device,
+namely the driver that loads host system. If the system detects invalid or the non-standard
+partition mark, it will prompt that whether continue to execute this command or not. Only if
+there are some problems with the driver you visit; otherwise, please do not continue.
+By default MBR structure will be checked. If it is abnormal, it will prompt that whether
+recover or not. If choose “Y”, it will search partitions. When it has found the partition, it will
+also prompt that whether to revise MBR or not. If choose “Y”, recovery will be finished. If
+the system is down now, please inactivate the anti-virus function in BIOS first and then
+continue.
+By default, it will search all existing hard disk, and finish all mentioned operations above. If
+the result is not right, you may use “/Z” parameter to clear the result and restart; then it
+returns to the original condition.
+2.Recovery of Partition
+The partition recovery is generally the second step of the whole process. Because apart from some
+tools that directly reads and writes hard disk, most of tool software runs under operation system,
+working with the system calling. While operation system’s visiting disk is on the basis of MBR
+and DBR; without MBR and DBR, operation system is unable to visit file system. Therefore, if
+the partition table is corrupted, we need rebuild partition table, which is usually fulfilled manually;
+in some special cases it can be done automatically by some working software.
+If partition table is corrupted, there are many tools to rebuild it automatically, if only the problem
+is not too serious. If it is too serious, or the partition table structure is too complex, it may possibly
+be out of the reach of their ability to rebuild. In this case, we need do it manually. Usually we use
+some tool software to recover the lost partition table, such as Norton Utilities 8.0, DiskMan,
+KV3000/Kavfix 和 PartitionMagic etc. Here we introduce Partition Table Doctor.
+3.Partition Table Doctor
+Partition Table Doctor is the only real software for hard disk partitions recovery. When you come
+up against a drive error (not hardware failure) this versatile tool would automatically check and
+repair the Master Boot Record, partition table, and the boot sector of the partition with an error, to
+recover the FAT16/FAT32/NTFS/NTFS5/EXT2/EXT3/SWAP partition on IDE/ATA/SATA/SCSI
+hard disk drives. It can create an emergency floppy disk or a bootable CD to recover the bad
+partition even if your operation system fails to boot. Partition Table Doctor manages for MS-DOS,
+Freedos, Windows 95/98/Me, Windows NT 4.0, Windows 2000, Windows XP and Windows 2003.
+There are two modes for partition recovery: “auto mode” and “interactive mode”.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+25
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Auto mode
+If you can enter operation system, you can install and run Partition Table Doctor and choose
+“Rebuild Partition Table”
+In the procedure of rebuilding partition table, there are two ways to recover the lost partition:
+Here we mainly refer to “Automatic”, so we choose “Automatic” (after this, in the whole process
+the users can not operate by themselves, the software will finish the work automatically.)
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+26
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Automatic will automatically rebuild and recover partition according to your former partition
+information. Usually we suggest this mode if users do not know much about partition. Of course,
+if you are not satisfied with the result, you can choose “Interactive” mode.
+Interactive
+Run Partition Table Doctor and choose “Interactive” in “Rebuild Partition Table”.
+By this mode, Partition Table Doctor will display all the partition found, you can choose the
+partition you want to recover.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+27
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+In the partition interface that Interactive mode has recovered, we can see clearly all the partition
+information that existed as well as information on file system, volume label, CHS, size and logics
+of the corresponding partition. With the information, user can locate the partition they want to
+recover. Also, to verify that whether the partition can be recovered normally and the recovered
+partition is the partition user want, the software provides a “Browse” function, with which we can
+choose the right partition:
+Click “Browse” and we can get file information of partition under root directory after recovery.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+28
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+And then you can be surer about the accuracy and efficiency, thus know the final result.
+If the partition where your operation system locates is damaged and you cannot enter it, you can
+install Partition Table Doctor in another operation system,
+By “Create Emergency Disk”, we can create an application under DOS to recover your partition:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+29
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Afterwards you can set your BIOS and then start from floppy disk, thus recover MBR by
+operation mode of Partition Table Doctor in DOS:
+DBR recovery
+MBR is for the whole hard disk, while DBR is for individual partition.
+The first sector of each MBR is DBR. Just as MBR, DBR contains some information that the boot
+operation system need. If DBR is corrupted, you can neither visit the partition nor start up the
+operation system of the partition.
+If boot sector is damaged, the possible symptoms are:
+1. Invalid media type reading drive
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+30
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+2. Abort Retry Fail?
+3. File system is displayed as “RAW”
+4. Windows may ask if you want to format the drive
+5. File names contain “weird” characters
+6.”Sector not found” messages
+Etc.
+Moreover, for partitions of NTFS, the functions of DBR are not all the same as that of FAT
+partition. For FAT partition, DBR locates FDT and FAT (correspondingly as well as DATA), but
+not verifying the correctness and reasonableness of FDT and FAT. For partition of NTFS, we need
+more units to load the file system, which is more complex than FAT.
+What if when the DBR is destroyed? Usually, there are methods as following:
+Recover DBR by Format
+If there is no important data in this partition, or you have backed up the data, the best way to
+recover DBR is direct high-level format, fast format or complete format. If there is no limitation of
+partition form and capacity, there would be no difference between DOS format and Windows
+format except speed. Format is quite thorough, it can completely rearrange the data storage, even
+“reset” former file fragmentation.
+Although this method is simple, it cannot recover data actually especially if you choose some
+different parameters. If you choose different system reserved sectors, or use clusters of different
+size, or change the size of FAT table etc, data recovery will be more difficult.
+Data recovery by Fixboot of Partition Table Doctor
+If the boot sector of a Fat16/Fat32/Ntfs partition was corrupted, it will be marked with X by
+Partition Table Doctor. If you cannot access a Fat16/Ntfs partition and the partition was marked
+with X. Right click the partition and choose Fixboot. Partition Table Doctor will automatically
+check and restore the boot sector of the partition.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+31
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+If you cannot access the Fat32 partition and the partition was marked with X Right click the
+partition and choose Fixboot, there will be two choices:
+'Auto' mode: Partition Table Doctor will automatically check and restore the boot sector of the
+partition. We recommend you choose this mode. If 'Auto' mode cannot help you, you can choose
+'Interactive' mode. If so, you need input the volume label or a file name (under the root directory).
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+32
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+If you do not know what file name to input, follow the file name that is suggested:
+Boot partition:
+
+io.sys msdos.sys ntldr bootlog.txt
+Other partitions: _restore recycled
+Note:
+For Fat16/Fat32 partition, fixboot can effectively restore damaged boot sector of partition.
+For NTFS partition, even if boot sector is correct but MFT (Main File Table) is corrupted,
+symptoms are the same. We recommend you download the demo version of Partition Table Doctor
+to determine whether boot sector of partition was corrupted.
+Mostly, scandisk that originally in operation system will destroy more than they retrieve. Please
+stop scandisk after logging on.
+In addition, you may use WinHex to recover DBR
+WinHex is powerful in disk editor. With backup DBR in WinHex to recover the DBR sector is
+convenient and fast. But for its strong specialization of WinHex we recommend that you choose
+easy-to-use software tool for integrity and correctness of the data.
+4.The FAT table recovery
+CIH destroys data backwards from partitions. In this case, system data in the former part may be
+destroyed and lost. If FAT2 is still intact, we may make FAT2 to cover FAT1. Usually we use
+DiskEdit and WinHex. Regarding to other forms of destruction such as format and so on, we
+usually make use of tool software to scan the whole disk, seldom manual recovery; because there
+are even dozens of trillions sectors a partition has several trillions. Depending on the manual
+analysis is impossible. For some extremely important data file, we can also recover manually.
+Recover FAT by DiskEdit
+After recovering DBR of FAT, if part of FAT1 is damaged while FAT2 remains intact (It is the
+most situation when destroyed by CIH), we may use FAT2 to cover FAT1. The specific method is
+to find the start sector of FAT2 and then start searching the start sector of DATA (if it is FAT16,
+search FDT). By this way, we can figure out the length of FAT table. According to length and the
+start sector of FAT2, we may know the start sector of FAT1. Copy FAT2 to the damaged FAT1, we
+can finally recover the whole partition.
+Recover FAT by WinHex
+Principle of recovering FAT by WinHex is the same as that by DiskEdit. After recovering DBR,
+we can make FAT2 to cover FAT1. After finding FAT2, we begin searching the start sector of
+DATA (if it is FAT16, search FDT). The division is distinct, because the conclusion part of FAT
+must be 0 regions, otherwise there is not any free space (even so, in ordinary circumstances, there
+is still a bit of space in FAT after scanning DATA area. So the end of the last sector must be 0 too.).
+While at the beginning of DATA region or FDT region it mustn’t be 0. No matter there is fixed
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+33
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+FDT, the system always begins from second cluster. If there is FDT, it follows closely FAT2, and
+its file registration must exist; if there is not, then begins from data area where some data must
+exists. Thus we may figure out the length of the FAT table, and then the start sector of FAT1
+according to the length and the start sector of FAT2. Copy FAT2 to the damaged FAT1 we can
+finally recover this partition.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+34
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Case Study
+Ⅶ.Case Study
+1. Introduction of Data Recovery Wizard 3.0
+Data Recovery Wizard is an advanced data recovery software. In Windows, this software can
+recover data on different storage media and partitions.
+General Functions of Data Recovery Wizard 3.0
+Deletedrecovery: This module works only with deleted files and allows to “undelete” them
+(another popular term is “unerase”). Intact file system is important for this module. If you know
+that there is something wrong with your file system (for example, you did not delete some
+folder/files but you cannot access them) or if you see something strange with Windows, you
+should use “AdvancedRecovery” module.
+Formattedrecovery: A common data recovery situation is accidentally reformatting a partition.
+The FormatRecovery tool will allow you to recover files from a partition, which has been
+accidentally formatted or reinstalled. This type of recovery will ignore the existing file system
+structures and search for structures associated with the previous file system. If you are not
+satisfied with the result, you should use “AdvancedRecovery” module
+AdvancedRecovery:you can use this function to recover your damaged system, deleted partitions,
+misoperation of HD and deletion caused by virus.
+RawRecovery:The RawRecovery tool allows you to scan severely corrupted partitions for files
+with a file signature search algorithm. This tool will help you recover files from a partition with
+damaged directory structures.
+2. Matters needs attention before recovery
+(1)Never operate on partition (such as write and create file) where the data lost.
+(2)Please close any other application program when Data Recovery Wizard 3.0 is running.
+(3)Make sure that there is no physical failure (such as physical bad track) on the disk you are
+operating. If there is any problem, please stop running Data Recovery Wizard 3.0, and send
+your disk to maintenace station.
+(4)Do not save the recovered files to the original partition. You need make sure that there is
+enough free space to save the recovered data; also you can save your files to removable devices
+or network devices.
+Here are some examples of using Data Recovery Wizard 3.0.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+35
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+3. Deletedrecovery
+ Eg: Here is a folder” my file”, whose contents are as following:
+Delete it:
+
+ Empty your “recycle bin”
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+36
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+
+Run Data Recovery Wizard 3.0:
+Select “deletedrecovery” then choose the partition that you want to recover.
+
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+37
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Click “Next” and scan the deleted files, choose the deleted folder” my file”
+
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+38
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Tick it and click “Next” to enter the interface of choosing path for saving files.
+
+Choose a partition with large space to save the files
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+39
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Click “Next”, after recovery, there will be a Report interface.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+40
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+If you want to check the recovered files, please click “file saved to”.
+
+Enter the folder “found files” created by Data Recovery Wizard 3.0 and you can see the recovered
+folder/file:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+41
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+If you are not satisfied with the result, you can use “AdvancedRecovery” module, and repeat steps
+above.
+4.FormatRecovery
+Eg: Format a partition from NTFS to FAT32
+Run and choose “FormatRecovery”, and then choose the formatted partition and tick the previous
+file system(here is “NTFS”)in “Previous File System”
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+42
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Click “Next” to search files, the following steps are the same as previous methods.
+Attention: if you are not satisfied with the result or you can not remember the previous file system
+on the partition or the program can not figure out the size of clusters on the partition, you can refer
+to the following steps:
+Choose “AdvancedRecovery” and choose the partition
+Click “Next”, the following steps please refer to previous methods.
+5.Recover encrypt/compressed files in NTFS
+Attention: if you want to recover encrypt/compressed file in NTFS, you need Data Recovery
+Wizard Professional 3.0, for Data Recovery Wizard 3.0 does not support encrypt/compressed file
+recovery.
+Encrypt/compressed file recovery and deletedrecovery are mostly the same. But more attention
+should be paid to that to rightly recover encrypt/compressed files , you need use the account that
+create encrypt/compressed files to log on Windows; moreover, the encrypt files must be recovered
+and saved to partition of other NTFS type not FAT partition, or the recovered encrypt files can not
+be opened correctly.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+43
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+6.RAW RECOVERY
+When the partition file system is completely destroyed or “AdvancedRecovery” cannot find data
+you want, you can try “RAWRECOVERY”.
+Run the program and choose the partition you want to recover
+Click “Option”, choose “RAW” and tick “Recover RAW files only.”:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+44
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Click “OK” and “Next” to finish the searching operation:
+Attention: this recovery module does not scan files via file system, so the files found have no
+usual filename and path. The program will classify the files according to the file types.
+Click “Next”, the following steps are the same as the previous methods.
+7. Recovery when parts of partitions are lost:
+Here are the partitions before lost:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+45
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Files in the partition:
+After deletion, we cannot see the partition in Windows explore:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+46
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Run Data Recovery Wizard, enter “AdvancedRecovery”, and choose the disk where you lost your
+partition.
+Click “Next”, search the lost partition.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+47
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+After searching, find the lost partition on the list, choose it:
+Click “Next”, the result of search is as following:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+48
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+The rest steps are the same as the previous methods.
+8. Data recovery in dynamic volume
+If you want to recover the data lost in a dynamic volume, you need Data Recovery Wizard
+Professional. Data Recovery Wizard does not support dynamic volume recovery.
+Data Recovery Wizard professional supports simple volume, spanned volume, striped volume,
+mirrored volume and RAID5.
+The method is the same as that of other types of partitions.
+Attention: if you have lost the dynamic volume, Data Recovery Wizard professional can not
+recover your data except that on simple volume.
+9. Data recovery on inaccessible partition.
+Before the partition was destroyed:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+49
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+The files in partition are:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+50
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+After the partition is destroyed, when enter the partition, it will prompts “The partition is not
+formatted.”
+
+
+Run the program, choose AdvancedRecovery, and choose the partition.
+Attention: the volume lable might have been destroyed, which may cause that the partition label
+cannot be shown on the partition list. In this case, you can choose partition according to the type
+and size of the partition.
+
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+51
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Click “Next”, the following steps are as the previous methods.
+If the program cannot recover the files, there will be a prompt message:
+
+Choose the partition, click “Option”, and choose “Scan File System”:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+52
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Click “Scan”, analyse the possibly existing file system information, and choose “System type”
+that gets the highest score:
+Click” OK” to continue the recovery steps, the result of the searching is as following:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+53
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+If you are not satisfied with the result, please Click “Option”, choose “RAW”, and tick “Recover
+Raw files only”
+Keep the default, click “OK” and then click “Next”.
+Attention: “RAW Function” does not scan files via file system, so the files found have no usual
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+54
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+filename and path. The system will classify the files according to their file types.
+Click “Next”, the rest recovery steps refers to the previous methods.
+10. File recovery on RAW partition
+In this case, the methods are the same as that of “Data recovery on inaccessible partition.”
+11. Data recovery when all the partitions are lost
+When all the partitions are destroyed, you can not see any partition in disk management:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+55
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+In this case, you can refer to the method of “Data recovery when parts of partitions are lost”.
+If you cannot find the partition where you want to recover data when searching the partition, you
+can follow these steps:
+Run the program, choose “AdvancedRecovery”, then choose the HD:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+56
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Click ”Next”, click ”Cancel” when searching the partition, then exit.
+Tick “RawRecovery, if you cannot find the partition that you want, please click this check box”.
+Roll the block to adjust the range of the sector you want to recover (you can set the range
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+57
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+according to the place and size of the partition):
+Click “Next” to search files in specified sectors
+The rest steps are the same as the previous methods.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+58
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+12．Data recovery when GHOST Image restore failed.
+In this case, there can be different recovery scenarios according to specific damage of the partition
+and file system:
+Usually, after the failure of GHOST Image restore, partition table of the target disk would be in
+some damaged condition, you can search the partition where you want to recover data by
+“Searching for Partition “function in “AdvancedRecovery”.
+If the partition is found, please refer to “Data recovery when parts of partitions are lost”.
+If not, please refer to “data recovery when all the partitions are lost”.
+13. After Partition Magic size revision/ combination/ division of partitions fails, how to
+recover the lost data?
+In this occasion please refer to “Data recovery when GHOST Image restore failed”
+14. When using Data Recovery Wizard 3.0 to recover files, there is some strange sound in
+HD. How to handle it?
+Your HD has some hardware problems. In this occasion, you need stop running Data Recovery
+Wizard 3.0 at once, and then send your HD to HD maintenance station.
+15. HD cannot be detected in BIOS, how to recover data by Data Recovery Wizard 3.0
+The precondition of data recovery by Data Recovery Wizard 3.0 is that the storage device has no
+hardware problem and runs normally; or Data Recovery Wizard 3.0 can not help you.
+16. There is not enough space in hard disk to save the recovered files, nor there is removable
+storage device, how to handle it?
+You can save you files to other host computers via network, please refer to steps as following:
+Choose another host computer on network:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+59
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Choose the host computer where you want to save your files, the rest steps please refer to the
+previous methods.
+17. How to recover data in other storage devices (eg: floppy disk, flash drive, removable disk
+etc)?
+Attention: Date Recovery Wizard 3.0 supports storage devices both with MBR and without.
+Eg: To recover data in flash drive
+Connect flash drive with host computer:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+60
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Choose different ways according to specific damage condition. Here we choose
+“AdvancedRecovery”:
+Click “Next”, the rest steps please refer to the previous method.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+61
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+18. To recover image file, how can I know it can really recover the data before I buy Data
+Recovery Wizard 3.0 ?
+You can use “Preview” function to preview;
+Run demo version to search the files, then choose an image file, click “Preview”
+Preview result:
+If the programmer can preview the image, Data Recovery Wizard 3.0 can rightly recover it.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+62
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+19. There are so many files recovered, how can I find the files I want fast?
+With “Search” and “Filter”, you can find files you want.
+Eg for “Search”,
+After searching:
+Click “Search”:
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+63
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+Enter the query information of your file:
+Click “Find”, the program will list the files you want:
+Click “Next”, the rest steps please refer to the previous methods.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+64
+Data Recovery Book V1.0 (Visit http://www.easeus.com for more information)
+20. I have recovered some files, but I cannot rightly open them.
+In some cases, files recovered by using Data Recovery Wizard cannot be opened, which means the
+data has been badly destroyed.
+You can try the following steps:
+1. Send the badly destroyed files to our email (repair@easeus.com); we will try our best to recover
+for you.
+2. Try to fix them with some file recovery tools
+Attentions: Some documents that are badly damaged are irrecoverable.
+21. In what occasion I cannot rightly recover data?
+In occasions as following, you cannot rightly recover data:
+1. Operations that cause the data are covered, such as: failure of GHOST image restore,
+virus attack, and mass write operation to the disk where you want to recover data etc.
+2. There are some physical problems in storage devices.
+------------------------------------------------------------------------------------------------------------------------------------
+Copyright © 2005-2006 CHENGDU YIWO Tech Development Co.' Ltd. All Right Reserved
+65
