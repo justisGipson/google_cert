@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 import csv
+import re
+
+file_path = '^?P<name>.*)\.py$'
+
 def read_employees(csv_file_location):
     csv.register_dialect('empDialect', skipinitialspace=True, strict=True)
     employee_file = csv.DictReader(open(csv_file_location), dialect = 'empDialect')
