@@ -100,7 +100,41 @@ print(re.findall(r'cat|dog', 'I like both cats and dogs.'))  # ['dog', 'cat']
 
 # ==========================================================================================
 
-# Repitition Qualifiers
+# Repetition Qualifiers
 # Repeated matches is a common expressions that include a . followed by a *
 # It matches any character repeated as many times as possible including zero - greedy behavior
+print(re.search(r'Py.*n', 'Pygmalion'))  # <re.Match object; span=(0, 9), match='Pygmalion'>
+print(re.search(r'Py.*n', 'Python Programming'))  # <re.Match object; span=(0, 17), match='Python Programmin'>
+print(re.search(r'Py[a-z]*n', 'Python Programming'))  # <re.Match object; span=(0, 6), match='Python'>
+print(re.search(r'Py[a-z]*n', 'Pyn'))  # <re.Match object; span=(0, 3), match='Pyn'>
+
+# Use a +, plus character, to match one or more occurrences of the character that comes before it
+print(re.search(r'o+l+', 'goldfish'))  # <re.Match objectl span=(1, 3), match='ol'>
+print(re.search(r'o+l+', 'woolly'))  # <re.Match object; span=(1, 5), match='ooll'>
+print(re.search(r'o+l+', 'boil'))  # None - because there's another character between the 'o' and 'l'
+
+import re
+
+
+def repeating_letter_a(text):
+  result = re.search(r"[aA].*[aA]", text)
+  return result != None
+
+
+print(repeating_letter_a("banana"))  # True
+print(repeating_letter_a("pineapple"))  # False
+print(repeating_letter_a("Animal Kingdom"))  # True
+print(repeating_letter_a("A is for apple"))  # True
+
+
+# Use a ?, question mark symbol, for either zero or one occurrence of the character before it
+# It is used to specified optional characters
+print(re.search(r'p?each', 'To each their own'))  # <re.Match object; span=(3, 7), match='each'>
+print(re.search(r'p?each', 'I like peaches'))  # <re.Match object; span=(7, 12), match='peach'>
+
+# ==========================================================================================
+
+# Escape Characters
+# A pattern that includes a \ could be escaping a special regex character or a special string character
+# Use a \, escape character, to match one of the special characters
 
