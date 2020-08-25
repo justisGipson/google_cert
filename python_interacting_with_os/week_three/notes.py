@@ -51,9 +51,56 @@ print(check_aei("paramedic"))  # True
 
 # Additional options to the search function can be added as a third parameter
 # The re.IGNORECASE option returns a match that is case insensitive
-print(re.search(r"p.ng", "Pangaea", re.IGNORECASE))  # <re.Match object; span=(0, 4), match='Pang'>
+print(re.search(r'p.ng', 'Pangaea', re.IGNORECASE))  # <re.Match object; span=(0, 4), match='Pang'>
 
 # ==========================================================================================
 
 # Wildcards and Special Characters
+# Character classes are written in square brackets
+# It lists the characters to match in the brackets
+print(re.search(r'[Pp]ython', 'Python'))  # <re.Match object; span=(0, 6), match='Python
+
+# A range of characters can be defined with a dash '-'
+print(re.search(r'[a-z]way', 'The end of the highway'))  # <re.Match object; span=(18, 22), match='hway'>
+
+print(re.search(r'[a-z]way', 'What a way to go'))  # None - because 'way' is preceded by whitespace
+
+# Can combine as many character classes as needed
+print(re.search(r'cloud[a-zA-z0-9]', 'cloudy'))  # <re.Match object; span=(0, 6), match='cloudy>
+print(re.search(r'cloud[a-zA-z0-9]', 'cloud9'))  # <re.Match object; span=(0, 6), match='cloud9>
+
+import re
+
+
+def check_punctuation (text):
+  result = re.search(r'[,.:;?!]', text)
+  return result != None
+
+
+print(check_punctuation("This is a sentence that ends with a period."))  # True
+print(check_punctuation("This is a sentence fragment without a period"))  # False
+print(check_punctuation("Aren't regular expressions awesome?"))  # True
+print(check_punctuation("Wow! We're really picking up some steam now!"))  # True
+print(check_punctuation("End of the line"))  # False
+
+# Use a ^, circumflex, inside the square brackets to match any characters that aren't in a group
+print(re.search(r'[^a-zA-Z]', 'This is a sentence with spaces.'))  # <re.Match object; span=(4, 5), match=' '>
+print(re.search(r'[^a-zA-Z ]', 'This is a sentence with spaces.')) # <re.Match object; span=(30, 31), match='.'>
+
+# Use a |, pipe symbol to match either one expression or another
+# The search function returns the first matching string only when there are multiple matches
+print(re.search(r'cat|dog', 'I like cats.'))  # <re.Match object; span=(7, 10), match='cat'>
+print(re.search(r'cat|dog', 'I like dogs.'))  # <re.Match object; span=(7, 10), match='dog'>
+
+# Since we have more than one match, the 'search' method finds the first match and returns that
+print(re.search(r'cat|dog', 'I like both cats and dogs.'))  # <re.Match object; span=(12, 15), match='dog'>
+
+# Use 're.findall' to return all possible matches
+print(re.findall(r'cat|dog', 'I like both cats and dogs.'))  # ['dog', 'cat']
+
+# ==========================================================================================
+
+# Repitition Qualifiers
+# Repeated matches is a common expressions that include a . followed by a *
+# It matches any character repeated as many times as possible including zero - greedy behavior
 
