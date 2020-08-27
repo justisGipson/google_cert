@@ -383,7 +383,7 @@ import re
 
 
 def convert_phone_number(phone):
-  result = re.sub(r'\b(\d{3})-(\d{3})-(\d{4})\b', r'(\1) \2-\3', phone)
+  result = re.sub(r'\b-(\d{3})-(\d{3})(\d{4})\b', r'(\1) \2-\3', phone)
   return result
 
 

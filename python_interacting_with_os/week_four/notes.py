@@ -3,4 +3,9 @@
 # STDOUT - the standard output stream which is a pathway between a program and a target of output
 # SDTERR - the standard error stream which displays output like standard out, but is used specifically as a channel to show error messages and diagnostics from the program
 
-data = input("This comes from STDIN:")
+data = input("This comes from STDIN: ")
+print("Writing to STDOUT: " + data)
+# print("We are generating an error to STDERR: " + data + 1)
+
+# ==========================================================================================
+# Environment Variables
