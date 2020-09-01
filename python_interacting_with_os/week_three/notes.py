@@ -1,4 +1,5 @@
 # Regular Expressions
+
 log = "July 31 07:51:48 mycomputer bad_process[12345]: Error Performing package upgrade"
 index = log.index('[')
 
@@ -16,6 +17,7 @@ print(result[1])
 # ==========================================================================================
 
 # Basic Regular Expressions
+
 # Simple Matching w/ Python
 # Always a good idea to use rawstrings for python regex
 # 'r' at the beginning of the pattern indicates this is a rawstring
@@ -56,6 +58,7 @@ print(re.search(r'p.ng', 'Pangaea', re.IGNORECASE))  # <re.Match object; span=(0
 # ==========================================================================================
 
 # Wildcards and Special Characters
+
 # Character classes are written in square brackets
 # It lists the characters to match in the brackets
 print(re.search(r'[Pp]ython', 'Python'))  # <re.Match object; span=(0, 6), match='Python
@@ -101,6 +104,7 @@ print(re.findall(r'cat|dog', 'I like both cats and dogs.'))  # ['dog', 'cat']
 # ==========================================================================================
 
 # Repetition Qualifiers
+
 # Repeated matches is a common expressions that include a . followed by a *
 # It matches any character repeated as many times as possible including zero - greedy behavior
 print(re.search(r'Py.*n', 'Pygmalion'))  # <re.Match object; span=(0, 9), match='Pygmalion'>
@@ -135,6 +139,7 @@ print(re.search(r'p?each', 'I like peaches'))  # <re.Match object; span=(7, 12),
 # ==========================================================================================
 
 # Escape Characters
+
 # A pattern that includes a \ could be escaping a special regex character or a special string character
 # Use a \, escape character, to match one of the special characters
 print(re.search(r'.com', 'welcome'))  # <re.Match object; span=(2, 6), match='lcom'>  - needs escape char to match '.'
@@ -166,6 +171,7 @@ print(check_character_groups("shopping_list: milk, bread, eggs."))  # False
 # ==========================================================================================
 
 # Regular Expressions in Action
+
 print(re.search(r'A.*a', 'Argentina'))  # <re.Match object; span=(0, 9), match='Argentina>
 # "Azerbaijan" returns "Azerbaija" because we did not specify the end
 print(re.search(r'A.*a', 'Azerbaijan'))  # <re.Match object; span=(0, 9), match='Azerbaija'>
@@ -199,7 +205,9 @@ print(check_sentence("A star is born."))  # True
 # ==========================================================================================
 
 # Advanced Regular Expressions
+
 # Capturing Groups
+
 # Use parentheses to capture groups which are portions of the pattern that are enclosed in
 # Below line defines two separate groups
 result = re.search(r'(^\w*), (\w*)$', 'Lovelace, Ada')  # <re.Match object; span=(0, 13), match='Lovelace, Ada'>
@@ -235,6 +243,7 @@ print(name)
 # ==========================================================================================
 
 # More on Repetition Qualifiers
+
 # Use {}, curly brackets and one or two numbers to specify a range with numeric repetition qualifiers
 print(re.search(r'[a-zA-Z]{5}', 'a ghost'))  # <re.Match object; span=(2, 7), match='ghost'>
 print(re.search(r'[a-zA-Z]{5}', 'a scary ghost appeared'))  # <re.Match object; span=(2, 7), match='scary'>
@@ -261,6 +270,7 @@ print(long_words("I also have a taste for hot chocolate in the afternoon."))  # 
 print(long_words("I never drink tea late at night."))  # []
 
 # ==========================================================================================
+
 # Extracting PID using regex
 
 import re
@@ -303,6 +313,7 @@ print(extract_pid("July 31 08:08:08 mycomputer new_process[67890]: RUNNING Perfo
 # ==========================================================================================
 
 # Splitting and Replacing
+
 # Split function from the re module works by taking any regular expression as a separator
 # Use capturing parentheses to split list to include the elements that is used to split the values
 print(re.split(r'[.?!]', 'One sentence. Another one? And a last one!'))  # ['One sentence', ' Another one',
@@ -340,6 +351,7 @@ print(transform_record("Charlie Rivera,698-746-3357,Web Developer"))
 # Charlie Rivera,+1-698-746-3357,Web Developer
 
 # ==========================================================================================
+
 import re
 
 
@@ -361,6 +373,7 @@ print(multi_vowel_words("Hello world!"))
 # []
 
 # ==========================================================================================
+
 import re
 
 
@@ -379,6 +392,7 @@ print(transform_comments("  return(number)"))
 # Should be "  return(number)"
 
 # ==========================================================================================
+
 import re
 
 

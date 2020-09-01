@@ -1,11 +1,13 @@
 # Reading and Writing Files
+
 # Creates a new file object and assigning it to a variable called file
 # Current line assumes that the spider.txt file is in the same directory
 file = open("using-python-to-interact-with-the-operating-system/week-two/spider.txt")
 
 # readline method reads a single line of a file
 print(file.readline())
-# readline method reads the second line of a file - each time the readline method is called, the file object updates the current position in the file
+# readline method reads the second line of a file - each time the readline method is called
+# the file object updates the current position in the file
 print(file.readline())
 # read method, which reads from the current position until the end of the file instead of just one line
 print(file.read())
@@ -42,6 +44,7 @@ with open("using-python-to-interact-with-the-operating-system/week-two/novel.txt
     file.write("It was a dark and stormy night")
 
 # Managing Files and Directories
+
 # os module provides a layer of abstraction between Python and the operating system
 import os
 
@@ -71,6 +74,7 @@ print(datetime.datetime.fromtimestamp(timestap))
 print(os.path.abspath("spider.txt"))
 
 # Directories
+
 # getcwd function checks which current directory the Python program is executing
 print(os.getcwd())
 
@@ -103,6 +107,7 @@ for name in os.listdir(dir):
 os.rmdir("week-two/another_new_dir")
 
 # Reading CSV Files
+
 import csv
 f = open("week-two/csv_file.txt")
 
@@ -115,6 +120,7 @@ for row in csv_f:
 f.close()
 
 # Reading and Writing CSV Files with Dictionaries
+
 # DictReader turns each row of the data in a CSV file into a dictionary
 with open ("week-two/software.csv") as software:
     reader = csv.DictReader(software)
