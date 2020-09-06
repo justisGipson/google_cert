@@ -34,7 +34,8 @@ A lot of commands come from Unix. The philosophy when designing how these progra
 * **tail \<file>**\: shows the last 10 lines of the given file
 * **less \<file>**\: scrolls through the contents of the given file (press "q" to quit)
 * **sort \<file>**\: sorts the lines of the file alphabetically
-* **cut -dseparator -ffields \<file>**\: for each line in the given file, splits the line according to the given
+* **cut -d\'separator\' -f\[field\] \<file>**\: for each line in the given file, splits the line according to the
+ given
  separator and prints the given fields (starting from 1)
 
 Additional commands
@@ -202,6 +203,38 @@ To work with a list of file, we can use globs like star and question mark to cre
     * This is a good practice in Bash scripts when dealing with file names or any variables that could include spaces.
 * It is also good idea to first run the script without actually modifying the file system to catch any possible bugs that the script might have.
     * Add an echo in front of the MV command
+    
+### Advanced Command Interaction
+
+```Bash
+tail /var/log/system.log
+
+Sep  6 12:06:28 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.oracle.oss.mysql.mysqld): Service only ran for 0 seconds. Pushing respawn out by 10 seconds.
+Sep  6 12:06:29 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.apple.mdworker.shared.08000000-0300-0000-0000-000000000000[37974]): Service exited due to SIGKILL | sent by mds[132]
+Sep  6 12:06:29 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.apple.mdworker.shared.02000000-0200-0000-0000-000000000000[37975]): Service exited due to SIGKILL | sent by mds[132]
+Sep  6 12:06:38 JG-MacBook-Pro xpcproxy[38552]: libcoreservices: _dirhelper_userdir: 557: bootstrap_look_up returned (ipc/send) invalid destination port
+Sep  6 12:06:38 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.oracle.oss.mysql.mysqld[38552]): Service exited with abnormal code: 1
+Sep  6 12:06:38 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.oracle.oss.mysql.mysqld): Service only ran for 0 seconds. Pushing respawn out by 10 seconds.
+Sep  6 12:06:40 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.apple.mdworker.shared.06000000-0400-0000-0000-000000000000[36812]): Service exited due to SIGKILL | sent by mds[132]
+Sep  6 12:06:48 JG-MacBook-Pro xpcproxy[38754]: libcoreservices: _dirhelper_userdir: 557: bootstrap_look_up returned (ipc/send) invalid destination port
+Sep  6 12:06:49 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.oracle.oss.mysql.mysqld[38754]): Service exited with abnormal code: 1
+Sep  6 12:06:49 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.oracle.oss.mysql.mysqld): Service only ran for 0 seconds. Pushing respawn out by 10 seconds.
+```
+
+```Bash
+cut -d' ' -f5- /var/log/system.log | sort | uniq -c | sort -nr | head
+
+850 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.oracle.oss.mysql.mysqld): Service only ran for 0 seconds. Pushing respawn out by 10 seconds.
+  21 JG-MacBook-Pro syslogd[104]: ASL Sender Statistics
+  16 JG-MacBook-Pro systemstats[115]: assertion failed: 19G2021: systemstats + 669448 [7B7F7B73-FFF4-3CB7-9C6F-CBD9A3397587]: 0x5
+  16 JG-MacBook-Pro syslogd[104]: Configuration Notice:
+  13 selected messages.
+  13 appear in standard system log files or in the ASL database.
+   4 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.oracle.oss.mysql.mysqld): Service only ran for 1 seconds. Pushing respawn out by 9 seconds.
+   3 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.apple.AddressBook.abd): Service only ran for 0 seconds. Pushing respawn out by 10 seconds.
+   2 Module "com.apple.asl" override any specified in ASL Module "com.apple.authd".
+   2 JG-MacBook-Pro com.apple.xpc.launchd[1] (com.apple.efilogin-helper): Service only ran for 0 seconds. Pushing respawn out by 1 seconds.
+```
 
 ### Choosing Between Bash and Python
 
