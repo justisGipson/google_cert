@@ -26,23 +26,26 @@ A lot of commands come from Unix. The philosophy when designing how these progra
 
 **Operating with the content of files**
 
-* cat file: shows the content of the file through standard output
-* wc file: counts the amount of characters, words, and lines in the given file; can also count the same values of whatever it receives via stdin
-* file file: prints the type of the given file, as recognized by the operating system
-* head file: shows the first 10 lines of the given file
-* tail file: shows the last 10 lines of the given file
-* less file: scrolls through the contents of the given file (press "q" to quit)
-* sort file: sorts the lines of the file alphabetically
-* cut -dseparator -ffields file: for each line in the given file, splits the line according to the given separator and prints the given fields (starting from 1)
+* **cat \<file>**\: shows the content of the file through standard output
+* **wc \<file>**\: counts the amount of characters, words, and lines in the given file; can also count the same
+ values of whatever it receives via stdin
+* **file \<file>**\: prints the type of the given file, as recognized by the operating system
+* **head \<file>**\: shows the first 10 lines of the given file
+* **tail \<file>**\: shows the last 10 lines of the given file
+* **less \<file>**\: scrolls through the contents of the given file (press "q" to quit)
+* **sort \<file>**\: sorts the lines of the file alphabetically
+* **cut -dseparator -ffields \<file>**\: for each line in the given file, splits the line according to the given
+ separator and prints the given fields (starting from 1)
 
 Additional commands
 
-* echo "message": prints the message to standard output
-* date: prints the current date
-* who: prints the list of users currently logged into the computer
-* man command: shows the manual page of the given command; manual pages contain a lot of information explaining how to use each command (press "q" to quit)
-* uptime: shows how long the computer has been running
-* free: shows the amount of unused memory on the current system
+* **echo "message"**: prints the message to standard output
+* **date**: prints the current date
+* **who**: prints the list of users currently logged into the computer
+* **man \[command]**\: shows the manual page of the given command; manual pages contain a lot of information
+ explaining how to use each command (press "q" to quit)
+* **uptime**: shows how long the computer has been running
+* **free**: shows the amount of unused memory on the current system
 
 ### Redirecting Streams
 
@@ -55,7 +58,7 @@ Additional commands
 ./stdout_example.py > new_file.txt
 ```
 
-After the second line, stoud.example.py is outputted in new_file.txt instead of inside of the terminal via STDOUT.
+After the second line, stdout.example.py is outputted in new_file.txt instead of inside of the terminal via STDOUT.
 
 Be careful not to overwrite an existing file as redirection overwrites destination each time we perform a redirection of STDOUT.
 
@@ -74,6 +77,13 @@ These are the redirectors that we can use to take control of the streams of our 
 * command < file: redirects standard input from file
 * command 2> file: redirects standard error to file
 
+```Bash
+./streams_err.py < new_file.txt 2> error_file.txt
+This will come from STDIN: Now we write to STDOUT: Don't mind me, just a bit of text here...
+```
+
+* "2>" descriptor indicates the exit command of the file: where 2 indicates an error
+
 ### Pipes
 
 Pipe, |, connects multiple scripts, commands, or other programs together into a data processing pipeline. Pipes connect the output of one program to the input of another.
@@ -87,14 +97,14 @@ Signals are tokens delivered to running processes to indicate a desired action.
 
 These are some commands that are useful to know in Linux when interacting with processes.
 
-* ps: lists the processes executing in the current terminal for the current user
-* ps ax: lists all processes currently executing for all users
-* ps e: shows the environment for the processes listed
-* kill PID: sends the SIGINT signal to the process identified by PID
-* fg: causes a job that was stopped or in the background to return to the foreground
-* bg: causes a job that was stopped to go to the background
-* jobs: lists the jobs currently running or stopped
-* top: shows the processes currently using the most CPU time (press "q" to quit)
+* **ps**: lists the processes executing in the current terminal for the current user
+* **ps ax**: lists all processes currently executing for all users
+* **ps e**: shows the environment for the processes listed
+* **kill PID**: sends the SIGINT signal to the process identified by PID
+* **fg**: causes a job that was stopped or in the background to return to the foreground
+* **bg**: causes a job that was stopped to go to the background
+* **jobs**: lists the jobs currently running or stopped
+* **top**: shows the processes currently using the most CPU time (press "q" to quit)
 
 ---
 
@@ -104,24 +114,25 @@ These are some commands that are useful to know in Linux when interacting with p
 
 **Bash** is the most commonly used shell on Linux. Bash is not only the interpreter that runs our commands, it's also a __scripting language__.
 
-* ps command can list all the current running processes
-* free command can show you the amount of free memory
-* uptime command can tell you how long the computer has been on
+* **ps** command can list all the current running processes
+* **free** command can show you the amount of free memory
+* **uptime** command can tell you how long the computer has been on
 
 ### Using Variables and Globs
 
 **Environment variables** are set in the environment in which the command is executing.
 
-* = sign is used to set an environment variables
+* **=** sign is used to set an environment variables
     * There can be no spaces between the name of the variable and the equal sign, or between the equal sign and the value
     * Any variable that you define in a script or in the command line is local to the environment where it was defined
-* $ prefix is used to access the value of a variable
-* export command to export commands from that environment
+* **$** prefix is used to access the value of a variable
+* **export** command to export commands from that environment
 
 **Globs** are characters that allow us to create list of files. The star and question mark are the most common globs.
 * using a \* in the command line will match all filenames that follow the format that we specify
 * using a ? sign in the command line will match exactly one character instead of any amount of characters
     * ? can be repeated as many times as we need
+ * available in python scripts through the **glob** module
 
 ### Conditional Execution in Bash
 
@@ -129,6 +140,27 @@ In bash scripting, the condition used is based on the exit status of commands, $
 * In bash scripting an exit value of zero means success.
 
 **Test** is a command that evaluates the conditions received and exits with zero when they are true and with one when they're false.
+
+```Bash
+if test -n "$PATH"; then echo "your path is not empty"; fi
+```
+
+or 
+
+```Bash
+if [ -n "$PATH"; then echo "your path is not empty"; fi
+```
+* \[  ] alias for the test command, must have space before the closing bracket
+
+<br>
+
+**Resources for Bash Scripting**
+
+* https://ryanstutorials.net/bash-scripting-tutorial/
+
+* https://linuxconfig.org/bash-scripting-tutorial-for-beginners
+
+* https://www.shellscript.sh
 
 ---
 
