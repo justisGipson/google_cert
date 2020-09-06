@@ -197,7 +197,7 @@ done
 ```
 To work with a list of file, we can use globs like star and question mark to create lists of files. These lists are separated by spaces and so we can use them in our loops to iterate over a list of files that match a criteria.
 
-* Basename command takes a filename and an extension and then returns the name without the extension.
+* **basename** command takes a filename and an extension and then returns the name without the extension.
 * Surround file variable with double-quotes to allow the command to work even if the file has spaces in its name.
     * This is a good practice in Bash scripts when dealing with file names or any variables that could include spaces.
 * It is also good idea to first run the script without actually modifying the file system to catch any possible bugs that the script might have.
