@@ -25,6 +25,7 @@ For real configuration and development work, more secure and private Git server 
 Remote repositories allows
 
 * Developers contribute to a project from their own workstations making changes to local copies of the project independently of one another
+
 * Developers to use git commands to pull code from a remote repository or push code into one when they need to share their changes
 
 ### Git Remote Cheatsheet
@@ -49,6 +50,7 @@ This can be useful for keeping your local workspace up to date.
 
 ### Rebasing Your Changes
 
+* **git rebase \<branch to set as base>**\
 Rebasing means changing the base commit that's used for our branch.
 
 The problem with three way merges is that because of the split history, it's hard for us to debug when an issue is found in our code, and we need to understand where the problem was introduced. By changing the base where our commits split from the branch history, we can replay the new commits on top of the new base. This allows Git to do a fast forward merge and keep history linear.
@@ -59,12 +61,20 @@ Run the command git rebase, followed by the branch that we want to set as the ne
 
 * Always synchronize your branches before starting any work on your own
   * Starting from the most recent version and you minimize the chances of conflicts or the need for rebasing
+  
 * Avoid having very large changes that modify a lot of different things
   * Push your changes often and pull before doing any work to reduce the chances of getting conflict
+  
+  * Regularly merge changes made on the master branch into feature branches, lessen the number of merge conflicts.
+  
 * Have the latest version of the project in the master branch and a stable version of the project on a separate branch.
+
 * Rebasing can help a lot with identifying bugs, but use it with caution
   * Whenever we do a rebase, we're rewriting the history of our branch
+  
   * Do not rebase changes that have been pushed to remote repos
+  
 * Have good commit messages
+  * Gives more context on why changes were made
 
 ---
