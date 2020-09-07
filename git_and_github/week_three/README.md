@@ -76,5 +76,7 @@ Run the command git rebase, followed by the branch that we want to set as the ne
   
 * Have good commit messages
   * Gives more context on why changes were made
+  
+[More Rebase info](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)
 
 ---
