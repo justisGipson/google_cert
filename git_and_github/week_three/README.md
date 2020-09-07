@@ -4,7 +4,7 @@
 
 ### What is Github
 
-GitHub is a web-based Git repository hosting service whle Git is a distributed version control system.
+GitHub is a web-based Git repository hosting service while Git is a distributed version control system.
 
 * Distributed means that each developer has a copy of the whole repository on their local machine.
 
@@ -12,9 +12,9 @@ For real configuration and development work, more secure and private Git server 
 
 ### Git Commands to Interact with Remote Repository
 
-* git clone URL: Git clone is used to clone a remote repository into a local workspace
-* git push: Git push is used to push commits from your local repo to a remote repo
-* git pull: Git pull is used to fetch the newest updates from a remote repository
+* **git clone \<URL>**\: Git clone is used to clone a remote repository into a local workspace
+* **git push**: Git push is used to push commits from your local repo to a remote repo
+* **git pull**: Git pull is used to fetch the newest updates from a remote repository
 
 ---
 
@@ -29,12 +29,19 @@ Remote repositories allows
 
 ### Git Remote Cheatsheet
 
-* git remote: Lists remote repos
-* git remote -v: List remote repos verbously
-* git remote show \<name>: Describes a single remote repo
-* git remote update: Fetches the most up-to-date objects
-* git fetch: Downloads specific objects
-* git branch -r: Lists remote branches; can be combined with other branch arguments to manage remote branches
+* **git remote**: Lists remote repos
+* **git remote -v**: List remote repos verbosely
+* **git remote show \<name>**\: Describes a single remote repo
+* **git remote update**: Fetches the most up-to-date objects
+* **git fetch**: Downloads specific objects
+* **git branch -r**: Lists remote branches; can be combined with other branch arguments to manage remote branches
+
+This can be useful for keeping your local workspace up to date.
+
+* [Password Caching in Git](https://help.github.com/en/articles/caching-your-github-password-in-git)
+
+* [Generating an SSH-Key](https://help.github.com/en/articles/generating-an-ssh-key)
+
 
 ---
 
