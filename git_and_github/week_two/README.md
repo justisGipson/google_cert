@@ -2,6 +2,10 @@
 
 * Git uses the `HEAD` alias to represent the currently checked-out 
 snapshot of the project. It can also be an old from before the latest changes were applied. Pointer to current branch.
+
+**.gitignore files**
+
+* **.gitignore** files are used to tell the git tool to intentionally ignore some files in a given Git repository. For example, this can be useful for configuration files or metadata files that a user may not want to check into the master branch. Check out more at: https://git-scm.com/docs/gitignore.
  
 ## Advanced Git interaction
 
@@ -27,6 +31,9 @@ snapshot of the project. It can also be an old from before the latest changes we
 * **git commit --amend**: Make changes to commits after-the-fact, which can be useful for making notes about a given
  commit
 * **git revert**:  Makes a new commit which effectively rolls back a previous commit. It’s a bit like an undo command
+
+* https://en.wikipedia.org/wiki/SHA-1
+* https://github.blog/2017-03-20-sha-1-collision-detection-on-github-com/
 
 ### Ammeding Commits
 
