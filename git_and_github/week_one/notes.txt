@@ -5,3 +5,11 @@ https://git-scm.com/doc
 https://www.mercurial-scm.org/
 https://subversion.apache.org/
 https://en.wikipedia.org/wiki/Version_control
+
+Initial Git Cheat Sheet
+Check out the following links for more information:
+
+The Linux kernel documentation itself, as well as impassioned opinions from other developers.
+
+You can check out "Setting your email in Git" and "Keeping your email address private" on the GitHub
+help site for how to do this.
