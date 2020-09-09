@@ -6,7 +6,17 @@ This repository is created to keep track of [Google IT Automation With Python](h
 
 [Python Crash Course Certificate](https://coursera.org/share/b89d818ca49a4d2d86ae18e270c969a1)
 
-[Python Interacting with the Operating System](https://coursera.org/share/9aefcc5cbc07fc8887494dda0a489f1d)
+[Python Interacting with the Operating System Certificate](https://coursera.org/share/9aefcc5cbc07fc8887494dda0a489f1d)
+
+<!-- [Git and GitHub Certificate]()
+
+[Troubleshooting and Debugging Techniques Certificate]()
+
+[Automating Real World Tasks with Python Certificate]()
+
+[Configuration and Cloud Management Certificate]()
+
+[Google IT Automation with Python Professional Certificate]() -->
 
 ---
 

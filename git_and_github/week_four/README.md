@@ -13,6 +13,8 @@ When collaborating on projects hosted on GitHub, the typical workflows is:
 1. Create a fork of the repo
 2. Work on that local fork
 
+* [More Fork and Pull Request Info](https://help.github.com/en/articles/about-pull-request-merges)
+
 ---
 
 ## Code Review
@@ -28,6 +30,28 @@ The goal of a code review is:
 * The style is consistent with the overall project
 * Remind us about any important cases
 
+* Increases the number of eyes on the code - reducing the number of bugs and increase code quality
+* Not about us being goo/bad coders but making our code better
+
+#### Extras
+
+* [Google Style Guide](http://google.github.io/styleguide/)
+* [Pull Requests and Review](https://help.github.com/en/articles/about-pull-request-reviews)
+* [Perfect Code Reviews](https://medium.com/osedea/the-perfect-code-review-process-845e6ba5c31)
+* [What is a Code Review?](https://smartbear.com/learn/code-review/what-is-code-review/)
+
+---
+
+### Managing Projects
+
+When collaborating:
+
+* Documenting any work is important
+* As a project maintainer, reply promptly to pull requests and don't let them stagnate
+* Understand any accepted changes
+* Use an issue tracker to coordinating who does what and when
+* Have a way of communicating and coordinating between contributors
+
 ### Continuous Integration
 
 **Continuous integration** is a system building and testing code every time there's a change.
@@ -39,16 +63,13 @@ Some of concepts that needs to be dealt with when creating CI/CD includes:
 1. Pipelines, which specifies the steps that need to run to get the desired result
 2. Artifacts, which is the name used to describe any files that are generated as part of the pipeline
 
----
+#### Extras
 
-## Managing Projects
-
-When collaborating:
-
-* Documenting any work is important
-* As a project maintainer, reply promptly to pull requests and don't let them stagnate
-* Understand any accepted changes
-* Use an issue tracker to coordinating who does what and when
-* Have a way of communicating and coordinating between contributors
-
+* [Open Source Ethics](https://arp242.net/diy.html) 
+* [Closing Issues with Keywords](https://help.github.com/en/articles/closing-issues-using-keywords)
+* [Repo Contribution Guidelines](https://help.github.com/en/articles/setting-guidelines-for-repository-contributors) 
+* [What is CI/CD](https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html)
+* [Getting CI/CD Right](https://stackify.com/what-is-cicd-whats-important-and-how-to-get-it-right/)
+* [Travis-CI Tutorial](https://docs.travis-ci.com/user/tutorial/)
+* [Travis-CI Build Stages](https://docs.travis-ci.com/user/build-stages/)
 ---
