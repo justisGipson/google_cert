@@ -9,9 +9,9 @@ This repository is created to keep track of [Google IT Automation With Python](h
 
 [Python Interacting with the Operating System Certificate](https://coursera.org/share/9aefcc5cbc07fc8887494dda0a489f1d)
 
-<!-- [Git and GitHub Certificate]()
+[Git and GitHub Certificate](https://www.coursera.org/account/accomplishments/certificate/URUHWUB8J6WV)
 
-[Troubleshooting and Debugging Techniques Certificate]()
+<!-- [Troubleshooting and Debugging Techniques Certificate]()
 
 [Automating Real World Tasks with Python Certificate]()
 
