@@ -117,13 +117,13 @@ First, reproduce the case and quantify the slowness with a tool called ```ab``` 
 Below command gets the average timing of 500 requests, and then pass site.example.com for the measurement:
 
 ```Shell
-ab -n 500 site.example.com
+    ab -n 500 site.example.com
 ```
 
 Next, connect to the web server with ```ssh```
 
 ```Shell
-ssh SERVERNAME
+    ssh SERVERNAME
 ```
 
 Start by looking at the output of ```top``` and see if there's possible cause.
@@ -147,7 +147,7 @@ Since there are multiple ffmpeg processes running, let's change priority of all 
  running ```renice``` one by one with the following shell script:
 
 ```Shell
-for pid in $(pidof ffmpeg); do renice 19; $pid; done
+    for pid in $(pidof ffmpeg); do renice 19; $pid; done
 ```
 
 Above shell script:
@@ -168,10 +168,10 @@ To do that, we'll need to find out how these processes got started:
 2. Call ```ps ax``` which shows us all the running processes on the computer, and connect the output of the command to ```less``` to be able to scroll through it
 
 ```Shell
-ps ax | less
+    ps ax | less
 
-#search for ffmpeg from the output of ps using / which is the search key when using less
-/ffmpeg
+    #search for ffmpeg from the output of ps using '/' which is the search key when using less
+    /ffmpeg
 ```
 
 Upon search, it shows that
@@ -182,16 +182,16 @@ Upon search, it shows that
 Use ```locate``` command to locate the file.
 
 ```Shell
-locate static/001.webm
+    locate static/001.webm
 
-#locate command returns the following
-/srv/deploy_videos/static/001.webm
+    #locate command returns the following
+    /srv/deploy_videos/static/001.webm
 ```
 
 When there are multiple files, use ```grep``` command to check if any of the files contain a call to a searching term - in this case ```ffmpeg``` instead of checking them one by one.
 
 ```Shell
-grep ffmpeg *
+    grep ffmpeg *
 ```
 
 The output of grep shows that ```deploy.sh``` script starts the ```ffmpeg``` processes in parallel using a tool called ```Daemonize``` that runs each program separately as if it were a daemon - address the issue.
@@ -203,13 +203,13 @@ The output of grep shows that ```deploy.sh``` script starts the ```ffmpeg``` pro
 To avoid canceling the processes, use the ```killall``` command with the ```-STOP``` flag which sends a stop signal but doesn't kill the processes completely.
 
 ```Shell
-killall -STOP ffmpeg
+    killall -STOP ffmpeg
 ```
 
 After stopping them all, we now want to run these processes **one at a time**. This can be done by sending the ```CONT``` signal one by one after each process completes the task. This can be automated with the similar for loop used earlier.
 
 ```Shell
-for pid in $(pidof ffmpeg); do while kill -CONT $pid; do sleep 1; done; done;
+    for pid in $(pidof ffmpeg); do while kill -CONT $pid; do sleep 1; done; done;
 ```
 
 Check if the problem has been solved by running ```ab```. **For this scenario, the problem is fixed at this point.**
@@ -242,7 +242,7 @@ As a rule, aim first to write code that is to avoid bugs
 
 If the code is not fast enough, tru to optimize by eliminating **expensive actions**, which are those that take a long time to complete.
 
-* Trying to optimize every second out of a script is probably not worth the effort though
+* Trying to optimize every second out of a script is probably not worth the effort or time
 
 The first step is to keep in mind that we can't really make our computer go faster. If we want our code to finish faster, we need to make our computer do less work, and to do this, we'll have to 
 
@@ -257,50 +257,100 @@ Because of how profilers work, they are specific to each programming language
 * C program uses gprof to analyze
 * Python uses c-Profile module to analyze
 
+---
 
 ### Using the Right Data Structures
 
 Using an appropriate data structures can help us avoid unnecessary expensive operations and create efficient scripts.
 
-**Lists** are sequences of elements that can
+**Lists** are sequences of elements that can:
 
 * Add, remove, or modify the elements in them
+
 * Iterate through the whole list to operate on each of the elements
 
 When adding or removing elements,
 
 * Adding or removing elements **at the end** is fast
+
 * Adding or removing elements in the middle can be slow because all the elements that follow need to be repositioned
 
 When accessing or finding an element,
 
 * Accessing an element in a specific position in the list is fast
+
 * Accessing an element in an unknown position requires going through the whole list
   * This can be super slow if the list is long
 
-**Dictionary** store key value pairs that can
+```text
+    ArrayList in Java
+    Vector in C++
+    Array in Ruby
+    Slice in Go
+```
+
+**Dictionary** store key value pairs that can:
 
 * Add data by associating a value to a key
 * Retrieve a value by looking up a specific key
+
+```text
+    HashMap in Java
+    Unordered Map in C++
+    Hash in Ruby
+    Map in Go
+```
 
 When accessing or finding an element,
 
 * Looking up keys is very fast O(n)
 
-In summary,
+In summary:
 
 * If you need to access elements by position or will always iterate through all the elements, use a list
+
 * If we need to look up the elements using a key, use a dictionary
 
 Another thing that we might want to think twice about is creating copies of the structures that we have in **memory**.
-
 
 ### Expensive Loops
 
 When using a loop, avoid doing expensive actions inside of the loop. If an expensive operation is performed inside a loop, you multiply the time it takes to do the expensive operation by the amount of times you repeat the loop.
 
 * Make sure that the list of elements that you're iterating through is only as long as you really need it to be
-* Break out of the loop once the data is found
+
+* Break out of the loop once the data is found **break** keyword in loops
+
+### Keeping Local Results
+
+For scripts that get executed regularly, it's common to create a local cache. A **cache** is a way to store data in a
+ form that faster to access than it's original form. 
+ 
+ * So if we're parsing a large file and only keeping a few key pieces of information from it, we can create a cache
+  to store only that information, or if we're getting some information over the network, we can keep a local copy of the file to avoid downloading it over and over again.
+  
+We can add a check to validate if we need to recalculate the cache or not.
+
+For example: 
+
+  * if our cache is based on a file, we could store the modification date of that file when we calculated
+  the cache. Then only recalculate the cache if the modification date of the file is newer than the one we had
+  stored. 
+
+### Slow Script with an Expensive Loop
+
+* **time \<command>** - runs the command we pass to it, then tells us how long it took to execute, it returns 3
+ different values:
+ 
+  * **real** - amount of time it took to execute the command - sometimes called wall-clock time
+  * **user** - amount of time spent doing operations in the user space 
+  * **sys** - amount of time spent doing system level operations
+
+The values of user and sys won't necessarily add up to the value of real because the computer might be busy with other processes.
+
+### Extra Reading
+
+* [Profiling](https://en.wikipedia.org/wiki/Profiling_(computer_programming))
 
 ---
 
@@ -324,6 +374,18 @@ To handle threads, modify the code to create and handle the thread.
 
 These modules let us specify which parts of the code we want to run in separate threads or as separate asynchronous events, and how we want the results of each to be combined in the end
 
-If your script is mostly just waiting on input or output, also known as I/O bound, it might matter if it's executed on one processor or eight.
+If your script is mostly just waiting on input or output, also known as **I/O bound**, it might matter if it's executed
+ on one processor or eight.
 
 ---
+
+### Slowly Growing in Complexity
+
+Solutions for one problem, might not be great for a different problem. And as systems grow in complexity and grows in
+ usage, a solution that worked well before may no longer be well suited. For the small projects so far, storing our
+  data in .csv files has been fine. But as that data grows, parsing the .csv files becomes slower and slower. At that
+   point considering moving the data into a SQL database is probably ideal. It's a lightweight database system that
+    allows you to query the information stored with out needing a full on database server. Again, as the data grows
+    , queries become slower. And moving to a full on database server that runs on it's own machine. And even from
+     there, to scale your information storage, using a caching service like memcached or redis, which keeps the most
+      commonly used results in RAM to avoid querying the database unnecessarily.
