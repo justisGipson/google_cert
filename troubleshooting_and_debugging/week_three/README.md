@@ -4,7 +4,8 @@
 
 ### Systems That Crash
 
-Reduce the scope of the problem by starting with the actions that are easier and faster to check.
+Reduce the scope of the problem by starting with the actions that are easier and faster to check. Start with the
+actions that are the easiest and fastest to check.
 
 1. Try looking at the logs to see if there's any error that may point to what's happening
 
