@@ -70,8 +70,8 @@ We are performing n-1 comparisons for our inner loop. Then, we must go through t
 The n signifies the number of elements in the list. In a worst case scenario, the inner loop does n-1 comparisons for each n element in the list.
 
 Therefore we calculate the algorithm’s efficiency as:
-<code>
 
+<code>
 O (n(n−1))=O(n(n))=O(n<sup>2</sup>))
 </code>
 
