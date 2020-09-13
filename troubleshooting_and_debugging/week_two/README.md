@@ -381,11 +381,73 @@ If your script is mostly just waiting on input or output, also known as **I/O bo
 
 ### Slowly Growing in Complexity
 
-Solutions for one problem, might not be great for a different problem. And as systems grow in complexity and grows in
- usage, a solution that worked well before may no longer be well suited. For the small projects so far, storing our
-  data in .csv files has been fine. But as that data grows, parsing the .csv files becomes slower and slower. At that
-   point considering moving the data into a SQL database is probably ideal. It's a lightweight database system that
-    allows you to query the information stored with out needing a full on database server. Again, as the data grows
-    , queries become slower. And moving to a full on database server that runs on it's own machine. And even from
-     there, to scale your information storage, using a caching service like memcached or redis, which keeps the most
-      commonly used results in RAM to avoid querying the database unnecessarily.
+__Example 1:__ Let's say you're writing a secret Santa script where each person gives a secret gift to one other
+ randomly
+ assigned person. The script randomly selects pairs of people and then sends an email to the gift-giver telling them who they're buying a present for. If you're doing this for the people working on your floor, you might just store the list of names and emails in a CSV file.
+Play video starting at 46 seconds and follow transcript0:46
+The file will be small enough that the time spent parsing it won't be significant. Now if this script grows into a larger project that handles everyone at your company and the company keeps hiring more and more people, at some point parsing the file will start taking a lot of time. This is where you might want to consider using a different technology.
+Play video starting at 1 minute 8 seconds and follow transcript1:08
+For example, you could decide to store your data in a SQLite file. This is a lightweight database system that lets
+ you query the information stored in the file without needing to run a database server. Using SQLite for the data
+  probably works just fine for assigning secret Santas at your company. But imagine that you've kept adding features to the service. So it now includes a way to create a wish list, a machine learning algorithm that suggests possible gifts and a tracker that keeps a history of each present given. And since people at your company love the program so much, you've made it an external service available to anybody. Keeping all the data in one file would be too slow. So you'll need to move to a different solution. You have to use a fully-fledged database server. Probably even running on a separate machine than the one running the secret Santa service. And there's even one more step after that. If the service becomes really really popular, you might notice that your database isn't fast enough to serve all the queries being requested. In that case, you can add a caching service like memcached which keeps the most commonly used results in RAM to avoid querying the database unnecessarily. So we've gone from hosting the data in a CSV file to having it in a SQLite file then moving it to a database server and finally using a dynamic cacher in front of the database server to make it run even faster.
+
+__Example 2:__ A similar progression can happen on the user facing side of the same project. Initially, we set the Santa service would simply send emails to the people on the list. That's fine if it's a small group and there's one person in charge of the script. But as the project grows more complex, you'd want to have a website for the service to let people do things like check who their assigned person is and create wish lists. Initially, this could just be running on a web server on the same machine as the data. If the website gets used a lot, you might need to add a caching service like Varnish. This would speed up the load of dynamically created pages. And eventually, this still might not be enough. So you need to distribute your service across many different computers and use a load balancer to distribute the requests. You could do this in-house with separate computers hosted at your company, but this means that as the application keeps growing you need to add more and more servers. It might be easier to use virtual machines running in the cloud that can be added or removed as the load sustained by the service changes.
+
+---
+
+### Dealing with Complex Slow Systems
+
+In large complex systems, we have lots of different computers involved. Each one doing a part of the work and
+interacting with the others through the network. For example, think of an e-commerce site for your company. The web
+ server is the part of the system that directly interacts with external users. Another component is the database
+  server, which is accessed by the code that handles any requests generated from the website, and depending on how
+   the whole system is built, you might have a bunch of other services involved doing different parts of the work
+   . There could be a billing system that generates invoices once orders are placed. A fulfillment system used by the
+    employees preparing the orders for customers. A reporting system that once a day creates a report of all the
+     sales placed and possibly more. On top of this, you should probably have backup, monitoring, testing
+      infrastructure, and so on. A system like this can be tricky to debug and understand. What do you do if your
+       complex system is slow? As usual, what you want to do is find the bottleneck that's causing your
+        infrastructure to under-perform. Is it the generation of dynamic pages on the web server? Is it the queries
+         to the database? Is it doing the calculations for the fulfillment process? Figuring this out can be tricky
+         . So one key piece is to have a good monitoring infrastructure that lets you know where the system is
+          spending the most time. Saying notice that getting the web pages is pretty slow. But when you check the web
+           server, you see that it's not overloaded. Instead, most of the time is spent waiting on network calls, and
+            when looking at your database server, you find that it's spending a lot of time on Disk I/O. This shows
+             that there's a problem with how the data is being accessed in the database. One thing to look at is the
+              indexes present in the database. When a database server needs to find data, it can do it much faster i
+                there's an index on the field that you're querying for. On the flip side, if the database has too
+                 many indexes, adding or modifying entries can become really slow because all of the indexes need
+                  updating. So we need to look for a good balance of having indexes for the fields that are actually
+                   going to be used. If the problem is not solved by indexing and there are too many queries for the
+                    server to reply to all of them on time, you might need to look into either caching the queries o
+                      distributing the data to separate database servers. Now what if when you try to figure out why
+                       the service is slow, you see that the CPU on the web serving machine is saturated. The first
+                        step is to check if the code of the service can be improved using the techniques that we
+                         explained earlier. If it's a dynamic website, we might try adding caching on top of it. But
+                          if the code is fine and the cache doesn't help because the problem is that there's just to
+                            many requests coming in for one machine to answer all of them, you'll need to distribute
+                             the load across more computers. To make this possible, you might need to reorganize the
+                              code so that it's capable of running in a distributed system instead of on a single
+                               computer. This might take some work, but once you've done it, you can easily scale
+                                your application to as many requests as needed by adding more computers to the system
+                                , and finally, make sure that you actually need to do whatever you're doing. Lots of
+                                 times, as projects evolve, we're left with a scary monster of layer after layer of
+                                  complex code. If we think about what our system is doing for a few minutes, we
+                                   might end up discovering that there's a whole piece that wasn't needed at all and
+                                    it was making our servers do unnecessary work all along. 
+
+---
+
+### Using threads to make things go faster
+
+To be able to run things in parallel, python scripts need an **Executor**. An Executor is the process that's in
+ charge of distributing the work among the different workers.
+ 
+The **Futures** module provides a couple different executors; one for using threads, another for using processes
+
+---
+
+### Extra Reading
+
+* [Speed Up Your Python Program With Concurrency](https://realpython.com/python-concurrency/)
+* [Threaded Async Magic](https://hackernoon.com/threaded-asynchronous-magic-and-how-to-wield-it-bba9ed602c32)
