@@ -130,11 +130,21 @@ On Linux or MacOS, the worst kind of crash is called a Kernel Panic. On Windows,
 
 ### Accessing Invalid Memory
 
-One common reason a program crashes is it's trying to access invalid memory. Accessing invalid memory means that the process tried to access a portion of the system's memory that wasn't assigned to it.
+One common reason a program crashes is it's trying to access invalid memory. Accessing invalid memory means that the
+ process tried to access a portion of the system's memory that wasn't assigned to it.
+ 
+During normal working conditions, applications will request a portion of the memory and then use the space the OS
+ assigned them. Programming errors might lead to a process trying to read or write to a memory address outside of the
+  valid range. 
 
-In low-level languages like C or C++, the variables that store memory addresses are called pointers and the programmer needs to take care of requesting the memory that the program is going to use and then giving that memory back once it's not needed anymore.
+In low-level languages like C or C++, the variables that store memory addresses are called pointers and the
+ programmer needs to take care of requesting the memory that the program is going to use and then giving that memory
+  back once it's not needed anymore. In these languages the variables that store memory addresses are called
+   **pointers**, they're just like any other variables as they can be modified as needed. So if a pointer is set to a
+    value outside of the valid memory range for that process, it will point to invalid memory. 
 
-When a program tries to read or write to a memory address outside of the valid range, OS will raise an error like **segmentation fault** or **general protection fault**.
+When a program tries to read or write to a memory address outside of the valid range, the OS will raise an error like
+ **segmentation fault** or **general protection fault**.
 
 Common programming errors that lead to segmentation faults or segfaults include,
 
@@ -150,9 +160,16 @@ The **debugger** can give you a lot more detail on what the application is doing
 
 Linux distributions like Debian or Ubuntu ships separate packages with the debugging symbols for all the packages in the distribution. Microsoft compilers can also generate debugging symbols in a separate PDB file.
 
-**Valgrind** can help when trying to understand problems related to handling invalid memory. Valgrind is a very powerful tool that can tell us if the code is doing any invalid operations no matter if it crashes are not. Valgrind lets us know if the code is accessing variables before initializing them.
+One of the trickiest things about invalid memory is that we're usually dealing with **Undefined behavior
+**. **Undefined behavior** is when the code is doing something that isn't valid in the programming language. The
+ actual outcome will depend on the compiler used, how the operating system assigns memory to processes, and even the
+ version of the libraries in use
 
-Valgrind is available on Linux and Mac OS, and Dr. Memory is a similar tool that can be used on both Windows and Linux.
+**Valgrind** can help when trying to understand problems related to handling invalid memory. **Valgrind** is a very
+ powerful tool that can tell us if the code is doing any invalid operations no matter if it crashes are not. Valgrind lets us know if the code is accessing variables before initializing them.
+
+**Valgrind** is available on Linux and Mac OS, and Dr. Memory is a similar tool that can be used on both Windows and
+ Linux.
 
 ---
 
