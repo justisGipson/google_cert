@@ -442,7 +442,7 @@ The **Futures** module provides a couple different executors; one for using thre
 
 ---
 
-### Extra Reading
+#### Extra Reading
 
 * [Speed Up Your Python Program With Concurrency](https://realpython.com/python-concurrency/)
 * [Threaded Async Magic](https://hackernoon.com/threaded-asynchronous-magic-and-how-to-wield-it-bba9ed602c32)
