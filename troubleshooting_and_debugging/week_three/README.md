@@ -175,7 +175,8 @@ One of the trickiest things about invalid memory is that we're usually dealing w
 
 ### Unhandled Errors and Exceptions
 
-When a program comes across an unexpected condition that isn't correctly handled in the code, it will trigger errors or exceptions.
+When a program comes across an unexpected condition that isn't correctly handled in the code, it will trigger errors
+ or exceptions.
 
 In Python, following errors could occurs,
 
@@ -184,6 +185,8 @@ In Python, following errors could occurs,
 * Type error or an attribute error if we try to take an action on a variable that wasn't properly initialized
 
 * Division by zero error if we tried to divide by zero
+
+These kind of errors are what will cause a program to finish unexpectedly.
 
 When these failures happen, the interpreter that's running the program will print the following:
 
@@ -195,13 +198,22 @@ When these failures happen, the interpreter that's running the program will prin
 
 To find out where things are going wrong, we use **debugging tools** available for the application's language
 
-For a Python, program we can use the **BDB interactive debugger** which lets us do all the typical debugging actions like executing lines of code one-by-one or looking at how the variables change values.
+For a Python program we can use the **BDB interactive debugger** which lets us do all the typical debugging actions
+ like executing lines of code one-by-one or looking at how the variables change values.
 
 When we're trying to understand what's up with a misbehaving function on top of using debuggers, it's 
+common practice to trying to understand what's up with a misbehaving function on top of using debuggers. It adds
+statements that print data related to the codes execution to show the contents of variables, the return values of
+functions or metadata like the length of a list or size of a file. This is called **print f debugging**. Taking a
+step further, the best approach is to add the messages in a way that can be easily enabled or disabled depending on
+whether we want the debug info or not.
 
-**print f debugging** is a common practice to trying to understand what's up with a misbehaving function on top of using debuggers. It adds statements that print data related to the codes execution to show the contents of variables, the return values of functions or metadata like the length of a list or size of a file. Taking a step further, the best approach is to add the messages in a way that can be easily enabled or disabled depending on whether we want the debug info or not.
+In Python, use the **logging module** which lets us set how comprehensive we want our code to be. We can set
+whether we want all debugging messages, only info warnings or error messages. When printing the message we specify
+what type of message we're printing, so we can change the debug level with a flag or configuration setting.
 
-In Python, use the **logging module** which lets us set how comprehensive we want our code to be.
+In general, you'll want to make the program more resilient to failures. Instead of crashing unexpectedly, you want
+the program to inform the user of the problem and tell them what they need to do
 
 ---
 
@@ -209,7 +221,7 @@ In Python, use the **logging module** which lets us set how comprehensive we wan
 
 Writing good comments is one of those good habits that pays off when trying to understand code written by others and also your past self.
 
-Another thing that can help to understand someone else's code is reading the tests associated to the code.
+Another thing that can help to understand someone else's code is reading the tests associated to the code. 
 
 ---
 
