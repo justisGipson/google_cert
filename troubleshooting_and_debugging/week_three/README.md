@@ -180,11 +180,11 @@ When a program comes across an unexpected condition that isn't correctly handled
 
 In Python, following errors could occurs,
 
-* Index error if we tried to access an element after the end of a list
+* **Index error** if we tried to access an element after the end of a list
 
-* Type error or an attribute error if we try to take an action on a variable that wasn't properly initialized
+* **Type error** or an **attribute error** if we try to take an action on a variable that wasn't properly initialized
 
-* Division by zero error if we tried to divide by zero
+* **Division by zero error** if we tried to divide by zero
 
 These kind of errors are what will cause a program to finish unexpectedly.
 
@@ -219,9 +219,22 @@ the program to inform the user of the problem and tell them what they need to do
 
 ### Fixing Someone Else's Code
 
-Writing good comments is one of those good habits that pays off when trying to understand code written by others and also your past self.
+Writing good comments and having well-documented functions is one of those good habits that pays off when trying to
+understand code written by others and also your past self. 
 
-Another thing that can help to understand someone else's code is reading the tests associated to the code. 
+Writing comments help you solidify your understanding of the code. Another thing that can help to understand someone
+else's code is reading the tests associated to the code. Well-written tests can tell us what each function is
+expected to do. Looking at the existing tests can show us which use cases weren't taken into account.
+
+Just like with writing extra comments, writing some tests of your own can help you better see what the code is
+supposed to do and improve overall quality of the code. This can also be really useful when modifying the original code.
+
+One possible approach in this case, would be to start with the function where the error happened, then the function
+or functions that call it, and so on until you can grasp the contexts that led to the problem. While this is of
+course much easier if it's in a programming language that you're familiar with, you don't need to be an expert in the
+language to fix a bug in the program. If you've come across an error and debug the issue well enough to understand
+what's going on, you might be able to fix the problem even if you've never seen that language before. Another thing
+that can help to understand someone else's code is reading the tests associated to the code. 
 
 ---
 
@@ -229,7 +242,9 @@ Another thing that can help to understand someone else's code is reading the tes
 
 When an application crashes, it's useful to have a **core file** of the crash.
 
-**Core files** store all the information related to the crash so that we or someone else can debug what's going on. It's like taking a snapshot of the crash when it happens to analyze it later.
+**Core files** store all the information related to the crash so that we or someone else can debug what's going on. 
+
+It's like taking a snapshot of the crash when it happens to analyze it later.
 
 In order to enable OS to generate core file,
 
@@ -237,20 +252,85 @@ In order to enable OS to generate core file,
 
 2. Use the **-c** flag for core files
 
-3. use the unlimited to state that we want core files of any size
+3. use the **unlimited** to state that we want core files of any size
 
 For the exercise shown in the video, it debugs **off-by-one error** by
 
 1. Generated a core file and check the file using **ls -l** command
 
-2. Use gdb-c core to give it a core file and then example to tell it where the executable that crashed is located
+2. Use **gdb -c core \<executable>** to give it a core file and tell it where the executable that crashed is located
 
-3. Use the backtrace command to look at the full backtrace of the crash
+3. Use the **backtrace** command to look at the full backtrace of the crash
 
-4. Use the list command that shows the lines around the current one to get more contexts for the code that failed
+4. Use the **up** command to move to the calling function in the backtrace and check out the line and copy parameters
+ that caused the crash
 
-5. Print the contents of the first element argv 0, and then the second element argv 1
+5. Use the **list** command that shows the lines around the current one to get more contexts for the code that failed
+
+6. Print the contents of the first element argv 0, and then the second element argv 1
+
     * Zero is never a valid pointer
+    
+**Segmentation Faults are common error to encounter in C or C++ crashes**
+
+### Debugging a Python Crash
+
+**Unexpected Exceptions are common errors to encounter in Python crashes**
+
+In unexpected exception trace backs we will see a few things.
+
+* At the bottom is the name of the exception and a message
+
+* List of function calls each being 2 lines
+    
+    * First line is the Python file that contains the function, the line number, and the name of the function
+    
+    * Second line shows us the contents of the line
+ 
+ Similar to the backtrace in the segfault example, but the order of functions is reversed.
+ 
+ Frequently, knowing the exception message and the line where the exception happened, is already enough to understand
+ what's going on
+ 
+ **pdb3 \<script> \[params]** starts the python debugger.
+ 
+**Byte Order Mark** or **BOM** which is used in UTF-16 to tell the difference between a file stored using **Little
+-endian** and **Big-endian**. Our file is in UTF-8 so it doesn't need the BOM. But some programs still include it and
+this is tripping up our script
+
+There is a special value called **UTF-8-sig** that we can set as the encoding parameter of the open function. Setting
+this encoding means that Python will get rid of the BOM
+
+We've barely scratched the surface of the many operations that we can do with debuggers. There are ton more advanced
+debugging features. Like setting **breakpoints** the let our code run until certain line of code is executed or
+**watchpoints** that let our code run until a variable or expression changes. We can also step through the code
+instruction by instruction to check when a problem happens
+
+### Extra Crash Debugging Resources
+
+* [Python Concurrency](https://realpython.com/python-concurrency/)
+
+* [Threaded Asynchronous Magic](https://hackernoon.com/threaded-asynchronous-magic-and-how-to-wield-it-bba9ed602c32)
+
+* [Common Segmentation Fault Reasons](https://stackoverflow.com/questions/33047452/definitive-list-of-common-reasons-for-segmentation-faults)
+
+* [Debugging Segmentation Faults](https://sites.google.com/a/case.edu/hpcc/home/important-notes-for-new-users/debugging-segmentation-faults)
+
+### Example of Readable Python
+
+* [Minecraft](https://github.com/fogleman/Minecraft)
+
+* [Cherry Py](https://github.com/cherrypy/cherrypy)
+
+* [Flask](https://github.com/pallets/flask)
+
+* [Tornado](https://github.com/tornadoweb/tornado)
+
+* [HowDoI](https://github.com/gleitz/howdoi)
+
+* [Bottle.py](https://github.com/bottlepy/bottle/blob/master/bottle.py)
+
+* [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)
 
 ---
 
@@ -262,10 +342,15 @@ Below is troubleshoot strategies that can be used when handling crashes in compl
 
 1. Roll back
     * It is the best strategy to use when the new changes are suspected to be causing the issue
+   
     * It restores the service back to health if it was the cause
+   
     * It helps eliminate new change as a possible cause if doing the rollback doesn't help
+    
 2. Logs with useful information
+
 3. Monitoring of what the service is doing and version control for quick roll back if needed
+
 4. Deploy new machines if needed
 
 ---
@@ -275,24 +360,32 @@ Below is troubleshoot strategies that can be used when handling crashes in compl
 Forgetting to document could:
 
 * Risk forgetting some important details
+
 * Wasting a lot of valuable time when the same issue is revisited
 
 Good document should contain the following:
 
 * Root cause
+
 * How you diagnose the problem and found that root cause
+
 * What you did to fix the issue and what needs to be done to prevent the problem from happening again
 
 ---
 
 ### Writing Effective Postmortems
 
-**Postmortems** are documents that describe details of incidence to help us learn from our mistakes. The goal of postmortems is to learn from what happened to prevent the same issue from happening again.
+**Postmortems** are documents that describe details of incidence to help us learn from our mistakes. The goal of
+postmortems is to learn from what happened to prevent the same issue from happening again.
 
 In general postmortem should include include:
 
 * Details of what caused the issue
+
 * What the impact of the issue was
+
 * How it got diagnosed
+
 * Short-term remediation you applied
+
 * Long-term remediation you recommend
