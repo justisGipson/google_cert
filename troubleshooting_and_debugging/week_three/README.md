@@ -340,18 +340,25 @@ instruction by instruction to check when a problem happens
 
 Below is troubleshoot strategies that can be used when handling crashes in complex systems,
 
-1. Roll back
+1. Logs with useful information
+    * The logs will contain the error messages from the server providing the service that's failing
+    
+    * General system logs will help indicate if there's an issue with the server in general
+    
+    * Essential to understanding what's going on
+
+2. Roll back
     * It is the best strategy to use when the new changes are suspected to be causing the issue
    
-    * It restores the service back to health if it was the cause
+    * It restores the service back to normal health if it was the cause
    
     * It helps eliminate new change as a possible cause if doing the rollback doesn't help
-    
-2. Logs with useful information
 
-3. Monitoring of what the service is doing and version control for quick roll back if needed
+3. Monitoring of what the service is doing  
 
-4. Deploy new machines if needed
+4. Use version control for quick roll back if needed
+
+5. Deploy new machines if needed
 
 ---
 
@@ -378,7 +385,7 @@ Good document should contain the following:
 **Postmortems** are documents that describe details of incidence to help us learn from our mistakes. The goal of
 postmortems is to learn from what happened to prevent the same issue from happening again.
 
-In general postmortem should include include:
+In general a postmortem should include:
 
 * Details of what caused the issue
 
