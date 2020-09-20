@@ -370,6 +370,34 @@ Forgetting to document could:
 
 * Wasting a lot of valuable time when the same issue is revisited
 
+Always document what you're doing in a bug or ticket. Use whatever you have access to. Documenting what you do, lets
+you keep track of what you've tried and what the results were. And documenting what's been done, makes it so you
+can easily share all data that's been collected with your team.
+
+While you're working on a problem, it's important to communicate clearly with those affected by the issue. They want
+to know what you figured out about the problem, what the available workarounds are, and when they can expect the
+next update. If you don't know what the problem is, it's hard to give an estimation of when you'll have it fixed. But
+you can still provide timely updates about the work you're doing. This kind of regular communication is helpful no
+matter the size of the incident
+
+For example, you could have someone working on finding out a temporary workaround, while someone else is in charge of
+understanding the root cause of the problem and finding the long-term remediation. 
+
+Or if there are lots of possible causes for the issue, you could divide the causes among the team members and have
+them work on those in parallel. On top of people looking for the root cause and a solution, you want to have a person
+in charge of communicating with the people affected. This lets the team avoid forgetting to update the tracking issue
+or even worse providing contradictory information. 
+
+This communications lead needs to know what's going on and provide timely updates on the current state and how long
+until the problem's resolved. They can act as a shield for questions from users letting the rest of the team focus
+on the actual problem. 
+
+Similarly, there should be one person in charge of delegating the different tasks to the team members. This person
+sometimes called the Incident Commander or Incident Controller needs to look at the big picture and decide what's the
+best use of the available resources. They can make sure that there's no duplication of work among team members and
+that only one person is modifying the production system at a time. Having multiple people make overlapping changes to
+the system could lead to confusing results, making the outage even longer. 
+
 Good document should contain the following:
 
 * Root cause
@@ -378,12 +406,16 @@ Good document should contain the following:
 
 * What you did to fix the issue and what needs to be done to prevent the problem from happening again
 
+Depending on the size of the issue and the number of people affected, this summary could just be the last update to
+the bug or ticket that you use to keep track of your work, or it could be a full postmortem.
+
 ---
 
 ### Writing Effective Postmortems
 
-**Postmortems** are documents that describe details of incidence to help us learn from our mistakes. The goal of
-postmortems is to learn from what happened to prevent the same issue from happening again.
+**Postmortems** are documents that describe details of incidence to help us learn from our mistakes.
+
+The goal of postmortems is to learn from what happened to prevent the same issue from happening again.
 
 In general a postmortem should include:
 
@@ -396,3 +428,5 @@ In general a postmortem should include:
 * Short-term remediation you applied
 
 * Long-term remediation you recommend
+
+It is also helpful to include what went well in postmortems.
