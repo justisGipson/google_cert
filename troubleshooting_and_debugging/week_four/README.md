@@ -73,7 +73,69 @@ using, that way the garbage collector can give that memory back to the OS
 
 ### Managing Disk Space
 
+Another resource that might need our attention is the disk usage of our computer.
 
+Programs may need disk space for lots of different reasons. Installed binaries and libraries, data stored by
+the applications, cached information, logs, temporary files or even backups
+
+If our computers running out of space, it's possible that we're trying to store too much data in too little space
+
+Maybe we have too many applications installed, or we're trying to store too many large files in the drive
+
+It's also possible that programs are misusing the space allotted to them, like by keeping temporary files or caching
+information that doesn't get cleaned up quickly enough or at all
+
+It's common for the overall performance of the system to decrease as the available disk space gets smaller
+
+Data starts getting fragmented across the disk, and operations become slower
+
+When a hard drive is full, programs may suddenly crash, while trying to write something into disk and finding out
+that they can't. A full hard drive might even lead to data loss, as some programs might truncate a file before
+writing an updated version of it, and then fail to write the new content, losing all the data that was stored in it
+before.
+
+If it gets to this point, we'll probably see some error, like no space left on device when running our applications
+or in the logs
+
+So what do you do if a computer runs out of disk space?
+
+*  If it's a user machine, it might be easily fixed by uninstalling applications that aren't used, or cleaning up old data that isn't needed anymore
+
+* But if it's a server, you might need to look more closely at what's going on
+
+Is the issue that you need to add an extra drive to the server to have more available space, or is it that some
+application is misbehaving and filling the disk with useless data?
+
+To figure this out, you want to look at how the space is being used and what directories are taking up the most
+space, then drill down until you find out whether large chunks of space are taken by valid information or by file
+that should be purged
+
+For example, on a database server, it's expected that the bulk of the disc space is going to be used by the data
+stored in the database. A mail server, it's going to be the mailboxes of the users of that service. But if you find
+that most of the data is stored in logs or in temporary files, something has gone wrong
+
+One common pattern of misbehavior is a program that keeps logging error messages to the system log over and over
+. This can happen for lots of different reasons. For example, the OS might keep trying to start a program that fails
+because of a configuration problem. This will generate a new log entry with every retry, and can take up a lot of
+space if there are several retries per second, or it could be that the server has a lot of activity and the logs
+are real
+
+In that case, you might want to look into tweaking the configuration of the tools that rotate the logs more
+frequently, to make sure that you're keeping only what you need
+
+In other cases, the disk might get full due to a program generating large temporary files, and then failing to clean
+those up.
+
+For example, an application might clean up temporary files when shutting down cleanly, but leave them behind if it
+crashes. Or it could simply be a programming error of creating temporary files and never cleaning them up
+
+In a case like this, you'll ideally have some housekeeping to fix the program, and delete those files correctly. But
+if that's not possible, you might need to write your own script that gets rid of them
+
+There are all kinds of other reasons why the disk may be getting too full. Just remember that whenever this happens
+, your process will remain the same. You'll need to spend some time looking into what's using the disk. Check to see
+if it's expected or an anomaly, figure out how to solve it, and most important of all, how to prevent it from
+happening again
 
 ---
 
