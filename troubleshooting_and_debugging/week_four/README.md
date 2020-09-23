@@ -253,6 +253,7 @@ ___
 
 ## Managing Our Time
 
+
 ### Getting to the Important tasks
 
 We've discussed how to make better use of the resources available on our computers and systems, like the CPU, the
@@ -292,7 +293,7 @@ critical when dealing with a large incident.
 
 But investing in the future can save you even more time and user frustration when responding to a problem. Researching new technologies is another task in this category
 
-__IT is always evolving and it's important to have time set aside to stay up to date.__
+___IT is always evolving and it's important to have time set aside to stay up to date.___
 
 Another important task that might not necessarily be urgent is solving **technical debt**. When you work in IT, you
 waste time a lot...
@@ -326,7 +327,7 @@ importance of each issue.
 Even when it looks like everything is important, you should be able to tell that some things are more important than
 others
 
-__A task that will benefit more people is more important than a task that will benefit less people__
+___A task that will benefit more people is more important than a task that will benefit less people___
 
 If there are a bunch of different tasks that depend on you completing one, that roadblock is more important to clear
 than the rest
@@ -513,16 +514,238 @@ rolling back changes to previous versions can help save you a lot of time when y
 
 ### Dealing with Hard Problems
 
+Brian Kernighan, one of the first contributors to the Unix operating system and co-author of the famous C programming
+language book, among many other things, once said:
+
+>*Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as you can be
+ when you write it, how will you ever debug it?*
+
+This is a warning against writing complicated programs. If the code is *clear* and *simple*, it will be much easier
+to debug than if it's clever but obscure.
+
+The same applies to IT systems.
+
+* If the system is engineered very cleverly, it will be extremely hard to understand what's going on with it when
+ something fails. 
+
+* It's important to focus on building systems and applications that are simple and easy to understand. So that when
+ something goes wrong, we can figure out how to fix them quickly.
+ 
+Something that's really valuable is to develop code in small, digestible chunks. Every so often, stop
+and test what I've written. 
+
+The hardest thing to do is to try to debug something when running it for the first time only after it's completed
+. There are so many places things could have gone wrong.
+
+If you're writing code, try writing the tests for the program before the actual code to help you keep focus on your
+goal. 
+
+If you're building a system or deploying an application, having documentation that states what the end goal
+should be, and the steps you took to get there can be really helpful.
+
+If the problem you're trying to solve is complex and affects a lot of people, it can get really stressful to try to
+fully debug it with everyone waiting on you. That's why it's better to focus first on the short-term solution, and
+then look for the long-term remediation once those affected are able to get back to work.
+
+__And don't be afraid to ask for help__
+
+There's a technique called **rubber duck debugging**, which is simply explaining the problem to a rubber duck
+
+When you ask a colleague for their help with debugging a problem, be careful not to tell them what you think the root
+cause of the issue might be. Instead, tell them about the symptoms, and see what questions they ask and what
+possibilities they probe. They might come up with completely different paths to explore
 
 ___
 
 ### Proactive Practices
 
+We'll come across lots of bugs that trigger lots of different failures in our programs. There's a bunch of strategies
+we can adopt to make our lives easier, by catching issues before they affect our users or making troubleshooting
+simpler by having better information
+
+To avoid having to scramble to fix things when there's an outage, it's really helpful to have infrastructure that
+lets us test changes in advance so that we can check that things are working as expected before they reach our users
+
+If we're the ones writing the code, one thing we can do is to make sure that our code has good unit tests and
+integration tests. If our tests have good coverage of the code, we can rely on them to catch a wide array of bugs
+whenever there's a change that may break things
+
+For these tests to be really meaningful, we need to run them often, and make sure we know as soon as they fail.
+
+Setting up continuous integration can help
+
+Another step in this direction is to have a test environment, where we can deploy new code before shipping it to the
+rest of our users. This serves two purposes; First, we can do a thorough check of the software as it will be seen by
+the users. Depending on the software and how often we update it, we can do both automated and manual tests in this
+environment. Second, we can use this test environment to troubleshoot problems whenever they happen. We can try p
+possible solutions and new features without affecting the production environment.
+
+Another recommended practice when managing a fleet of computers is to deploy software in **phases** or **canaries**
+
+What this means is that instead of upgrading all computers at the same time and possibly breaking all of them at the
+same time, you upgrade some computers first and check how they behave. If everything goes fine, you can upgrade a
+few more, and so on until you're confident enough to upgrade the remaining part of the fleet.
+
+To make the best use of this practice, we'll need to be able to easily roll back to the previous version. Depending
+on the software, this might require more or less infrastructure. ___THIS IS WORTH THE TIME___
+
+We can make our troubleshooting easier by including good debug logging in the code.
+
+That way, whenever we have to figure out an issue, we can look at the logs and get a pretty good idea of what's
+going on.
+
+Another method that can help us is having centralized logs collection. This means there's a special server that
+gathers all the logs from all the servers or even all the computers in the network 
+
+That way, when we have to look at those logs, we don't need to connect to each machine individually, we can comb
+through all the logs together in a centralized server
+
+Similarly, having a good monitoring system can be super helpful. We can use it to catch issues early before they
+affect too many users. During a debugging session, we can look at the collected data to try to determine if there's
+anything out of the ordinary going on
+
+Making good use of a ticketing system can help us save a lot of time when trying to get to the bottom of a problem
+. If we ask users to provide the needed information up front, we don't have to waste time and go back and forth
+
+___Even here, we can look at opportunities for automation___
+
+Say you almost always want some specific info from the users computers, you can automate getting it by creating a
+script that gathers all the data you want and have the users attach it to the ticket.
+
+Finally, remember to spend time writing documentation. Just as importantly, store the documentation in a well-known
+location. Even if writing documentation isn't especially fun, having good instructions on how to solve a specific
+problem, knowing how to diagnose what's going on with the server, or tracking the known issues in a system can be
+real time savers
+
+At Google, they have a bunch of docs called Playbooks where they detail what a person who's on call can do to
+diagnose and mitigate a ton of different problems. By keeping this information updated, they make sure that no matter
+who the person on call is, everybody has access to the knowledge base accumulated by the whole team. 
+
+If we're dealing with systems that change and grow, we can proactively plan for the additional capacity that we'll
+need in the future
+
+___
+
+### Planning Future Resource Usage
+
+Sometimes, it's not a question of misusing resources, but rather missing resources
+
+A database server is expected to use more disk storage as more data gets stored. Or a web server is expected to use
+more network bandwidth as the service grows in popularity.
+
+If you're dealing with a service that's expected to grow and will acquire more resources in the future, it makes
+sense to spend some time thinking about what that might look like
+
+Planning ahead will prepare you for when you need additional resources, instead of having to scramble for them at the
+last minute
+
+> Lets say the database growth is expected to be one megabyte per day, and you have 500 megabytes of free-space. You
+> can use that storage for almost two years. But if the growth is expected to be 10 megabytes per day and you only
+> have those 500 megabytes available, then you need to start figuring out a plan that will allow your database to
+> keep growing at that pace. Otherwise, you run out of space in a couple of months
+
+Once you've figured out the current usage and the expected growth, don't forget to write this down so you can refer
+to it in the future and check if anything has changed
+
+If you find that you'll soon be running out of space, what you'll do next will depend on what the system does, and
+the importance of the data
+
+You might decide that you don't really want to store all that data, and instead clean up anything that's not really
+necessary, or you might decide that you really need to have a lot more storage available. In that case, you might
+opt for buying a network attached storage or **NAS** that can be attached to your server for additional disk space
+
+__Migrating to a different type of storage takes time, and can be tricky to do right under pressure__
+
+It's important to do this kind of planning in advance and not wait until the disk is completely full. This means
+monitoring the usage growth of the computer to see if there are any trends that need attention. 
+
+Our monitoring system should trigger an automatic alert when daily growth increases to unexpected levels
+
+An interesting strategy for making the best possible use of resources, is to mix and match the processes that run
+on the computers, so they make use of all the available resources
+
+> If you have a process that's CPU intensive and takes almost all the available CPU on a computer, you can still run
+> processes that are IO intensive, reading and writing a lot of data to the hard drive. Or if you have a service that
+> requires a lot of RAM, you can pair it with another one that uses very little memory, and mostly sends and receives
+> data over the network
+
+An alternative for having to deal with all these resources like figuring out when to buy more and how to distribute
+them, is to migrate those systems to the Cloud.
+
+Setting up your service to run on the cloud will require some initial setup time, as well as an ongoing cost for th
+Cloud resources you're using
+
+But while this is more expensive than what you'd pay when running the service on premise, you're basically delegating
+all your capacity planning needs to your Cloud provider
+
+That way, if the initial setup doesn't have enough space, you can simply attach a bigger hard drive. Or if the
+program needs more RAM, you can just deploy the service in a virtual machine with more memory assigned
+
+If you decide that moving to the Cloud is a good way to go for your company, remember that you'll also need to plan
+for that. Migrating your services to run fully or even partially in the Cloud, requires work on your side. So you'll
+need to decide if and when to make the leap, to avoid your service having an outage because it ran out of resources
 
 ___
 
 ### Preventing Future Problems
 
+Whenever we're faced with an issue, it's usually best to find a quick workaround. So that those affected can get back
+to work as soon as possible
+
+Say your database server crashed because it ran out of space. You can solve it quickly by adding an extra hard drive
+and starting the service back up. But remember, our work doesn't finish there
+
+Once the affected users are happily doing their job, we need to look for a long-term solution that will prevent the
+problem from happening again in the future
+
+In the database server scenario, that would be detecting that the disk is running out of space before it happens
+
+___One key strategy is to make good use of monitoring___
+
+You want the computers you care about to send their data to a centralized location that aggregates all this
+information. And then you want to be able to look at both the information yourself, and trigger alerts when the
+values are not within acceptable range
+
+When you first set up a monitoring system, you might not be sure what information to prioritize, so start with the
+basics: **CPU**, **disk**, **memory**, and **network usage**. As time passes and you have to deal with more incidents
+, you'll probably discover other metrics that you'd like to include in your monitoring system
+
+You'll also want to include information related to the specific service running on the computer. If it's a web server
+, you'll want to know the ratio between successful web responses and errors.
+
+If it's a database server, you'll want to know how many queries that are being served over time
+
+Whenever you have to deal with an incident that wasn't caught by the monitoring system, remember to set up new
+monitoring and alerting rules that will notify you about the problem if it ever happens again
+ 
+___An important capability of monitoring is to include the measurements taken along a period of time___
+
+That way, we can keep track of how we're using our resources, and catch changes in tendencies early on to help us
+with planning.
+
+If you have to work around an issue in an application developed by someone else, it's important that you report a bug
+to the relevant developers. That way, those in charge of the code can take your case into account and make it work
+correctly in the future
+
+If you don't do this, it's possible that the workaround you figured out for the current version is not sufficient for
+the next version, and you'll have to figure out a whole new workaround
+
+When reporting a bug to someone else, let them know what you were trying to achieve, what you did, what the expected
+result was, and what the actual result was. Include your reproduction case and workarounds for the issue. If you
+have access to the source code of the project, providing a patch that fixes the issue increases the chance of that
+code getting fixed
+
+On the flip side, if you have to work around an issue in the software that you own, make sure that you write a test
+that catches the problem
+
+That way, you can be sure that you won't ever make a change to the code that will trigger that same issue again. And
+even if you're not in charge of the development of the software, you can still run automatic tests whenever there's a
+new version, just to check if it still works as expected.
+
+So make sure you perform these tests whenever a new version of the application comes around.
+
+Finally, regardless of whether the bug came from software that you wrote or someone else wrote, make sure that you
+document the key pieces of what you did, how you diagnosed the issue, and how you squashed it.
 
 ___
 
