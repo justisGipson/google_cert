@@ -11,13 +11,18 @@ This repository is created to keep track of [Google IT Automation With Python](h
 
 [Git and GitHub Certificate](https://www.coursera.org/account/accomplishments/certificate/URUHWUB8J6WV)
 
-<!-- [Troubleshooting and Debugging Techniques Certificate]()
+[Troubleshooting and Debugging Techniques Certificate](https://www.coursera.org/account/accomplishments/certificate
+/CTR938GH3HEH)
 
-[Automating Real World Tasks with Python Certificate]()
+<!--
 
 [Configuration and Cloud Management Certificate]()
 
-[Google IT Automation with Python Professional Certificate]() -->
+[Automating Real World Tasks with Python Certificate]()
+
+[Google IT Automation with Python Professional Certificate]() 
+
+-->
 
 ---
 
