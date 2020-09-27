@@ -5,8 +5,14 @@
 
 Look into how automation can be applied to manage fleets of computers by:
 
+* Learn about configuration management, which lets us manage the configuration of our computers at scale
+
 * Learn how to use **Puppet**, the current industry standard for configuration management
+
+* Learn how to make use of the cloud to help us scale our infrastructure
+
 * Learn about the benefits and challenges of moving services to the Cloud
+
 * Learn the best practices for handling hundreds of virtual machines running in the Cloud
 
 ---
@@ -14,13 +20,76 @@ Look into how automation can be applied to manage fleets of computers by:
 ## Introduction to Automation at Scale
 
 
+### Intro
+
+No matter the size of your team or the number of computers in your fleet, knowing how to apply automation techniques
+will enable you to do your work much more effectively
+
+Being able to automate the installation of new software, the provisioning of new workstations or the configuration o
+a new server can make a big difference even when you're the only person in your IT department
+
 ### What is scale
 
-Being able to **scale** means keep achieving larger impacts with the same amount of effort. A scalable system is a **flexible**.
+Being able to **scale** means keep achieving larger impacts with the same amount of effort.
+
+A scalable system is a **flexible**
+
+> For example, if the web application your company provides is scalable, that it can handle an increase in the number
+> of people using it by adding more servers to serve requests.
+
+Adding more computers to the pool of servers that are serving the website can be a very simple or very hard operation
+depending on how your infrastructure is set up
+
+To figure out how scalable your current setup is, you can ask yourself questions like:  
+
+* Will adding more servers increase the capacity of the service?
+
+* How are new servers prepared, installed, and configured?
+
+* How quickly can you set up new computers to get them ready to be used
+
+* Could you deploy a hundred servers with the same IT team that you have today?
+
+* Would all the deployed servers be configured exactly the same way?
+
+Scaling isn't just about website serving content of course.
+
+If your company is rapidly hiring a lot of new employees, you'll need to have an on-boarding process that can scale as
+needed. And as you keep adding new computers to the network, you'll need to make sure that your system
+administration process can scale to the growing needs of the company
+
+This can include tasks like:
+
+* applying the latest security policies and patches while making sure users' needs still get addressed
+
+* while more and more users join the network without new support staff to back you up
 
 **Automation** is an essential tool for keeping up with the infrastructure needs of a growing business.
 
+By using the right automation tools, we can get a lot more done in the same amount of time.
+
+> For example, we could deploy a whole new server by running a single command and letting the automation take care of
+> the rest. We could also create a batch of user accounts with all the necessary permissions based on data already
+> stored in the database, eliminating all human interaction. 
+
+Automation is what lets us scale. It allows a small IT team to be in charge of hundreds or even thousands of computers.
+
+---
+
 ### What is configuration management
+
+> Imagine your team is in charge of setting up a new server. This could be a physical computer running close to you
+> or a virtual machine running somewhere in the cloud. To get things moving, the team installs the operating system
+>, configures some applications and services, sets up the networking stack, and when everything is ready, puts the
+> server into use.
+
+* **Configuration** everything from the current operating system and the applications installed to any necessary
+configuration files or policies, including anything else that's relevant for the server to do its job
+
+When you work in IT, you're generally in charge of the configuration of a lot of different devices, not just servers
+Network routers printers and even smart home devices can have configuration that we can control.
+
+> For example, a network switch might use a config file to set up each of its ports.
 
 **Unmanaged configuration** manually deploys the installation and configuring a computer.
 
@@ -29,6 +98,8 @@ Being able to **scale** means keep achieving larger impacts with the same amount
 * Typically you'll define a set of rules that have to be applied to the nodes you want to manage and then have a process that ensures that those settings are true on each of the nodes
 
 Configuration management system allows a way to make changes to a system or group of systems in a **systematic**, **repeatable way**.
+
+---
 
 ### What is infrastructure as code
 
@@ -49,6 +120,7 @@ Managing your Infrastructure as Code it means that the fleet of nodes are **cons
 ---
 
 ## Introduction to Puppet
+
 
 ### What is Puppet
 
@@ -92,6 +164,8 @@ Tasks Puppet can accomplish includes
 * Add, remove, or modify Users and Groups
 * Execute external commands
 
+---
+
 ### Puppet Resources
 
 **Resources** are the basic unit for modeling the configuration that we want to manage in Puppet.
@@ -134,6 +208,8 @@ class timezone {
 ```
 
 When we declare a resource in our puppet rules. We're defining the desired state of that resource in the system. The puppet agent then turns the desired state into reality using providers.
+
+---
 
 ### Puppet Classes
 
@@ -215,6 +291,7 @@ else {
 }
 
 ```
+---
 
 ### The Driving Principles of Configuration Management
 
