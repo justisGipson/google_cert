@@ -1,5 +1,6 @@
 # Configuration Management and the Cloud - Week 1
 
+
 ## Learning Objectives
 
 Look into how automation can be applied to manage fleets of computers by:
@@ -11,6 +12,7 @@ Look into how automation can be applied to manage fleets of computers by:
 ---
 
 ## Introduction to Automation at Scale
+
 
 ### What is scale
 
@@ -70,11 +72,13 @@ When using this model,
 Below example says that the package 'sudo' should be present on every computer where the rule gets applied.
 
 ```puppet
+
 class sudo {
     package { 'sudo':
         ensure => present,
     }
 }
+
 ```
 
 Tasks Puppet can accomplish includes
@@ -97,6 +101,7 @@ Tasks Puppet can accomplish includes
 Below example is s a simple rule that ensures that etc/sysctl.d exists and is a directory.
 
 ```puppet
+
 class sysctl {
     # resource type: file
     # resource title: '/etc/sysctl.d'
@@ -105,11 +110,13 @@ class sysctl {
         ensure => directory,
     }
 }
+
 ```
 
 Below examples uses a file resource to configure the contents of etc/timezone, a file, which is used in some Linux distributions to determine the time zone of the computer.
 
 ```puppet
+
 class timezone {
     # resource type: file
     # resource title: '/etc/timezone'
@@ -123,6 +130,7 @@ class timezone {
         replace => true,
     }
 }
+
 ```
 
 When we declare a resource in our puppet rules. We're defining the desired state of that resource in the system. The puppet agent then turns the desired state into reality using providers.
@@ -134,6 +142,7 @@ When we declare a resource in our puppet rules. We're defining the desired state
 Below example groups all of the resources related to NTP in the same class to make changes in the future easier.
 
 ```puppet
+
 # a class with three resources related to the Network Time Protocol, or NTP
 # rules make sure that the NTP package is always upgraded to the latest version
 class ntp {
@@ -151,11 +160,14 @@ class ntp {
         ensure => running,
     }
 }
+
 ```
 
 ---
 
 ## The Building Blocks of Configuration Management
+
+
 
 ### What are domain-specific languages
 
@@ -190,6 +202,7 @@ after that are attributes that are being set. We use equals greater than to assi
 each attribute ends with a comma
 
 ```puppet
+
 if $facts['is_virtual']{
     package{ 'smartmontools':
         ensure => purged,
@@ -200,6 +213,7 @@ else {
         ensure => installed,
     }
 }
+
 ```
 
 ### The Driving Principles of Configuration Management
@@ -219,10 +233,12 @@ In configuration management, operations should be **idempotent**. In this contex
   * This can be worked around by using the only if attribute
 
 ```puppet
+
 exec {'move example file':
     command => 'mv /home/user/example.txt /home/user/Desktop',
     onlyif => 'test -e /home/user/example.txt',
 }
+
 ```
 
 Another important aspect of how configuration management works is the **test and repair paradigm**. This means that actions are taken only when they are necessary to achieve a goal.
