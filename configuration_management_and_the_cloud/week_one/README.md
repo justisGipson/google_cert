@@ -93,29 +93,158 @@ Network routers printers and even smart home devices can have configuration that
 
 **Unmanaged configuration** manually deploys the installation and configuring a computer.
 
-**Managed configuration** uses a **configuration management system** to handle all of the configuration of the devices in the **nodes** which aims to solve the scaling problem.
+**Managed configuration** uses a **configuration management system** to handle all of the configuration of the
+ devices or **nodes** which aims to solve the scaling problem.
 
-* Typically you'll define a set of rules that have to be applied to the nodes you want to manage and then have a process that ensures that those settings are true on each of the nodes
+* Typically you'll define a set of rules that have to be applied to the nodes you want to manage and then have a
+process that ensures that those settings are true on each of the nodes
+
+At a small scale, unmanaged configurations seem inexpensive. If you only manage a handful of servers, you might be
+able to get away with doing that without the help of automation. You could log into each device and make changes by
+hand when necessary. And when your company needs a new database server, you might just go ahead and manually
+install the OS and the database software into a spare computer
+
+But this approach doesn't always scale well. The more servers that you need to deploy, the more time it will take you
+to do it manually
+
+And when things go wrong, and they often do, it can take a lot of time to recover and have the servers back online.
+
+Configuration management systems aim to solve this scaling problem. By managing the configuration of a fleet with a
+system like this, large deployments become easier to work with because the system will deploy the configuration
+automatically no matter how many devices you're managing
+
+When you use configuration management and you need to make a change in one or more computers, you don't manually
+connect to each computer to perform operations on it. Instead, you edit the configuration management rules and then
+let the automation apply those rules in the affected machines.
 
 Configuration management system allows a way to make changes to a system or group of systems in a **systematic**, **repeatable way**.
+
+Being repeatable is important, because it means that the results will be the same on every device
+
+A configuration management tool can take the rules you define and apply them to the systems that it manages, making
+changes efficient and consistent
+
+Configuration management systems often also have some form of automatic error correction built in so that they can
+recover from certain types of errors all by themselves
+
+> For example, say you found that some application that was being used widely in your company was configured to be
+> very insecure. You can add rules to your configuration management system to improve the settings on all computers
+>. And this won't just apply the more secure settings once. It will continue to monitor the configuration going
+> forward. If a user changes the settings on their machine, the configuration management tooling will detect this
+> change and reapply the settings you defined in code.
+
+There are lots of configuration management systems available in the IT industry today. Some popular systems include: 
+
+* [Puppet](https://www.puppet.com)
+
+* [Chef](https://www.chef.io)
+
+* [Ansible](https://www.ansible.com)
+
+* [CFEngine](https://www.cfengine.com)
+
+These tools can be used to manage locally hosted infrastructure. Think bare metal or virtual machines, like the
+laptops or work stations that employees use at a company
+
+Many also have some kind of Cloud integration allowing them to manage resources in Cloud environments like:
+
+* [Amazon EC2](https://aws.amazon.com/ec2/)
+
+* [Microsoft Azure](https://azure.microsoft.com/)
+
+* [Google Cloud Platform](https://cloud.google.com)
+
+There are some platform specific tools like:
+
+* [SCCM](https://docs.microsoft.com/en-us/mem/configmgr/core/understand/introduction)
+
+* [Group Policy for Windows](https://en.wikipedia.org/wiki/Group_Policy)
+
+Keep in mind though that selecting a configuration management system is a lot like deciding on a programming language
+or version control system. You should pick the one that best fits your needs and adapt accordingly, if necessary.
+
+Each has its own strengths and weaknesses. So a little research beforehand can help you decide which system is best
+suited for your particular infrastructure needs
 
 ---
 
 ### What is infrastructure as code
 
-**Infrastructure as Code** or IaC is the paradigm of storing all the configuration for the managed devices in version controlled files. This is then combined with automatic tooling to actually get the nodes provisioned and managed.
+When we use a configuration management system, we write rules that describe how the computers in our fleet should be
+configured
 
-The principals of Infrastructure as Code are commonly applied in __cloud computing environments__, where machines are treated like __interchangeable resources__, instead of individual computers.
+These rules are then executed by the automation, to make the computers match our desired state.
+
+This means that we can model the behavior of our IT infrastructure in files that can be processed by automatic tools.
+
+These files can then be tracked in a version control system. Remember, version control systems help us keep track of
+all changes done to the files, helping answer questions like who, when, and why... 
+
+**Infrastructure as Code** or **IaC** is the paradigm of storing all the configuration for the managed devices in
+version controlled files. This is then combined with automatic tooling to actually get the nodes provisioned and
+managed.
+
+**IaC** - When all the configurations necessary to deploy and manage a node in the infrastructure is stored in
+version control. This is then combined with automatic tooling to actually get the nodes provisioned and managed.
+
+The principals of Infrastructure as Code are commonly applied in __cloud computing environments__, where machines are
+treated like __interchangeable resources__, instead of individual computers.
+
+This principle is also known as treating your computers as cattle instead of pets because you care for them as a
+group rather than individually
+
+This concept isn't just for managing computers in huge data centers or globe spanning infrastructures, it can work
+for anything; from servers to laptops, or even workstations in a small IT department
+
+    Even if your company only has a single computer working as the mail server, 
+    you can still benefit from storing all the configuration needed to set it 
+    up in a configuration management system
+
+One valuable benefit of this process is that the configuration applied to the device doesn't depend on a human
+remembering to follow all the necessary steps
 
 IaC allows the followings:
 
 * Makes the deployment consistent
+
 * Applies the benefits of the version control system to the infrastructure
+
 * Run automated tests on the files
 
-In a complex or large environment, treating your IT Infrastructure as Code can help you deploy a flexible scalable system. A configuration management system can help you manage that code by providing a platform to maintain and provision that infrastructure in an automated way.
+It gives us an audit trail of changes, it lets us quickly rollback if a change was wrong, it lets others reviewed our
+code to catch errors and distribute knowledge, it improves collaboration with the rest of the team, and it lets us
+easily check out the state of our infrastructure by looking at the rules that are committed
+
+The ability to easily see what configuration changes were made and roll back to a known good state is super important
+. It can make a big difference in quickly recovering from an outage, especially since changing the contents of the
+configuration file can be as dangerous as updating the version of an application
+
+In a complex or large environment, treating your IT Infrastructure as Code can help you deploy a flexible scalable
+system. 
+
+A configuration management system can help you manage that code by providing a platform to maintain and
+provision that infrastructure in an automated way.
+
+Having your infrastructure stored as code means that you can automatically deploy your infrastructure with very
+little overhead.
+
+If you need to move it to a different location, it can be deployed, de-provisioned, and redeployed at scale in a
+different locale with minimal code level changes
 
 Managing your Infrastructure as Code it means that the fleet of nodes are **consistent, versioned, reliable, and repeatable**.
+
+Instead of being seen as precious or unique, machines are treated as replaceable resources that can be deployed on
+-demand through the automation
+
+Any infrastructure that claims to be scalable must be able to handle the capacity requirements of growth
+
+Performing an action like adding more servers to handle an increase in requests is just a possible first step. There
+are other things that we might need to take into account, such as the amount of traffic that network can handle or
+the load on the back-end servers like databases
+
+Viewing your infrastructure in this way helps your IT team adapt and stay flexible. The technology industry is
+constantly changing and evolving. Automation and configuration management can help you embrace that change instead
+of avoiding it
 
 ---
 
@@ -124,24 +253,35 @@ Managing your Infrastructure as Code it means that the fleet of nodes are **cons
 
 ### What is Puppet
 
-Puppet is the current industry standard for managing the configuration of computers in a fleet of machines. Puppet is:
+[Puppet](https://www.puppet.com) is the current industry standard for managing the configuration of computers in a
+fleet of machines. 
+
+Puppet is:
 
 * Cross-platform
+
 * Open source project
 
 Puppet is typically deploy using a client-server architecture.
 
 * The client is known as the Puppet agent
+
 * Te service is known as the Puppet master
 
 When using this model,
 
 1. The agent connects to the master and sends a bunch of facts that describe the computer to the master
+
 2. The master then processes this information, generates the list of rules that need to be applied on the device
+
 3. The master sends this list back to the agent
+
 4. The agent is then in charge of making any necessary changes on the computer
 
-Below example says that the package 'sudo' should be present on every computer where the rule gets applied.
+Puppet is a cross-platform application available for all Linux distributions, Windows, and Mac OS. This means that
+you can use the same puppet rules for managing a range of different computers.
+
+Example block below says that the package 'sudo' should be present on every computer where the rule gets applied.
 
 ```puppet
 
@@ -153,20 +293,48 @@ class sudo {
 
 ```
 
-Tasks Puppet can accomplish includes
+There are various installation tools available depending on the type of operating system. Puppet will determine the
+type of operating system being used and select the right tool to perform the package installation
+
+Linux - **APT**, **Yum**, **DNF**
+
+Puppet will also determine which package manager should be used to install the package
+
+On Mac OS, there's a few different available providers depending on where the package is coming from. The Apple
+Provider is used for packages that are part of the OS, while the MacPorts provider is used for packages that come
+from the MacPorts Project
+
+For Windows, we'll need to add an extra attribute to our rule, stating where the installer file is located on the
+local disk or a network mounted resource. Puppet will then execute the installer and make sure that it finishes
+successfully
+
+If you use Chocolatey to manage your windows packages, you can add an extra Chocolatey provider to Puppet to support
+that
+
+Using rules like this one, we can get puppet to do a lot more than just install packages for us
+
+Tasks Puppet can accomplish includes:
 
 * Install packages
+
 * Add, remove, or modify configuration files stored in the system
+
 * Change registry entries on Windows
+
 * Enable, disable, start, or stop the services
+
 * Configure crone jobs
+
 * Schedule tasks
+
 * Add, remove, or modify Users and Groups
+
 * Execute external commands
 
 ---
 
 ### Puppet Resources
+
 
 **Resources** are the basic unit for modeling the configuration that we want to manage in Puppet.
 
@@ -187,7 +355,12 @@ class sysctl {
 
 ```
 
-Below examples uses a file resource to configure the contents of etc/timezone, a file, which is used in some Linux distributions to determine the time zone of the computer.
+Syntax - write them in a block that starts with the resource type ,in this case File. The configuration of the
+resource is then written inside a block of curly braces. Right after the opening curly brace, we have the title of
+the resource, followed by a colon. After the colon come the attributes that we want to set for the resource
+
+Below examples uses a file resource to configure the contents of etc/timezone, a file, which is used in some Linux
+distributions to determine the time zone of the computer.
 
 ```puppet
 
@@ -197,21 +370,37 @@ class timezone {
     file { '/etc/timezone':
         # resource attributes
         # this will be a file instead of a directory or a symlink
-        # the contents of the file will be the UTC time zone
-        # the contents of the file will be replaced even if the file already exists
         ensure => file,
+
+        # the contents of the file will be the UTC time zone
         content => "UTC\n",
+
+        # the contents of the file will be replaced even if the file already exists
         replace => true,
     }
 }
 
 ```
 
-When we declare a resource in our puppet rules. We're defining the desired state of that resource in the system. The puppet agent then turns the desired state into reality using providers.
+There are a lot more attributes that we could set, like file permissions the file owner, or the file modification time.
+
+How do these rules turn into changes in our computers?
+
+When we declare a resource in our puppet rules. We're defining the desired state of that resource in the system. The
+puppet agent then turns the desired state into reality using providers.
+
+The provider used will depend on the resource defined and the environment where the agent is running. Puppet will
+normally detect this automatically without us having to do anything special
+
+When the puppet agent processes a resource, it first decides which provider it needs to use, then passes along the
+attributes that we configured in the resource to that provider.
+
+The code of each provider is in charge of making our computer reflect the state requested in the resource.
 
 ---
 
 ### Puppet Classes
+
 
 **Classes** in Puppets are used to collect the resources that are needed to achieve a goal in a single place.
 
