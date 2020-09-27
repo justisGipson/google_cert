@@ -404,6 +404,11 @@ The code of each provider is in charge of making our computer reflect the state 
 
 **Classes** in Puppets are used to collect the resources that are needed to achieve a goal in a single place.
 
+> For example, you could have a class that installs a package, sets the contents of a configuration file, and starts
+> the service provided by that package
+
+
+
 Below example groups all of the resources related to NTP in the same class to make changes in the future easier.
 
 ```puppet
@@ -415,6 +420,7 @@ class ntp {
         ensure => latest,
     }
     # contents of the file will be based on the source attribute
+    # agent will read the requiured contents from the specified location
     file { '/etc/ntp.conf':
         source => 'puppet:///modules/ntp/ntp.conf',
         replace => true,
@@ -428,75 +434,169 @@ class ntp {
 
 ```
 
+* **NTP** is the mechanism computers use to synchronize their clocks
+
+By grouping all of the resources related to NTP in the same class, we only need a quick glance to understand how the
+service is configured and how it's supposed to work
+
+This would make it easier to make changes in the future since we have all the related resources together. It makes
+sense to use this technique whenever we want to group related resources
+
+> For example, you could have a class grouping all resources related to managing log files, or configuring the time
+> zone, or handling temporary files and directories. 
+>
+> You could also have classes that group all the settings related to your web serving software, your email
+> infrastructure, or even your company's firewall 
+
+---
+
+### Extra Puppet Resources
+
+* [Resources](https://puppet.com/docs/puppet/latest/lang_resources.html)
+
+* [Deploy Packages Across Your Windows Estate with Bolt and Chocolatey](https://puppet.com/blog/deploy-packages-across-your-windows-estate-with-bolt-and-chocolatey/)
+
 ---
 
 ## The Building Blocks of Configuration Management
 
 
-
 ### What are domain-specific languages
 
-These resources are the building blocks of Puppet rules, but we can do much more complex operations using Puppet's domain specific language or DSL. 
+These resources are the building blocks of Puppet rules, but we can do much more complex operations using Puppet's
+**Domain Specific Language** or **DSL**. 
 
-a domain specific language is a programming language that's more limited in scope
+Typical programming languages like **Python**, **Ruby**, **Java** or **Go** are general purpose languages that can be
+used to write lots of different applications with different goals and use cases
 
-In the case of Puppet, the DSL is limited to operations related to when and how to apply configuration management rules to our devices. 
+A **Domain Specific Language** is a programming language that's more limited in scope
 
-On top of the basic resource types that we already checked out, Puppet's DSL includes variables, conditional statements, and functions.
+Learning a domain-specific language is usually much faster and easier than learning a general purpose programming
+language because there's a lot less to cover
+
+You don't need to learn as much syntax or understand as many keywords or taking to account a lot of overhead in general
+
+In the case of Puppet, the DSL is limited to operations related to when and how to apply configuration management
+rules to our devices. 
+
+> For example, we can use the mechanisms provided by the DSL to set different values on laptops or desktop computers
+> or to install some specific packages only on the company's web servers
+
+On top of the basic resource types that we already checked out, Puppet's DSL includes variables, conditional
+statements, and functions.
+
+Using them, we can apply different resources or set attributes to different values depending on some conditions
 
 Let's talk a bit about Puppet facts. Facts are variables that represent the characteristics of the system. When the
 Puppet agent runs, it calls a program called factor which analyzes the current system, storing the information it
 gathers in these facts. Once it's done, it sends the values for these facts to the server, which uses them to
 calculate the rules that should be applied
 
+Puppet comes with a bunch of baked-in core facts that store useful information about the system like what the current
+OS is, how much memory the computer has whether it's a virtual machine or not or what the current IP address is
+
+If the information we need to make a decision isn't available through one of these facts, we can also write a script
+that checks for the information and turns it into our own custom fact.
+
 Let's check out an example of a piece of Puppet code that makes use of one of the built-in facts. This piece of code
 is using the is-virtual fact together with a conditional statement to decide whether the **smartmontools** package
-should be installed or purged. This package is used for monitoring the state of hard drives using smart. So it's
-useful to have it installed in physical machines, but it doesn't make much sense to install it in our virtual
-machines. 
+should be installed or purged. 
 
-First, facts is a variable. All variable names are preceded by a dollar sign in Puppet's DSL. In particular, the
-facts variable is what's known as a hash in the Puppet DSL, which is equivalent to a dictionary in Python. This means
-that we can access the different elements in the hash using their keys. In this case, we're accessing the value
-associated to the is virtual key. Second, we see how we can write a conditional statement using if else, enclosing
-each block of the conditional with curly braces. Finally, each conditional block contains a package resource. We've
-seen resources before, but we haven't looked at the syntax in detail. So let's do that now. Every resource starts
-with the type of resource being defined. In this case, package and the contents of the resource are then enclosed
-in curly braces. Inside the resource definition, the first line contains the title followed by a colon. Any lines
-after that are attributes that are being set. We use equals greater than to assign values to the attributes and then
-each attribute ends with a comma
+The **smartmontools** package is used for monitoring the state of hard drives using smart. So it's useful to have it
+installed in physical machines, but it doesn't make much sense to install it in our virtual machines. 
+
+First, facts is a variable. All variable names are preceded by a **$** in Puppet's DSL. In particular, the
+facts variable is what's known as a **hash** in the Puppet DSL, which is equivalent to a dictionary in Python. This
+means that we can access the different elements in the hash using their keys. 
+
+In this case, we're accessing the value associated to the is virtual key. Second, we see how we can write a
+conditional statement using if else, enclosing each block of the conditional with curly braces. Finally, each
+conditional block contains a package resource. 
+
+We've seen resources before, but we haven't looked at the syntax in detail. So let's do that now. Every resource starts
+with the type of resource being defined. 
+
+In this case, **package** and the contents of the resource are then enclosed in curly braces. Inside the resource
+definition, the first line contains the title followed by a colon. Any lines after that are attributes that are being
+set. We use **=>** to assign values to the attributes and then each attribute ends with a comma
 
 ```puppet
 
 if $facts['is_virtual']{
-    package{ 'smartmontools':
+    package {'smartmontools':
         ensure => purged,
     }
 }
 else {
-    package{ 'smartmontools':
+    package {'smartmontools':
         ensure => installed,
     }
 }
 
 ```
+
+While each tool uses their own DSL, they're usually very simple and can be learned very quickly
+
 ---
 
 ### The Driving Principles of Configuration Management
 
-Unlike Python or C which are called procedural languages, Puppet is a **declarative language** because the desired state is declared rather than writing the steps to get there.
+The providers that we mentioned earlier lake **apt** and **yum** are the ones in charge of turning our goals into
+whatever actions are necessary
+
+Unlike Python or C which are called **procedural languages**, because we write out the procedure that the computer
+needs to follow to reach our desired goal, Puppet is a **declarative language** because the desired state is declared
+rather than writing the steps to get there.
+
+___Remember that when it comes to configuration management, it makes sense to simply state what the configuration
+should be, not what the computer should do to get there___
 
 There are three important principles of configuration management
 
 1. Idempotency
+
 2. Test and repair paradigm
+
 3. Stateless
 
-In configuration management, operations should be **idempotent**. In this context, an idempotent action can be performed over and over again without changing the system after the first time the action was performed, and with no unintended side effects Idempotency is a valuable property of any piece of automation. If a script is idempotent, it means that it can fail halfway through its task and be run again without problematic consequences
+In configuration management, operations should be **idempotent**. 
+
+In this context, an **idempotent** action can be performed over and over again without changing the system after the
+first time the action was performed, and with no unintended side effects 
+
+* **Idempotency** is a valuable property of any piece of automation. If a script is idempotency , it means that it can
+fail halfway through its task and be run again without problematic consequences
+
+```puppet
+
+file { 'etc/issue':
+    mode    => '6604'
+    content => "Internal system \l \n,
+}
+
+```
+
+This resource ensures that the **/etc/issue** file has a set of permissions and a specific line in it. Fulfilling this
+requirement is an idempotent operation. If the file already exists and has the desired content, then Puppet will
+understand that no action has to be taken
+
+If the file doesn't exist, then puppet will create it. If the contents or permissions don't match, Puppet will fix
+them. No matter how many times the agent applies the rule, the end result is that this file will have the requested
+contents and permissions
+
+Idempotency is a valuable property of any piece of automation. If a script is idempotent, it means that it can fail
+halfway through its task and be run again without problematic consequences
+
+> Say you're running your configuration management system to setup a new server. Unfortunately, the setup fails
+> because you forgot to add a second disk to the computer and the configuration required two disks. If your
+> automation is idempotent, you can add the missing disk and then have the system pick up from where it left off
 
 * Most Puppet resources provide idempotent actions
+
 * exec resource is NOT an idempotent actions though - exec modifies the system each time it's executed
-  * This can be worked around by using the only if attribute
+
+> To understand this, let's check out what happens when we execute a command that moves a file on our computer. First
+>, we'll check that the example.txt file is here, and then we'll move it to the desktop directory.
 
 ```puppet
 
@@ -507,8 +607,35 @@ exec {'move example file':
 
 ```
 
-Another important aspect of how configuration management works is the **test and repair paradigm**. This means that actions are taken only when they are necessary to achieve a goal.
+This works fine now, but what happens if we run the exact same command again after it's been executed once? We
+receive an error because the file is no longer in the same place. In other words, this was not an idempotent action
+, as executing the same action twice produced a different result and the unintended side effect of an error. If we
+were running this inside Puppet, this would cause our Puppet run to finish with an error
 
-Finally, another important characteristic is **stateless**, this means that there's no state being kept between runs of the agent.
+* This can be worked around by using the **onlyif** attribute
+
+By adding this conditional, we've taken an action that's not idempotent and turned it into an idempotent one
+
+Another important aspect of how configuration management works is the **test and repair paradigm**. This means that
+actions are taken only when they are necessary to achieve a goal.
+
+Puppet will first test to see if the resource being managed like a file or a package, actually needs to be modified
+. If the file exists in the place we want it to, no action needs to be taken. If a package is already installed
+, there's no need to install it again
+
+Finally, another important characteristic is **stateless**, this means that there's no state being kept between runs
+of the agent.
+
+Each Puppet run is independent of the previous one, and the next one
+
+Each time the puppet agent runs, it collects the current facts
+
+The Puppet master generates the rules based just on those facts, and then the agent applies them as necessary
+
+### Extra Resources on Configuration Management
+
+* [Domain Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language)
+
+* [Puppet Design Philosophy](http://radar.oreilly.com/2015/04/the-puppet-design-philosophy.html)
 
 ---
