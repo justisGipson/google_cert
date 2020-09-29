@@ -186,7 +186,8 @@ that we want to be different.
 When setting up Puppet, we usually have a default node definition that lists the classes that should be included for
 all the nodes.
 
-Below example is the default node with two classes, the sudo class and the ntp class.
+Below example is the default node with two classes, the sudo class and the ntp class. For the ntp class, we're
+setting an additional servers parameter that lists the servers we can use to get the network time.
 
 ```puppet
 
@@ -218,7 +219,9 @@ node default {
 
 ```
 
-Below example shows how specific nodes in the fleet are identified by their FQDNs, or fully qualified domain names.
+All right, that's the default node, so it will apply to computers in the fleet by default. 
+
+Below example shows how specific nodes in the fleet are identified by their FQDNs
 
 ```puppet
 
@@ -251,22 +254,80 @@ The node definitions are typically stored in a file called **site.pp**, which is
 
 Instead, it just defines what classes will be included for what nodes
 
+This is another step towards helping us organize our code in a way that makes it easier to maintain
+
 ---
 
 ### Puppet's Certificate Infrastructure
 
-Puppet uses __public key infrastructure (PKI)__, __secure sockets layer (SSL)__, to establish secure connections
+In typical Puppet deployments, all managed machines and the fleet connect to a Puppet server
+
+The client send their facts to the server, and the server then processes the manifests, generates the corresponding
+catalog, and sends it back to the clients who apply it locally.
+
+Puppet uses __public key infrastructure (PKI)__, and __secure sockets layer (SSL)__, to establish secure connections
 between the server and the clients.
 
+The clients use this infrastructure to check the server's identity, and the server uses it to check the client's
+identity, and all communication is done over an encrypted channel that uses these identities so it can't be
+intercepted by other parties
+
+Each machine involved has a pair of keys related to each other, a private key and a public key. The private key is
+secret, only known to that specific machine, the public key is shared with other machines involved. Machines can
+then use the standardized process to validate the identity of any other machine. The sender signs a message using
+the private key and the receiver validates the signature using the corresponding public key.
+
+But how do machines know which public keys to trust? This is where a **certificate authority**, or **CA** comes in
+
+The CA verifies the identity of the machine and then creates a certificate stating that the public key goes with that
+machine. After that, other machines can rely on that certificate to know that they can trust the public key, since
+it means the machine's identity has been verified.
+
 __Puppet comes with its own certificate authority__, which can be used to create certificates for each clients.
+
+So you can use that one, or if your company already has a CA that validates the identity of the machines in your
+fleet, you can integrate it with Puppet, so you only validate the identities once
+
+When a node checks into the Puppet master for the first time, it requests the certificate. The Puppet master looks at
+this request and if it can verify the nodes identity, it creates a certificate for that node. The system
+administrator can check the identity manually or use a process that does this automatically using additional
+information about the machines to verify their identity. When the agent node picks up this certificate, it knows
+it can trust the Puppet master, and the node can use the certificate from then on to identify itself when
+requesting a catalog
 
 Why do we care so much about the identity of the nodes? There's a bunch of reasons.
 
 One of the reason why identity of the nodes matter is that the Puppet rules can sometimes include confidential
 information.
 
-* Automatic sign all requests feature is available in Puppet, it should be limited to test deployment and never used
-for real computers being used by real users
+Even if none of the rules hold confidential info, you want to be sure that the machine you're setting up as your web
+server really is your web server and not a rogue machine that just claims to have the same name
+
+All sorts of things could go wrong if random computers start popping up in your network with the wrong settings.
+
+> If you're creating a test deployment to try out how Puppet rules get applied, and so you're only managing tests
+> machines, you can configure Puppet to automatically sign all requests, but you should never do this for real
+> computers being used by real users.
+
+___Remember that it's better to be safe than sorry. So always take the time to authenticate your machines___
+
+___AND___
+
+___Automatic sign all requests feature is available in Puppet, it should be limited to test deployment and never used
+for real computers being used by real users___
+
+When starting out with Puppet, it's common to use the manual signing approach. In this case, when the node connects
+to the master, it will generate a certificate request, which we'll go into a queue in the Puppet master machine. You
+'ll then need to verify that the machine's identity is correct and the baked-in CA will issue the corresponding
+certificate.
+
+If your fleet is large, this manual approach won't really work. Instead, you'll want to write a script that verifies
+the identity of the machines automatically for you
+
+One way to do this is by copying a unique piece of information into the machines when they get provisioned and then
+use this pre-shared data as part of the certificate request.
+
+That way, your script can verify that the machines are who they claim to be without involving any humans
 
 ---
 
