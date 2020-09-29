@@ -35,7 +35,9 @@ centers**.
 There are multiple factors that is determined based on the selected region,
 
 * Latency
+
 * Legal or political factors
+
 * Other services as dependencies that is needed to run the service
 
 ---
@@ -49,6 +51,7 @@ Queries per second or QPS
 This capacity change is called scaling-
 
 * **Up-scaling** when the capacity is being increased
+
 * **Down-scaling** when the capacity is being decreased
 
 There are a couple of different ways that we can scale our service in the Cloud,
@@ -70,9 +73,11 @@ There are a couple of different ways that we can scale our service in the Cloud,
 
 ### Evaluating the Cloud
 
-In the case of cloud solutions, IT team is giving up some of its control to the cloud provider. Therefore, it's important to know what kind of support is available and select the one that fits the needs.
+In the case of cloud solutions, IT team is giving up some of its control to the cloud provider. Therefore, it's
+important to know what kind of support is available and select the one that fits the needs.
 
-Treat the servers executing the workloads as a **commodity** and always use reasonable judgment to protect the machines that we deploy, whether that's on physical server is running on-premise or on virtual machines in the Cloud.
+Treat the servers executing the workloads as a **commodity** and always use reasonable judgment to protect the
+machines that we deploy, whether that's on physical server is running on-premise or on virtual machines in the Cloud.
 
 ---
 
@@ -85,7 +90,8 @@ of a truck, you migrate your physical servers running on-premise to a virtual ma
 case, you're shifting from one way of running your servers to another. The key thing to note with both approaches, is
 that **the servers core configurations stay the same**.
 
-**PaaS** is well-suited for when you have a specific infrastructure requirement, but you don't want to be involved in the day-to-day management of the platform
+**PaaS** is well-suited for when you have a specific infrastructure requirement, but you don't want to be involved in
+the day-to-day management of the platform
 
 **Containers** are applications that are packaged together with their configuration and dependencies.
 
@@ -115,7 +121,8 @@ Regardless of the service provider, following parameters needs to be set when cr
   * CPU, memory and boot disk options for the VM
 
 Cloud service providers also provides the command line interface, which allows for us to specify what we want once
-, and then use the same parameters many times. __Using the command line interface lets us create, modify, and even delete virtual machines from our scripts.__
+, and then use the same parameters many times. __Using the command line interface lets us create, modify, and even
+delete virtual machines from our scripts.__
 
 **Reference images** store the contents of a machine in a reusable format, while templating is the process of
 capturing all of the system configuration to let us create VM in a repeatable way. That exact format of the reference
