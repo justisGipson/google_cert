@@ -295,15 +295,15 @@ information about the machines to verify their identity. When the agent node pic
 it can trust the Puppet master, and the node can use the certificate from then on to identify itself when
 requesting a catalog
 
-Why do we care so much about the identity of the nodes? There's a bunch of reasons.
+Why do we care so much about the identity of the nodes? There's a bunch of reasons...
 
 One of the reason why identity of the nodes matter is that the Puppet rules can sometimes include confidential
-information.
+information
 
 Even if none of the rules hold confidential info, you want to be sure that the machine you're setting up as your web
 server really is your web server and not a rogue machine that just claims to have the same name
 
-All sorts of things could go wrong if random computers start popping up in your network with the wrong settings.
+All sorts of things could go wrong if random computers start popping up in your network with the wrong settings
 
 > If you're creating a test deployment to try out how Puppet rules get applied, and so you're only managing tests
 > machines, you can configure Puppet to automatically sign all requests, but you should never do this for real
@@ -317,17 +317,29 @@ ___Automatic sign all requests feature is available in Puppet, it should be limi
 for real computers being used by real users___
 
 When starting out with Puppet, it's common to use the manual signing approach. In this case, when the node connects
-to the master, it will generate a certificate request, which we'll go into a queue in the Puppet master machine. You
+to the master, it will generate a certificate request, which will go into a queue in the Puppet master machine. You
 'll then need to verify that the machine's identity is correct and the baked-in CA will issue the corresponding
-certificate.
+certificate
 
 If your fleet is large, this manual approach won't really work. Instead, you'll want to write a script that verifies
 the identity of the machines automatically for you
 
 One way to do this is by copying a unique piece of information into the machines when they get provisioned and then
-use this pre-shared data as part of the certificate request.
+use this pre-shared data as part of the certificate request
 
 That way, your script can verify that the machines are who they claim to be without involving any humans
+
+---
+
+### Setting Up Puppet Clients and Servers
+
+We've already installed the Puppet master package on this computer, so we'll use it as the master
+
+Since this is a test deployment to demonstrate Puppet, we'll configure it to automatically sign the certificate
+requests of the nodes we add
+
+Remember, if we were deploying this to real computers, we'd have to manually sign the requests or implement a proper
+validating script
 
 ---
 
