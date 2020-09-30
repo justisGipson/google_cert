@@ -2,9 +2,11 @@
 
 ### Bubble Sort Introduction
 
-Bubble sort is an introductory sorting algorithm that iterates through a list and compares pairings of adjacent elements.
+Bubble sort is an introductory sorting algorithm that iterates through a list and compares pairings of adjacent
+elements.
 
-According to the sorting criteria, the algorithm swaps elements to shift elements towards the beginning or end of the list.
+According to the sorting criteria, the algorithm swaps elements to shift elements towards the beginning or end of the
+list.
 
 By default, a list is sorted if for any element e and position 1 through N:
 
@@ -30,7 +32,8 @@ If it is, we swap the position of the elements. The larger element is now at a g
 
 When a swap is made, we know the list is still unsorted. The outer loop will run again when the inner loop concludes.
 
-The process repeats until the largest element makes its way to the last index of the list. The outer loop runs until no swaps are made within the inner loop.
+The process repeats until the largest element makes its way to the last index of the list. The outer loop runs until
+no swaps are made within the inner loop.
 
 ---
 
@@ -47,9 +50,11 @@ It is tempting to write code like:
     list[index_1] = list[index_2]
     list[index_2] = list[index_1]
 
-However, if we do this, we lose the original value at `index_1`. The element gets replaced by the value at `index_2`. Both indices end up with the value at `index_2`.
+However, if we do this, we lose the original value at `index_1`. The element gets replaced by the value at `index_2
+`. Both indices end up with the value at `index_2`.
 
-Programming languages have different ways of avoiding this issue. In some languages, we create a temporary variable which holds one element during the swap:
+Programming languages have different ways of avoiding this issue. In some languages, we create a temporary variable
+which holds one element during the swap:
 
     temp = list[index_1]
     list[index_1] = list[index_2]
@@ -63,11 +68,14 @@ Other languages provide multiple assignment which removes the need for a tempora
 
 ### Algorithm Analysis
 
-Given a moderately unsorted data-set, bubble sort requires multiple passes through the input before producing a sorted list. Each pass through the list will place the next largest value in its proper place.
+Given a moderately unsorted data-set, bubble sort requires multiple passes through the input before producing a
+sorted list. Each pass through the list will place the next largest value in its proper place.
 
-We are performing n-1 comparisons for our inner loop. Then, we must go through the list n times in order to ensure that each item in our list has been placed in its proper order.
+We are performing n-1 comparisons for our inner loop. Then, we must go through the list n times in order to ensure
+that each item in our list has been placed in its proper order.
 
-The n signifies the number of elements in the list. In a worst case scenario, the inner loop does n-1 comparisons for each n element in the list.
+The n signifies the number of elements in the list. In a worst case scenario, the inner loop does n-1 comparisons for
+each n element in the list.
 
 Therefore we calculate the algorithm’s efficiency as:
 
@@ -78,12 +86,18 @@ O (n(n−1))=O(n(n))=O(n<sup>2</sup>))
 
 The diagram analyzes the pseudocode implementation of bubble sort to show how we draw this conclusion.
 
-When calculating the run-time efficiency of an algorithm, we drop the constant (-1), which simplifies our inner loop comparisons to n.
+When calculating the run-time efficiency of an algorithm, we drop the constant (-1), which simplifies our inner loop
+comparisons to n.
 
-This is how we arrive at the algorithm’s runtime: O(n^2).
+This is how we arrive at the algorithm’s runtime:<code>O(n
+<sup>2</sup>)</code>.
 
-Bubble sort is an algorithm to sort a list through repeated swaps of adjacent elements. It has a runtime of O(n^2).
+Bubble sort is an algorithm to sort a list through repeated swaps of adjacent elements. It has a runtime of <code>O(n
+<sup>2</sup>)</code>.
 
-For nearly sorted lists, bubble sort performs relatively few operations since it only performs a swap when elements are out of order.
+For nearly sorted lists, bubble sort performs relatively few operations since it only performs a swap when elements
+are out of order.
 
-Bubble sort is a good introductory algorithm which opens the door to learning more complex algorithms. It answers the question, “How can we algorithmically sort a list?” and encourages us to ask, “How can we improve this sorting algorithm?”
+Bubble sort is a good introductory algorithm which opens the door to learning more complex algorithms. It answers the
+question, “How can we algorithmically sort a list?” and encourages us to ask, “How can we improve this sorting
+algorithm?”
