@@ -595,6 +595,12 @@ more complex, you want to improve the automated testing of all the pieces.
 As you managed with your configuration management system grows in size, you want to increase the size of your
 testing environment, move some nodes to canaries and so on
 
+Using configuration management lets us track where these experiments are running, which servers they apply to, and
+where. They also let us show who's running them, and why, and even indicate how to turn them on or off. The manifest
+files that we wrote in this module were all text files that you can edit with any text editor. This means we can
+make the most out of tracking these files with a version control system. We store our infrastructure as code and
+can rollback or cherry pick changes if we need. 
+
 ---
 
 ### Extra Resources for Updating Deployments
