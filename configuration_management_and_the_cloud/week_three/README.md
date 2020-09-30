@@ -109,8 +109,8 @@ There are different types of Cloud services:
 
 ## Managing Instances in the Cloud
 
-There are different Cloud providers each with some specific advantages depending on what we are trying to achieve
-. But usually Cloud service providers implement a console to manage the services.
+There are different Cloud providers each with some specific advantages depending on what we are trying to achieve.
+But usually Cloud service providers implement a console to manage the services.
 
 Regardless of the service provider, following parameters needs to be set when creating a VM running in the Cloud
 
@@ -133,4 +133,33 @@ of a virtual machine's disk at a given point in time.
 
 ## Automatic Cloud Deployments
 
+
+### Cloud Scale Deployments
+
 ---
+
+### What is Orchestration?
+
+---
+
+### Cloud Infrastructure as Code
+
+---
+
+### Extra Resources on Cloud & GCP
+
+* [Getting Started on GCP with Terraform](https://cloud.google.com/community/tutorials/getting-started-on-gcp-with-terraform)
+
+* [Creating Groups of Unmanaged Instances](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-unmanaged-instances)
+
+* [Offical GCP Docs on Load Balancing](https://cloud.google.com/load-balancing/docs/https/)
+
+* [GCP Load Balancer](https://geekflare.com/gcp-load-balancer/)
+
+### Info on Hybrid Setups
+
+* [VMware Terraform Template](https://blog.inkubate.io/create-a-centos-7-terraform-template-for-vmware-vsphere/)
+
+* [GCP Reference Architecture - Terraform](https://www.terraform.io/docs/enterprise/before-installing/reference-architecture/gcp.html)
+
+* [Terraform On-Premises Hybrid Cloud - Wayfair](https://www.hashicorp.com/resources/terraform-on-premises-hybri-cloud-wayfair)
