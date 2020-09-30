@@ -46,7 +46,7 @@ There are multiple factors that is determined based on the selected region,
 
 Capacity is how much the service can deliver.
 
-Queries per second or QPS
+**Queries per second** or **QPS**
 
 This capacity change is called scaling-
 
@@ -120,14 +120,23 @@ Regardless of the service provider, following parameters needs to be set when cr
 
   * CPU, memory and boot disk options for the VM
 
-Cloud service providers also provides the command line interface, which allows for us to specify what we want once
-, and then use the same parameters many times. __Using the command line interface lets us create, modify, and even
-delete virtual machines from our scripts.__
+Cloud service providers also provides the command line interface, which allows for us to specify what we want once,
+and then use the same parameters many times.
+
+__Using the command line interface lets us create, modify, and even delete virtual machines from our scripts.__
 
 **Reference images** store the contents of a machine in a reusable format, while templating is the process of
 capturing all of the system configuration to let us create VM in a repeatable way. That exact format of the reference
 image will depend on the vendor. But often, the result is a file called a **disk image**. A disk image is a snapshot
 of a virtual machine's disk at a given point in time.
+
+### Extra Resources on Managing Vms in GCP
+
+* [GCP - Linux Quickstart](https://cloud.google.com/compute/docs/quickstart-linux)
+
+* [GCP -Create VM from Instance Template](https://cloud.google.com/compute/docs/instances/create-vm-from-instance-template)
+
+* [GCP SDK Docs](https://cloud.google.com/sdk/docs)
 
 ---
 
