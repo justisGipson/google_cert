@@ -669,7 +669,82 @@ deployment no matter which datacenter the services are running in
 
 ### Cloud Infrastructure as Code
 
+We've talked about how we need to orchestrate complex Cloud setups
 
+This includes handling a bunch of different nodes with different workloads, managing the complexity of deploying a
+hybrid setup, or modifying deployments across several Data centers.
+
+We also talked about **Infrastructure as Code**, and we called out that storing our infrastructure in a code like
+format, lets us create repeatable infrastructure, and that using **Version Control** for the storage, means that we ca
+keep a history of what we've done and easily rollback mistakes 
+
+These principles also apply to Cloud infrastructure
+
+The way we store it might be a little different depending on the tools that we use, but we'll still be storing this
+configuration in a code like format using Version control to keep track of the changes
+
+This lets us manage large-scale solutions with a small team. We can very quickly have an idea of what the deployment
+looks like, by looking at the configuration. We can try new things out and roll back if anything goes wrong. We can
+look at the history of changes to figure out why a specific change was made, and much more
+
+Most Cloud providers offer their own tool for managing resources as code
+
+* ___Amazon Cloud Formation___
+
+* ___Google Cloud Deployment Manager___
+
+* ___Microsoft Azure Resource Manager___
+
+* ___OpenStack Heat Orchestration Templates___
+
+These tools are specific to the Cloud provider, which means it can be complex and cumbersome to move to a different
+provider or combine a Cloud deployment with an on-premise deployments
+
+An option that's becoming really popular in the Orchestration field, is called **Terraform**
+
+Similar to Puppet, Terraform uses its own Domain-specific language which lets us specify what we want our Cloud
+infrastructure to look like
+
+The cool thing about Terraform is that it knows how to interact with a lot of different Cloud providers and
+automation vendors. So you can write your Terraform rules to deploy something on one Cloud provider, and then use
+very similar rules to deploy the service to a different Cloud provider
+
+Terraform uses each Cloud provider's API to accomplish this. This keeps you from having to learn a new API when
+moving to a different Cloud provider, and lets you focus on the infrastructure design
+
+We've seen how we can have a puppet rule that specifies that a computer should install a given package
+, and that the local puppet agent analyzes the computer and decides which installation mechanism to use depending on
+the operating system, the specific Linux distro and so on
+
+A similar thing happens with Terraform. The rules that define the resources like the VMs or containers to use, will
+use specific values related to the Cloud provider like selecting which machine type to use or in what region to
+deploy it.
+
+But a lot of the overall configuration is independent of the provider, and can be reused if we decide to move our
+configuration to a different provider or we want to use a hybrid setup
+
+Of course Terraform isn't the only option
+
+Puppet itself also ships with a bunch of plug-ins that can be used to interact with the different Cloud providers to
+create and modify the desired Cloud infrastructure
+
+On the contents of the nodes or instances managed by the Orchestration tools - 
+
+When dealing with nodes in the Cloud, there are basically two options:
+
+* They're long-lived and their contents need to be periodically updated
+
+* They are short-lived and updates are made by deleting the old instances and deploying new ones
+
+Long-lived instances are typically servers that are not expected to go away. Things like your company's internal mail
+server or internal document sharing servers, will manage these instances using a configuration management system
+like Puppet, which can deploy any necessary changes to the machines while they're running. This keeps them updated
+to the latest state
+
+Short-lived instances come and go very quickly. For these cases, it makes less sense to apply changes while they're
+running. Instead, we normally apply the configuration that we want the instances to have when they start, and we
+deploy any future changes by replacing the instances with new ones. We can still use Puppet for the initial setup
+but we don't need to run the agent periodically, only at the start
 
 ---
 
@@ -690,3 +765,35 @@ deployment no matter which datacenter the services are running in
 * [GCP Reference Architecture - Terraform](https://www.terraform.io/docs/enterprise/before-installing/reference-architecture/gcp.html)
 
 * [Terraform On-Premises Hybrid Cloud - Wayfair](https://www.hashicorp.com/resources/terraform-on-premises-hybri-cloud-wayfair)
+
+---
+
+### Wrap-up
+
+We've learned how to use the different Cloud resources available to us
+
+We've gone through a bunch of different concepts like software or infrastructure-as-a-service, public or hybrid
+clouds, up-scaling and down-scaling, and a lot more
+
+We've also demonstrated how to deploy single virtual machines and then turn them into a customized VM template
+
+Creating a single VM can be useful for small to medium-sized organizations with lower technical requirements. But as
+the technical requirements for the organization grows, it's often necessary to deploy more and larger Cloud solutions
+
+This is where using the template to create large system clusters becomes very handy. Using reference images and
+templating lets us clone a VM 100, 1,000, or more times, and this makes scaling our Cloud deployments super easy
+
+We checked out a bunch of different ways to interact with the platform
+
+We've seen how we can use both the web interface and the command line tool to create virtual machines in the Cloud
+
+Using these tools we can control which machines are online or offline, modify their configuration, and a bunch of
+other things. At a small or medium scale, using these tools can be really effective. At a larger scale, we have to
+automate these deployments even further and that's where orchestration comes into play
+
+Tools like Terraform let us define our Cloud infrastructure as code, allowing us to have a lot of control over how
+the infrastructure is managed, how the changes are applied, and so on
+
+This lets us combine the power of using infrastructure as code with the flexibility of using Cloud resources.
+
+---
