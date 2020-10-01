@@ -59,13 +59,95 @@ it strikes.
 
 ## Building Software for the Cloud
 
---
+
+### Storing Data in the Cloud
+
+
+
+---
+
+### Load Balancing
+
+
+
+---
+
+### Change Management
+
+
+
+---
+
+### Understanding Limitations
+
+
+
+---
+
+### Extra Reading on Cloud Providers
+
+* [Understanding VM CPU and IP-Address Quotas](https://cloud.google.com/compute/quotas#understanding_vm_cpu_and_ip_address_quotas)
+
+* [AWS Service Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+
+* [Microsoft Azure Service Specific Limits](https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits#service-specific-limits)
+---
 
 ## Monitoring and Alerting
+
+
+### Getting Started with Monitoring
+
+
+
+---
+
+### Getting Alerts When Things Go Wrong
+
+
+
+---
+
+### Basic Monitoring in GCP
+
+
+
+---
+
+### Extra Resources on Monitoring and Alerting
+
+* [DataDog - Monitoring 101: Collecting Data](https://www.datadoghq.com/blog/monitoring-101-collecting-data/)
+
+* [DigitalOcean - Intro to Metrics Monitoring and Alerting](https://www.digitalocean.com/community/tutorials/an-introduction-to-metrics-monitoring-and-alerting)
+
+* [Wikipedia - High Availability](https://en.wikipedia.org/wiki/High_availability)
+
+* [Google SRE Books](https://landing.google.com/sre/books/)
 
 ---
 
 ## Troubleshooting and Debugging
 
---
+
+### What To Do When You Can't Physically Be There
+
+---
+
+### Identifying Where The Failure is Coming From
+
+---
+
+### Recovering From Failure
+
+---
+
+### Extra Resources on Debugging in The Cloud
+
+* [Google - Troubleshooting Instances](https://cloud.google.com/compute/docs/troubleshooting/troubleshooting-instances)
+
+* [Microsoft Azure VM Troubleshooting](https://docs.microsoft.com/en-us/azure/virtual-machines/troubleshooting/)
+
+* [AWS - EC2 Instance Troubleshooting](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-troubleshoot.html)
+
+---
 
