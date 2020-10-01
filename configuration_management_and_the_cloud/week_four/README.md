@@ -291,7 +291,98 @@ cached in a server that's pretty close and it can be downloaded extra fast
 
 ### Change Management
 
+We now know how to get your service running in the cloud. Next, let's talk about how to keep it running
 
+Most of the time when something stops working, it's because something changed. If we want our cloud service to be
+stable, we might be tempted to avoid changes altogether. But change is a fact of cloud life. If we want to fix bugs
+and improve features in our services, we have to make changes
+
+But we can make changes in a controlled and safe way
+
+This is called **Change Management**, and it's what lets us keep innovating while our services keep running
+
+Step one in improving the safety of our changes, we have to make sure they're well-tested. This means running unit
+tests and integration tests, and then running these tests whenever there's a change
+
+A **Continuous Integration** or **CI** system will build and test our code every time there's a change
+
+Ideally, the CI system runs even for changes that are being reviewed. That way you can catch problems before they're
+merged into the main branch. You can use a common open source CI system like **Jenkins**, or if you use **GitHub**, you can use its **Travis CI Integration**
+
+Many cloud providers also offer continuous integration as a service. Once the change has committed, the CI system
+will build and test the resulting code
+
+Now you can use **Continuous Deployment**, or **CD**, to automatically deploy the results of the build or build
+artifacts. Continuous deployment lets you control the deployment with rules
+
+> For example, we usually configure our CD system to deploy new builds only when all of the tests have passed
+> successfully.
+
+On top of that, we can configure our CD to push to different environments based on some rules
+
+We mentioned that when pushing puppet changes, we should have a test environment separate from the production
+environment. Having them separate lets us validate that changes work correctly before they affect users.
+
+Here environment means everything needed to run the service. It includes the machines and networks used for running
+the service, the deployed code, the configuration management, the application configurations, and the customer data.
+
+* **Production**, usually shortened to **prod**, is the real environment, the ones users see and interact with
+
+* **Test** environment needs to be similar enough to prod that we can use them to check our changes work correctly
+
+You could have your CD system configured to push new changes to the test environment. You can then check that the
+service is still working correctly there, and then manually tell your deployment system to push those same changes
+to production
+
+If the service is complex and there are a bunch of different developers making changes to it, you might set up
+additional environments where the developers can test their changes in different stages before releasing them
+
+> For example, you might have your CD system push all new changes to a development or dev environment, then have a
+> separate environment called pre-prod, which only gets specific changes after approval. And only after a thorough
+> testing, these changes get pushed to prod
+
+Say you're trying to increase the efficiency of your surface by 20%, but you don't know if the change you made might
+crash part of your system
+
+You want to deploy it to one of those testing or development environments to make sure it works correctly before you
+ship it to prod
+
+Remember, these environments need to be as similar to prod as possible. They should be built and deployed in the same
+way. And while we don't want them to be breaking all the time, it's normal for some changes to break dev or even pre
+-prod.  
+
+Sometimes you might want to experiment with a new service feature. You've tested the code, you know it works, but you
+want to know if it's something that's going to work well for your users
+
+When you have something that you want to test in production with real customers, you can experiment using **A/B
+testing**
+
+* **A/B testing** some requests are served using one set of code and configuration, A, and other requests are served
+using a different set of of code and configuration, B
+ 
+This is another place where a load balancer and instance groups can help us out. You can deploy one instance group
+in your A configuration and a second instance group in your B configuration. Then by changing the configuration of
+the load balancer, you can direct different percentages of inbound requests to those two configurations
+
+If your A configuration is today's production configuration and your B configuration is something experimental, you
+might want to start by only directing 1 % of your requests to B. Then you can slowly ramp up the percentage that you
+check out whether the B configuration performs better than A, or not
+
+___Make sure you have basic monitoring so that it's easy to tell if A or B is performing better or worse___
+
+If it's hard to identify the back-end responsible for serving A requests or B requests, then much of the value of A/B
+testing is lost to A/B debugging
+
+So what happens if all the precautions we took aren't enough and we break something in production?
+
+Remember what we discussed earlier about post-mortems. We learn from failure and we build the new knowledge into our
+change management
+
+* Ask yourself, what did I have to do to catch the problem? 
+
+* Can I have one of my change management systems look for problems like that in the future?
+
+* Can I add a test or a rule to my unit tests, my CI/CD system, or my service health checks to prevent this kind of failure in the future?
 
 ---
 
