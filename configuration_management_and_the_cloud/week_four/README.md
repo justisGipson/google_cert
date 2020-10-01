@@ -148,8 +148,8 @@ machines and are super fast when retrieving results. But instead of a unified qu
 specific API provided by the database. This means that we might need to rewrite the portion of the application that
 accesses the DB
 
-When deciding how to store your data, you'll also have to choose a storage class. Cloud providers typically offer
-different classes of storage at different prices. Variables that affect the monthly price could be:
+When deciding how to store your data, you'll also have to choose a **storage class**. Cloud providers typically offer
+different classes of storage at different prices. Variables that could affect the monthly price could be:
 
 * Performance
 
@@ -202,7 +202,90 @@ and possibly costs more to access
 
 ### Load Balancing
 
+We've seen a bunch of different reasons why we might want more than one machine or container running our service
 
+> For example, we might want to horizontally scale our service to handle more work, distribute instances
+> geographically to get closer to our users. Or have backup instances to keep the service running if one or more of
+> the instances fail
+
+No matter the reason, we use orchestration tools and techniques to make sure that the instances are repeatable. And
+once we've set up replicated machines, we'll want to distribute the requests across instances
+
+This is where load balancing comes into play
+
+A pretty common load balancing technique is **Round Robin DNS**. Round robin is a really common method for
+distributing tasks
+
+If we want to translate a URL like my service.example.com into an IP address, we use the DNS protocol or domain name
+system
+
+In the simplest configuration, the URL always gets translated into exactly the same IP address. But when we configure
+our DNS to use round robin, it'll give each client asking for the translation a group of IP addresses in a different
+order. The clients will then pick one of the addresses to try to reach the service. If an attempt fails, the client
+will jump to another address on the list
+
+This load balancing method is super easy to set up. You just need to make sure that the IPs of all machines in the
+pool are configured in your DNS server, but it has some limitations
+
+First, you can't control which addresses get picked by the clients. Even if a server is overloaded, you can't stop
+the clients from reaching out to it
+
+Secondly, DNS records are cached by the clients and other servers. So if you need to change the list of addresses for
+the instances, you'll have to wait until all of the DNS records that were cached by the clients expire
+
+To have more control over how the load's distributed and to make faster changes, we can set up a server as a
+dedicated load balancer
+
+This is a machine that acts as a proxy between the clients and the servers. It receives the requests and based on the
+rules that we provide, it directs them to the selected back-end server
+
+Load balances can be super simple or super complex depending on the service needs
+
+Say your service needs to keep track of the actions that a user has taken up till now. In this case, you'll want your
+load balancer to use **sticky sessions**
+
+* **Sticky sessions** means all requests from the same client always go to the same back end server
+
+This can be really useful for services than need it but can also cause headaches when migrating or maintaining your
+service. So you need to use it only if you really need it
+
+Another cool feature of load balancers is that you can configure them to check the health of the backend servers
+
+Typically, we do this by making a simple query to the servers and checking that the reply matches the expected reply.
+If a back-end server is unhealthy, the load balancer will stop sending new requests to it to keep only healthy
+servers in the pool.
+
+A cool feature of cloud infrastructure is how easily we can add or remove machines from a pool of servers providing a
+service. If we have a load balancer controlling the load of the machines, adding a new machine to the pool is as
+easy as creating the instance, and then letting the load balancer know that it can now route traffic to it
+
+We can do this by manually creating and adding the instance or when our services under heavy load, we can just let
+the auto-scaling feature do it
+
+Okay, so imagine that you've built out your service with load balancers and you're receiving requests from all over
+the world
+
+How do you make sure that clients connect to the servers that are closest to them? You can use **Geo DNS** and
+**geoip**
+
+These are DNS configurations that will direct your clients to the closest geographical load balancer. The mechanism
+used to route the traffic relies on how the DNS servers respond to requests
+
+> For example, from machines hosted in North America, a DNS server in North America might be configured to respond
+> with the IPs in, you guessed it, North America
+
+It can be tricky to set this up on your own but most Cloud providers offer it as part of their services making it
+much easier to have a geographically distributed service
+
+Let's take this one step further. There are some providers dedicated to bringing the contents of your services as
+close to the user as possible. These are the **Content Delivery Networks** or **CDN**s. They make up a network of
+physical hosts that are geographically located as close to the end-user as possible.
+
+This means that CDN servers are often in the same data center as the users Internet service provider
+
+* **CDN**s work by caching content super close to the user. When a user requests a video, it's stored in
+the closest CDN server. That way, when a second user in the same region requests the same video, it's already
+cached in a server that's pretty close and it can be downloaded extra fast
 
 ---
 
