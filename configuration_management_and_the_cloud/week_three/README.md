@@ -344,11 +344,11 @@ on writing code
 
 Some popular managed web application platforms include:
   
-   * Amazon Elastic Beanstalk
+   * ___Amazon Elastic Beanstalk___
   
-   * Microsoft App Service
+   * ___Microsoft App Service___
   
-   * Google App Engine
+   * ___Google App Engine___
    
 While these platforms are very similar, they aren't fully compatible. So migrating from an on-premise framework and
 switching between vendors will require some code changes   
@@ -391,25 +391,124 @@ provider
 ## Managing Instances in the Cloud
 
 There are different Cloud providers each with some specific advantages depending on what we are trying to achieve.
-But usually Cloud service providers implement a console to manage the services.
 
-Regardless of the service provider, following parameters needs to be set when creating a VM running in the Cloud
+And while some terms used by one provider might not exactly match the ones used by other providers, the concepts are
+the same.
 
-  * Name of the instance
+But usually Cloud service providers implement a console to manage the services. This console includes pointers to a
+lot of different services that the providers offer
 
-  * Region and zone where the instance will be running
+So it's a good idea to start just by familiarizing yourself with the platform before you try to do something with it.
 
-  * CPU, memory and boot disk options for the VM
+This can mean, for example, looking at the available menus and options, and figuring out where the sections that let
+you use infrastructure-as-a-service are located
 
-Cloud service providers also provides the command line interface, which allows for us to specify what we want once,
-and then use the same parameters many times.
+No matter the exact menu entries, when you want to create a VM running in the Cloud, there are a bunch of parameters
+that you need to set
+
+These parameters are used by the Cloud infrastructure to spin up the machine with the settings that we want
+
+  * ___Name of the instance___ - This name will later let you identify the instance if you want to connect to it
+  , modify it, or even delete it.
+
+  * ___Region and zone where the instance will be running___ - you'll generally want to choose a region that's clos
+   to your users so that you provide better performance.
+
+  * ___Machine type for the VM___ - Cloud providers allow users to configure the characteristics of their virtual
+   machines to fit their needs. This means selecting how many processing units, or virtual CPUs, and how much memory
+   the virtual machine will be allocated
+   
+You might be tempted to select the most powerful VM available, but of course the more powerful the VM, the more money
+it will cost to run it
+
+As a sysadmin, you may need to decide between costs and processing power to fit the needs of your organization.
+
+When setting up instances like these, it's a good idea to start small and scale as needed
+
+On top of the CPU and memory available, you'll also need to select the boot disk that the VM will use
+
+Each virtual machine running in the Cloud has an associated disk that contains the operating system it runs and some
+extra disk space. When you create the VM, you select both how much space you want to allocate for the virtual disk
+and what operating system you want the machine to run
+
+To create these resources, we can use the web interface or the command line interface. The web UI can be very useful
+for quickly inspecting the parameters that we need to set
+
+he UI will let us compare the different options available and even show us an estimation of how much money our
+selected VM would cost per month. This is great for experimenting, but it doesn't scale well if we need to quickly
+create a bunch of machines or if we want to automate the creation
+
+In those cases, Cloud service providers also provides the command line interface, which allows for us to specify what
+we want once, and then use the same parameters many times
 
 __Using the command line interface lets us create, modify, and even delete virtual machines from our scripts.__
 
-**Reference images** store the contents of a machine in a reusable format, while templating is the process of
-capturing all of the system configuration to let us create VM in a repeatable way. That exact format of the reference
-image will depend on the vendor. But often, the result is a file called a **disk image**. A disk image is a snapshot
-of a virtual machine's disk at a given point in time.
+This is a great step towards automation, but it doesn't stop there. We can also automate the preparation of the
+contents of those virtual machines
+
+> Imagine spending an afternoon installing and configuring your new web server. You can do this on one machine, and
+> the process is fairly straightforward. You install any necessary software, you modify any configuration settings,
+> and then make sure that it's working correctly. But it would be hard to reproduce this exactly on another machine
+> and impossible to do it on thousands of machines.
+
+This is where **reference images** and **templating** come into play
+
+**Reference images** store the contents of a machine in a reusable format, 
+
+**templating** is the process of capturing all of the system configuration to let us create VM in a repeatable way
+. 
+That exact format of the reference image will depend on the vendor. But often, the result is a file called a **disk
+image** 
+
+A **disk image** is a snapshot of a virtual machine's disk at a given point in time
+
+Good templating software lets you copy an entire virtual machine and use that copy to generate new ones
+
+Depending on the software, the disk image might not be an _exact_ copy of the original machine because some machine
+data changes, like the hostname and IP address. But it will have the data that we need to make it reusable on lots
+of virtual machines
+
+This can be super helpful if we want to build a cluster of 10,000 machines which all have identical software
+
+---
+
+### Creating a New VM Using the GCP Web UI
+
+####[Google Cloud Platform Console](https://console.cloud.google.com)
+
+Here, the first step is to create a project so that our VMs are associated to that project
+
+`First Cloud Steps`
+
+Takes a couple of seconds to create the project
+
+Now that we have a project, our dashboard has a lot more info. Next, we want to go to the menu entry that lets us
+create virtual machines. To do that, we'll go into the Compute Engine menu, and select the VM instances entry.
+
+This screen is pretty empty because we don't have any VMs yet. We can create a VM by pressing the Create button.
+
+Here we're showing the many different options that we can set for this VM that we're creating. We can set the name
+, the region and zone, the machine type, the boot disk, and so on.
+
+`linux-instance`
+
+Now it's time to select the region and zone. If we click on the region drop-down, we can see all the regions that are
+currently available to create new VMs.
+
+For this example, we'll just keep the default regions.
+
+* If you're deploying a service, you should select something that's close to your users
+
+Example below is to create up the identical VM that was created via the GCP Web UI from the steps above
+```bash
+
+gcloud beta compute --project=first-cloud-steps-291215 instances create linux-machine-instance --zone=us-central1-a --machine-type=e2-medium --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=97071662855-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server --image=ubuntu-1804-bionic-v20200923 --image-project=ubuntu-os-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=linux-machine-instance --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+
+gcloud compute --project=first-cloud-steps-291215 firewall-rules create default-allow-http --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:80 --source-ranges=0.0.0.0/0 --target-tags=http-server
+
+```
+
+---
 
 ### Extra Resources on Managing Vms in GCP
 
@@ -426,13 +525,151 @@ of a virtual machine's disk at a given point in time.
 
 ### Cloud Scale Deployments
 
+The biggest advantage of using Cloud services is how easily we can scale our services up and down
+
+Now, to make the most out of this advantage, we need to do some preparation
+
+We'll set up our services so that we can easily increase their capacity by adding more nodes to the pool
+
+These nodes could be virtual machines, containers, or even specific applications providing one service. Whenever we
+have a service with a bunch of different instances serving the same purpose, we'll use a **load balancer**
+
+A **load balancer** ensures that each node receives a balanced number of requests
+
+When a request comes in, the load balancer picks a node to serve the response. There's a bunch of different
+strategies load balancer uses to select the node
+
+The simplest one is just to give each node one request called round robin
+
+More complex strategies include always selecting the same node for requests coming from the same origin, selecting
+the node that's closest to the requester, and selecting the one with the least current load
+
+Instance groups like these are usually configured to spin up more nodes when there's more demand, and to shut some
+nodes down when the demand falls
+
+This capability is called **autoscaling**
+
+* **Autoscaling** allows the service to increase or reduce capacity as needed while the service owner only pays for
+the cost of the machines that are in use at any given time
+
+Since some nodes will shut down when demand is lower, their local disks will also disappear and should be considered
+ephemeral or short-lived
+
+If you need data persistence, you'll have to create separate storage resources to hold that data and connect that
+storage to the nodes. That's why the services that we run in the Cloud are usually connected to a database which is
+also running in the Cloud
+
+This database will also be served by multiple nodes behind a load balancer, but this is typically managed by the Cloud
+provider using the platform as a service model
+
+> To check out how this works in practice, let's look at an example of a web application with a lot of users. 
+
+When you connect to a site through the Internet, your web browser first retrieves an IP address for the website that
+you want to visit. This IP address identifies a specific computer, the entry point for the sites
+
+Commonly there will be a bunch of different entry points for a single website. This allows the service to stay up
+even if one of them fails
+
+On top of that, it's possible to select an entry point that's closer to the user to reduce latency. In a small-scale
+application, this entry point could be the web server that serves the pages, and that would be it. 
+
+For large applications where speed and availability matter, there will be a couple of layers in between the entry
+point and the actual web service
+
+The first layer will be a pool of web caching servers with a load balancer to distribute the requests among them. 
+
+One of the most popular applications for this caching is called **Varnish**, but of course it's not the only one. The
+**Nginx** web server and software also includes this caching functionality
+
+There's a bunch of providers that do web caching as a service like Cloudflare and Fastly. No matter the software used
+, the result is basically the same
+
+When a request is made, the caching servers first check if the content is already stored in their memory. If it's
+there, they respond with the contents, if it's not, they ask their configured backend for the content and then store
+it so that it's present for future requests
+
+This configured backend is the actual web service that generates the webpages for the site, and it will also normally
+be a pool of nodes running under a load balancer
+
+To get any necessary data, this service will connect to a database. But because getting data from a database can be
+slow, there's usually an extra layer of caching, specific for the database contents. The most popular application for
+this level of caching are **Memcached** and **Redis**.
+
+Once you've done your homework and prepared your setup, you can rely on the capabilities offered by the Cloud
+provider to automatically scale the system up and down as necessary. The infrastructure will take care of adding and
+removing instances, distributing the load, making sure that each geographical region has the right capacity, and
+bunch more things
+
 ---
 
 ### What is Orchestration?
 
+___Automation is the process of replacing a manual step with one that happens automatically___
+
+We've mentioned a few ways that let us automate the creation of Cloud instances:
+
+* We can use templating to create new virtual machines
+
+* We can run a command line tool that automatically creates new instances for us
+
+* We can choose to enable auto-scaling and let the infrastructure tools take care of that depending on the demand
+
+But all of this automatic creation of new instances needs to be coordinated so that the instances correctly interact
+with each other and that's where **orchestration** comes into play
+
+* **Orchestration** is the automated configuration and coordination of complex IT systems and services
+
+___In other words, orchestration means automating a lot of different things that need to talk to each other___
+
+This will always include a lot of different automated tasks and will generally involve configuring a bunch of
+different systems
+
+> Now, say you wanted to deploy a new copy of the system in a separate data center where you have no instances yet
+>, you'll need to also automate the whole configuration of the system, the different instance types involved, how
+> will each instance finesse the others, what the internal network looks like, and so on
+
+So how does this work?
+
+The key here is that the configuration of the overall system needs to be automatically repeatable
+
+There's a bunch of different tools that we can use to do that. These tools typically don't communicate with the Cloud
+systems through the web interface or the command line
+
+They normally use an **Application Programming Interface** or **API** that lets us interact with the Cloud
+infrastructure directly from our scripts
+
+In the case of Cloud provider APIs, they typically let you handle the configuration that you want to sit directly
+from your scripts or programs without having to call a separate command
+
+This combines the power of programming with all of the available Cloud resources. The APIs offered by the Cloud
+providers let us perform all the tasks that we mentioned earlier like creating, modifying, and deleting instances
+and also deploying complex configurations for how these instances will talk to each other
+
+All of these actions can also be completed through the web interface or the command line. But doing them from our
+programs gives us extra flexibility which can be key when automating complex setups
+
+> Say you wanted to deploy a system that combines some services running on a Cloud provider and some services running
+> on-premise, this is known as a **Hybrid Cloud** setup, or only part of the services are in the Cloud
+
+The setup is super common in the industry right now
+
+Orchestration tools can be a pretty useful tool to make sure that both the on-premise services and the Cloud services
+know how to talk to each other and are configured with the right settings
+
+To ensure the service is running smoothly, we should set up a monitoring and alerting 
+
+This lets us detect and correct any problems with our service before users even notice. This is a critical piece of
+infrastructure but setting it up correctly can take quite some time
+
+By using orchestration tools, we can automate the configuration of any monitoring rules that we need to set, which
+metrics we want to look for, when we want to be alerted, and so on, and automatically apply these to a complete
+deployment no matter which datacenter the services are running in
+
 ---
 
 ### Cloud Infrastructure as Code
+
+
 
 ---
 
