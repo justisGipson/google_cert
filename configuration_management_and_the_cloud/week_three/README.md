@@ -508,6 +508,8 @@ gcloud compute --project=first-cloud-steps-291215 firewall-rules create default-
 
 ```
 
+___# TODO - grab info for walk through and make notes out of it___
+
 ---
 
 ### Extra Resources on Managing Vms in GCP
