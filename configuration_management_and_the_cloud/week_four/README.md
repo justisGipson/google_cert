@@ -349,7 +349,7 @@ ship it to prod
 
 Remember, these environments need to be as similar to prod as possible. They should be built and deployed in the same
 way. And while we don't want them to be breaking all the time, it's normal for some changes to break dev or even pre
--prod.  
+-prod.
 
 Sometimes you might want to experiment with a new service feature. You've tested the code, you know it works, but you
 want to know if it's something that's going to work well for your users
