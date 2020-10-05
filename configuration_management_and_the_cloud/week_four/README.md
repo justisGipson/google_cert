@@ -312,21 +312,21 @@ merged into the main branch. You can use a common open source CI system like **J
 Many cloud providers also offer continuous integration as a service. Once the change has committed, the CI system
 will build and test the resulting code
 
-Now you can use **Continuous Deployment**, or **CD**, to automatically deploy the results of the build or build
-artifacts. Continuous deployment lets you control the deployment with rules
+Now you can use **Continuous Deployment**, or **CD**, to automatically deploy the results of the build or *build
+artifacts*. Continuous deployment lets you control the deployment with rules
 
 > For example, we usually configure our CD system to deploy new builds only when all of the tests have passed
 > successfully.
 
 On top of that, we can configure our CD to push to different environments based on some rules
 
-We mentioned that when pushing puppet changes, we should have a test environment separate from the production
+We mentioned that when pushing puppet changes, we should have a test environment *separate* from the production
 environment. Having them separate lets us validate that changes work correctly before they affect users.
 
 Here environment means everything needed to run the service. It includes the machines and networks used for running
 the service, the deployed code, the configuration management, the application configurations, and the customer data.
 
-* **Production**, usually shortened to **prod**, is the real environment, the ones users see and interact with
+* **Production**, usually shortened to **prod**, is the *real environment*, the ones users see and interact with
 
 * **Test** environment needs to be similar enough to prod that we can use them to check our changes work correctly
 
@@ -337,8 +337,8 @@ to production
 If the service is complex and there are a bunch of different developers making changes to it, you might set up
 additional environments where the developers can test their changes in different stages before releasing them
 
-> For example, you might have your CD system push all new changes to a development or dev environment, then have a
-> separate environment called pre-prod, which only gets specific changes after approval. And only after a thorough
+> For example, you might have your CD system push all new changes to a *development* or *dev environment*, then have a
+> separate environment called *pre-prod*, which only gets specific changes after approval. And only after a thorough
 > testing, these changes get pushed to prod
 
 Say you're trying to increase the efficiency of your surface by 20%, but you don't know if the change you made might
@@ -347,9 +347,10 @@ crash part of your system
 You want to deploy it to one of those testing or development environments to make sure it works correctly before you
 ship it to prod
 
-Remember, these environments need to be as similar to prod as possible. They should be built and deployed in the same
-way. And while we don't want them to be breaking all the time, it's normal for some changes to break dev or even pre
--prod.
+___Remember, these environments need to be as similar to prod as possible___
+
+They should be built and deployed in the same way. And while we don't want them to be breaking all the time, it's
+normal for some changes to break dev or even pre-prod.
 
 Sometimes you might want to experiment with a new service feature. You've tested the code, you know it works, but you
 want to know if it's something that's going to work well for your users
@@ -357,15 +358,17 @@ want to know if it's something that's going to work well for your users
 When you have something that you want to test in production with real customers, you can experiment using **A/B
 testing**
 
-* **A/B testing** some requests are served using one set of code and configuration, A, and other requests are served
-using a different set of of code and configuration, B
+* **A/B testing** some requests are served using one set of code and configuration, *A*, and other requests are served
+using a different set of of code and configuration, *B*
  
 This is another place where a load balancer and instance groups can help us out. You can deploy one instance group
-in your A configuration and a second instance group in your B configuration. Then by changing the configuration of
-the load balancer, you can direct different percentages of inbound requests to those two configurations
+in your A configuration and a second instance group in your B configuration. 
+
+Then by changing the configuration of the load balancer, you can direct different percentages of inbound requests to
+those two configurations
 
 If your A configuration is today's production configuration and your B configuration is something experimental, you
-might want to start by only directing 1 % of your requests to B. Then you can slowly ramp up the percentage that you
+might want to start by only directing 1% of your requests to B. Then you can slowly ramp up the percentage that you
 check out whether the B configuration performs better than A, or not
 
 ___Make sure you have basic monitoring so that it's easy to tell if A or B is performing better or worse___
@@ -375,8 +378,9 @@ testing is lost to A/B debugging
 
 So what happens if all the precautions we took aren't enough and we break something in production?
 
-Remember what we discussed earlier about post-mortems. We learn from failure and we build the new knowledge into our
-change management
+Remember what we discussed earlier about post-mortems. 
+
+___We learn from failure and we build the new knowledge into our change management___
 
 * Ask yourself, what did I have to do to catch the problem? 
 
@@ -388,7 +392,78 @@ change management
 
 ### Understanding Limitations
 
+When writing software to run on the Cloud, it's important to keep in mind how the application will be deployed
 
+* The software that's being created needs to be fault tolerant and capable of handling unexpected events. 
+
+* Instances might be added or removed from the pool as needed and if an individual machine crashes
+
+* The service needs to breeze along without introducing problems
+
+* Not every problem results in a crash, sometimes we run into quotas or limits, meaning that you can only perform a
+certain number of operations within a certain time period
+
+> For example, when using Blob Storage there might be a limit of 1,000 writes to the same blob in a given seconds
+
+If your service performs a lot of these operations routinely, it might get blocked by these limits
+
+In that case- you'll need to see if you can change the way you're doing the operations, for example by grouping all
+of the calls into one batch. Switching to a different service is sometimes an option too.
+
+Some API calls used in Cloud services can be expensive to perform, so most Cloud providers will enforce rate limits on
+these calls to prevent one service from overloading the whole system
+
+> For example, there might be a rate limit of one call per second for an expensive API call
+
+On top of that, there are also utilization limits, which cap the total amount of a certain resource that you can
+provision
+
+These quotas are there to help you avoid unintentionally allocating more resources than you wanted
+
+> Imagine you've configured your service to use auto scaling and it suddenly receives a huge spike in traffic. This
+> could mean a lot of new instances getting deployed which can cost a lot of money. For some of these limits, you can
+> ask for a quota increase from the Cloud provider if you want additional capacity, and you can also set a smaller
+> quota in the default to avoid overspending
+
+This can be a great idea when you're running a service on a tight budget
+
+If your service performance expensive operations routinely, you should make sure you understand the limitations of
+the solution that you choose. A lot of platform as a service and infrastructure as a service offerings have costs
+directly related to how much they're used
+
+They also have usage quotas
+
+If the service you've built suddenly becomes very popular, you can run out of quota or run out of budget. By imposing
+a quota on an auto-scaling system, the system will grow to meet user demand until it reaches the configured limit
+
+The trick here is to have good monitoring and alerting around behavior like this. If your system runs out of quota
+but there's an increased demand for content, the system may have problems, degraded performance or worse yet
+an outage
+
+So you want to be notified as soon as it happens that you can decide whether to increase your quota or not
+
+Finally, dependencies...
+
+When your service depends on a Platform as a Service offering like a hosted database or CICD system, you're handing
+the responsibility for maintenance and upgrades of that service off to your Cloud provider, fewer things to worry
+about and maintain, but it also means that you don't always get to choose what version of that software you're using
+
+You might find yourself on either side of the upgrade cycle, either wanting to stay at a version that's working well
+for you or wanting the Cloud provider to hurry up and upgrade to resolve a bug that's affecting your service
+
+Your Cloud provider has a strong incentive to keep its service software fairly up-to-date
+
+Keeping software as a service solutions up to date ensures that customers aren't vulnerable to security flaws, that
+bugs are promptly fixed and that new features get released early
+
+At the same time, the Cloud provider has to move carefully and test changes to keep destruction of its service to a
+minimum
+
+They will communicate proactively about changes to the services that you use and in some cases, Cloud providers might
+give you access to early versions of these services
+
+> For example, you can set up a test environment for your service that uses the beta or pre-release version of a given
+> software as a service solution, letting you test it before it impacts production
 
 ---
 
@@ -406,11 +481,230 @@ change management
 
 ### Getting Started with Monitoring
 
+Once we have our service running in the Cloud, we want to make sure that our service keeps running, and not just that
+, we want to make sure it keeps behaving as expected, returning the right results quickly and reliably
 
+The key to ensuring all of this, is to set up good monitoring and alerting rules
+
+To understand how our service is performing, we need to monitor it
+
+Monitoring lets us look into the history and current status of a system
+
+How can we know what the status is? We'll check out a bunch of different metrics. These metrics tell us if the
+service is behaving as expected or not. Well, some metrics are generic, like how much memory an instance is using.
+Other metrics are specific to the service we want to monitor.
+
+> Say your company is running a website and you want to check if it's working correctly. When a web server responds
+> to an HTTP request, it starts by sending a response code, followed by the content of the response.
+
+You might know, for example, that a **404** code means that the page wasn't found, or that a **500** response means
+that there was an internal server error. In general, response codes in the **500** range, like **501**. or **503**,
+tells us that something bad happened on the server while generating a response. Response codes in the 400 range means
+there was a client-side problem in the request
+
+When monitoring your web service, you want to check both the count of response codes and their types to know if
+everything's okay
+ 
+> If you're running an e-commerce site, you'll care about how many purchases were made successfully and how many
+> failed to complete. 
+>
+> If you're running a mail server, you want to know how many emails were sent and how many got stuck and so on
+
+You'll need to think about the service you want to monitor and figure out the metrics you'll need
+
+Now, once we've decided what metrics we care about, what do we do with them?
+
+We'll typically store them in the monitoring system. There's a bunch of different monitoring systems out there.
+
+Some systems like:
+
+* ___[AWS Cloudwatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)___
+
+* ___[Google Operations(Formerly Stackdriver)](https://cloud.google.com/products/operations)___
+
+* ___[Microsoft Azure Monitor(Formerly Metrics)](https://docs.microsoft.com/en-us/azure/azure-monitor/)___
+
+Are offered directly by Cloud Providers
+
+Other systems like:
+
+* ___[Prometheus](https://prometheus.io/)___
+
+* ___[DataDog](https://www.datadoghq.com/)___
+
+* ___[Nagios](https://www.nagios.org/)___
+
+Can be used across vendors of Cloud services
+
+There's two ways of getting our metrics into the monitoring system
+
+* Some systems use a pull model, which means that the monitoring infrastructure periodically queries our service to
+get the metrics
+
+* Other monitoring systems use a push model, which means that our service needs to periodically connect to the system
+to send the metrics
+
+No matter how we get the metrics into the system, we can create dashboards based on the collected data
+
+These dashboards show the progression of the metrics over time. We can look at the history of one specific metric to
+compare the current state to how it was last week or last month. Or we can look at the progression of two or more
+metrics together to check out how the change in one metrics effects another
+
+> Imagine it's Monday morning and you notice that your service is receiving a lot less traffic than usual. You can
+> look at the data from past weeks and see if you always get less traffic on Monday mornings or if there's something
+> broken causing your service to be unresponsive. 
+>
+> Or if you see that in the past couple days, the memory used by your instances has been going up, you can check if
+> this growth follows a similar increase in another metric, like the amount of requests received or the amount of
+> data being transmitted
+
+This can help you decide if there's been a memory leak that needs to be fixed or if it's just an expected
+consequences of a growth in popularity
+
+* **Pro tip** -  you only want to store the metrics that you care about, since storing all of these metrics in the
+system takes space, and storage space costs money
+
+When we collect metrics from inside a system, like how much storage space the service is currently using or how long
+it takes to process a request, this is called **Whitebox Monitoring**
+
+* **Whitebox Monitoring** checks the behavior of the system from the inside
+
+We know the information we want to track, and we're in charge of making it possible to track
+
+> For example, if we want to track how many queries we're making to the database, we might need to add a variable to
+> count this
+
+* **Blackbox Monitoring** checks the behavior of the system from the outside
+
+This is typically done by making a request to the service and then checking that the actual response matches the
+expected response
+
+We can use this to do a very simple check to know if the service is up and to verify if the service is responding
+from outside your network. Or we could use it to see how long it takes for a client in a different part of the world
+to get a response from the system
 
 ---
 
 ### Getting Alerts When Things Go Wrong
+
+We expect a lot from our modern IT services. We expect them to be up and running 24-7. We want to be able to get our
+work done whenever and wherever
+
+For that, we need our services to respond day or night, workday or holiday
+
+But even if the services are running 24-7, System Administrators can't constantly be in front of their systems
+
+Instead, we set up our services so that they work unattended and deal with problems when they happen
+
+Now to do this, we need to detect those problems so that we can deal with them as quickly as possible. If you have
+no automated way of raising an alert, you might only find out about the issue when you get a call from a frustrated
+user telling you that your service is down
+
+It's much better to create automation that checks the health of your system and notifies you when things don't behave
+as expected. This can give you advance warning that something's wrong, sometimes even before users notice a problem
+at all
+
+So how do we do that?
+
+The most basic approach is to run a job periodically that checks the health of the system and sends out an email if
+the system isn't healthy
+
+On a Linux system, we could do this using **cron**, which is the tool to schedule periodic jobs. 
+
+We'd pair this with a simple Python script that checks the service and sends any necessary emails. This is an
+extremely simplified version of an alerting system, but it shares the same principles as all alerting systems, no
+matter how complex and advanced
+
+___We want to periodically check the state of the service and raise alerts if there's a problem___
+
+When you use a monitoring system like the ones we described in the last lesson, the metrics you collect represent the
+state of your service. 
+
+Instead of periodically running a script that connects to the service and checks if it's responding, you can
+configure the system to periodically evaluate the metrics; and based on some conditions, decide if an alert should be
+raised
+
+Raising an alert signals that something is broken and a human needs to respond
+
+>  For example, you can set up your system to raise alerts if the application is using more than 10 gigabytes of RAM
+>, or if it's responding with too many 500 errors, or if the queue of requests waiting to get processed gets too long
+
+___Not all alerts are equally urgent___
+
+We typically divide useful alerts into two groups, those that need immediate attention and those that need attention
+in the near future
+
+If an alert doesn't need attention, then it shouldn't have been sent at all. It's just noise. If your web service is
+responding with errors to 50% of the requests, you should look at what's going on right away
+
+Even if this means waking up in the middle of the night to address whatever is wrong, you'll definitely want to fix
+this kind of critical problem ASAP
+
+On the other hand, if the issue is that the attached storage is 80% full, you need to figure out whether to
+increase the disk size or maybe clean up some of the stored data. But this isn't super urgent, so don't let it get in
+the way of a good night's sleep
+
+Since these two types of alerts are different, we typically configure our systems to raise alerts in two different ways
+
+Those that need immediate attention are called pages, which comes from a device called a pager. Before mobile phones
+became popular, pagers were the device of choice for receiving urgent messages, and they're still used in some places
+around the world
+
+Nowadays, most people receive their pages in other forms like SMS, automated phone calls, emails, or through a
+mobile app, but we still call them pages
+
+On the flip side, the non-urgent alerts are usually configured to create bugs or tickets for an IT specialist to take
+care of during their workday
+
+They can also be configured to send email to specific mailing lists or send a message to a chat channel that will be
+seen by the people maintaining the service
+
+___All alerts should be actionable___
+
+
+If you get a bug or a page and there's nothing for you to do, then the alert isn't actionable and it should be
+changed or it shouldn't be there at all.
+
+Otherwise, it's just noise
+
+> Say you're trying to check if your services database back-end is responsive. If you do this by creating a query that
+> returns all rows in a large table, your request might sometimes timeout and raise an alert
+
+That would be a noisy alert, not really actionable. You'd need to tweak the query to make the check useful
+
+> Say you run a cron job that copies files from one location to another every 10 minutes, you want to check that this
+> job runs successfully. So you configure your system to alert you if the job fails. 
+>
+> After putting this in production, you realize there's a bunch of unimportant reasons that can cause this job to
+> temporarily fail. Maybe the destination storage is too busy and so sometimes the job times out. Maybe the origin wa
+> being rebooted right when the job started, so the job couldn't connect to it. 
+>
+> No matter why, whenever you go to check out what caused a job to fail, you discover that the following run had
+> succeeded and there's nothing for you to do
+
+You need to rethink the problem and tweak your alert
+
+Since the task is running frequently, you don't care if it fails once or twice, you can change the system to only
+raise the alert if the job fails three times in a row
+
+That way when you get a bug, it means that it's failing consistently and you'll actually need to take action to fix it
+
+You need to think about which metrics you care about. Configure your monitoring system to store them, then configure
+your alerting system to raise alerts when things don't behave as expected. The flip side is that once you've set
+your systems to raise actionable alerts when needed, you're going to have peace of mind.
+
+If no alerts are firing, you know the service is working fine. This lets you concentrate on other tasks without
+having to worry
+
+To set up good alerts, we need to figure out which situations should page, which ones should create bugs, and which
+ones we just don't care about 
+
+These decisions aren't always easy and might need some discussion with the rest of your team. But it can help make
+sure that you spend time only on things that actually matter
+
+---
+
+### Service-Level Objectives
 
 
 
@@ -439,13 +733,19 @@ change management
 
 ### What To Do When You Can't Physically Be There
 
+
+
 ---
 
 ### Identifying Where The Failure is Coming From
 
+
+
 ---
 
 ### Recovering From Failure
+
+
 
 ---
 
