@@ -863,7 +863,7 @@ services interacting with each other
 If you're trying to figure out what's causing your complex servers to respond with a ton of 500s. You need to look at
 different pieces individually until you find the culprit
 
-* Does the problem happen if you run the service and a test VM?
+* Does the problem happen if you run the service in a test VM?
 
 * Without any load balancers or caching servers in between?
 
@@ -877,9 +877,10 @@ Setting up a testing environment might take time and effort. So it's a good idea
 problem actually happens. That way you don't need to do it under pressure when your users are complaining that the
 system's down
 
-> Say you're using a database service that's only reachable from inside your cloud network. This means you can't
-> interact with it directly from the outside, only from instances within your cloud infrastructure. If your service
-> starts acting up, you might want to check the responses from the database directly
+> Say you're using a database service that's only reachable from inside your cloud network.
+
+This means you can't interact with it directly from the outside, only from instances within your cloud
+infrastructure. If your service starts acting up, you might want to check the responses from the database directly
 
 Rather than going through any of the other back-end servers. To do this, you'll need to have a debugging machine in
 the network and you'll need to use tools to interact with the database directly
@@ -894,7 +895,7 @@ info is available in which logs
 
 Some cloud providers offer centralized log solutions to collect all your logs in one place
 
-You can have all your notes, send info, warning and error messages to the log collection point
+You can have all your notes, info, warning and error messages to the log collection point
 
 Then, when you're trying to debug a problem, you can easily see everything that was going on when the error occurred
 
@@ -902,7 +903,66 @@ Then, when you're trying to debug a problem, you can easily see everything that 
 
 ### Identifying Where The Failure is Coming From
 
+When we host our services in the cloud, we need to give up part of the control over the infrastructure that we're
+using
 
+This might be especially noticeable when we're trying to find the root cause of a problem in our service and we don't
+know if the failure is caused by an error on our side or on the provider side
+
+So what can we do in that case?
+
+Problems on the provider side tend to be isolated to geographical regions. If you're seeing weird problems and you
+have no idea what could be going on, you can try bringing up your service in a different region and checking if the
+failure happens there too
+
+If it works fine there, it's likely that there's an issue with the cloud infrastructure and you should bring it up
+with your provider
+
+If it fails in the other regions too, it's likely that it's a problem with your system
+
+Similarly, if you're seeing problems related to resource usage, you can try running the same system in a different
+machine type and checking how it behaves there. This could help out, for example, if your service takes too much time
+to process incoming requests
+
+By changing your service to more powerful machines, you might improve the overall performance
+
+Another option that we've mentioned a bunch is doing rollbacks for the pieces that have recently changed
+
+Having all your infrastructure stored as code in a version control system will let you access the history of the
+changes to each component in the system
+
+When setting up your service, you should make sure that you can deploy and roll back each individual piece
+
+> Imagine you get an alert saying that the web servers in your application are using a lot more memory than they used
+> to you. You don't know why but you know that a new version was deployed a couple of days ago. 
+>
+> By rolling back to the previous version, you can verify if that change was at fault or not.
+>
+> If the servers work fine after the rollback, you can investigate the specific changes and try to figure out why
+> they're using so much more memory. If the server's are still using a lot of memory after the rollback, it means
+> something else is up...
+
+We've touched briefly upon one popular option when running things on the cloud called **Containers**
+
+* **Containers** are packaged applications that are shipped together with their libraries and dependencies
+
+Each application is executed in a separate container, completely independent of any other applications running on the
+same machine
+
+One of the neat characteristics of containerized applications is that you can deploy the same container to your local
+workstation to a server running on-premise or to cloud infrastructure provided by different vendors
+
+This can be really helpful when trying to understand if the failure is in the code or the infrastructure. You simply
+deploy the container somewhere else and check if it behaves the same way
+
+When using containers, the typical architecture is to have a lot of small containers that take care of different
+parts of the service. This means that the overall system can get really complex and when something breaks, it can
+be hard to identify where the problem is coming from
+
+The key to solving problems in the container world is to make sure you have good logs coming in from all of the parts
+of the system
+
+And that, you can bring up test instances of each of the applications to try things out when necessary
 
 ---
 
