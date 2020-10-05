@@ -968,11 +968,74 @@ And that, you can bring up test instances of each of the applications to try thi
 
 ### Recovering From Failure
 
+When dealing with a complex system, there's a lot of ways it can fail. If we want our service to be reliable, we need
+to make sure that we can get it up and running as quickly as possible when bad things happen
 
+We'll need to have good backups and a well-documented recovery plan
+
+Backups here doesn't mean just copies of your data. It also means backups for the different pieces of your
+infrastructure, including the instances that are running the service and the network that's used to connect to the
+service
+
+___Backups of the data your service handles are extremely important___
+
+If you operate a service that stores any kind of data, it's critical that you implement automatic backups *and* that
+you periodically check that those backups are working correctly by performing restores. This helps make sure that
+you're backing up the right data and that you have well-documented processes for recovering it when things fail
+
+What about the rest of the infrastructure?
+
+If you store all your Infrastructure as code, you already have a backup of what your infrastructure should look like
+
+But if your service goes down for some reason, deploying all that infrastructure from scratch might take awhile
+
+That's why many teams keep backup or a secondary instances of their services already up and running
+
+That way, if there's a problem with the primary instance, they can simply point the load balancer or the DNS entries
+to the secondary instance with minimal disruption to the service
+
+Alternatively, it's common practice to have enough servers running at any time so that if one of them goes down, the
+others can still handle the traffic, or on a larger scale, have the service running on different data centers
+around the world, so that if one of the data centers has a problem, the service can still be provided by the
+instances running in the other data centers
+
+If you're running a service on-premise, you might want to have two different connections to the Internet
+
+This way, if the connection offered by one of your ISPs goes down, you can still connect to the Internet through the
+other one
+
+When you're running on Cloud, you can mostly rely on your Cloud provider having enough network redundancy. But if you
+really care about your service staying up no matter what, you might want to run your service on two different Cloud
+vendors so that if one of the providers has a large outage, you can still rely on the other
+
+> Now, imagine you're running your service in one data center. Unfortunately, that data center has just suffered a
+> natural disaster, and all of your instances are down
+
+What do you do?
+
+You need to recover your service from scratch, deploying it in a different data center and getting all your data from
+backups
+
+As long as the backups are available in other data centers and your Infrastructure is fully stored in a version
+control system, this should be possible
+
+But figuring out how to successfully bring up the whole system from scratch can take awhile. So you don't want to
+have to scramble to do it when disaster hits
+
+Instead, you should have a documented procedure that explains all of the steps that you need to take. Since systems
+evolve over time, you need to make sure that this documentation stays up-to-date. One way to do that is to once in
+a while pretend that you need to recover your service, follow the documented steps, and check if anything is
+missing or outdated
+
+___Systems will fail___
+
+___A hundred percent availability is simply not an achievable target___
+
+But being prepared for a failure will let you recover your service quickly and keep your users happy
 
 ---
 
-### Extra Resources on Debugging in The Cloud
+### Extra Resources on Debugging Problems in The Cloud
 
 * [Google - Troubleshooting Instances](https://cloud.google.com/compute/docs/troubleshooting/troubleshooting-instances)
 
@@ -982,3 +1045,32 @@ And that, you can bring up test instances of each of the applications to try thi
 
 ---
 
+### Wrap-up
+
+We've discussed a lot of different topics related to deploying software in the Cloud
+
+We've learned a bunch of concepts and techniques that we need to take into account when building applications that
+will run on Cloud, how to keep them running, and how to figure out what's wrong when things don't go according to plan
+
+We started by discussing some of the different options for storing data in the Cloud
+
+We learned how we can use Cloud's flexibility to get the right type of storage and increase it when needed
+
+We then learned about the different approaches to load balancing, which we can use to ensure that our services can be
+distributed across a number of servers
+
+We also learned how we can get the load balancer to check the health of the back ends to only send request to the
+servers that are working fine
+
+We looked into how we can build safety into our code changes. We checked out how we can make sure that changes we
+pushed to production are well-tested, and how we can use development and test environments to let us experiment with
+changes until we know they'll give a good experience to our users
+
+We then learned about some of the limitations that we can come across when running our services in the Cloud, which
+are different from the problems we have when running services on physical machines
+
+We also learned some best practices for how to monitor our service, when and how to generate alerts, and we even saw
+an alert triggering an action
+
+We wrapped up by looking into some of the problems specific to running our instances in the Cloud and how to deal
+with those
