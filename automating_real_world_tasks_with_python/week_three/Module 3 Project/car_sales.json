@@ -483,4 +483,3 @@
     {"id":483,"car":{"car_make":"Pontiac","car_model":"Grand Prix","car_year":1989},"price":"$18793.51","total_sales":986},
     {"id":484,"car":{"car_make":"Audi","car_model":"A8","car_year":2010},"price":"$6605.02","total_sales":294},
     {"id":485,"car":{"car_make":"Hyundai","car_model":"Sonata","car_year":2008},"price":"$12011.32","total_sales":1189}]
-
