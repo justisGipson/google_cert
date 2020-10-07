@@ -13,6 +13,8 @@ task!
 In the next couple of readings, we're going to get into what to expect, and some things you should keep in mind when
 writing your solution.
 
+---
+
 ### Project Problem Statement
 
 Okay, here's the scenario:
@@ -38,8 +40,9 @@ Hopefully this summary has helped you start thinking about how you’ll approach
 little scared, don't worry, you can definitely do this! You have all the necessary tools, and the lab description
 will go into a lot more detail of what you need to do.
 
-### How to Approach the Problem
+---
 
+### How to Approach the Problem
 
 We're giving you a pretty big project to do at the end of this course -- but you can totally complete it with what
 you've learned until now! Take your time, and be methodical. Use these tips to help you:
@@ -73,5 +76,34 @@ these modules in previous lessons too, so feel free to go back and review them i
 
 * [smtplib](https://docs.python.org/3/library/smtplib.html) (Sending Email)
 
-Read the lab instructions carefully! Following the instructions and implementing your solution to the specifications
-that you’re given are critical to completing the task, and to being accurately graded!
+---
+
+### Introduction
+
+You work for an online fruits store, and you need to develop a system that will update the catalog information with
+data provided by your suppliers. The suppliers send the data as large images with an associated description of the
+products in two files (.TIF for the image and .txt for the description). The images need to be converted to smaller
+jpeg images and the text needs to be turned into an HTML file that shows the image and the product description.
+The contents of the HTML file need to be uploaded to a web service that is already running using Django. You also
+need to gather the name and weight of all fruits from the .txt files and use a Python request to upload it to your
+Django server.
+
+You will create a Python script that will process the images and descriptions and then update your company's online
+website to add the new products.
+
+Once the task is complete, the supplier should be notified with an email that indicates the total weight of fruit (in
+lbs) that were uploaded. The email should have a PDF attached with the name of the fruit and its total weight (in lbs).
+
+Finally, in parallel to the automation running, we want to check the health of the system and send an email if
+something goes wrong.
+
+###What you’ll do
+
+* Write a script that summarizes and processes sales data into different categories
+
+* Generate a PDF using Python
+
+* Automatically send a PDF by email
+
+* Write a script to check the health status of the system
+
