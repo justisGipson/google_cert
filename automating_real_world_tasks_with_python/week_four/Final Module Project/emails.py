@@ -7,7 +7,7 @@ import smtplib
 
 
 def generate_email(sender, recipient, subject, body, attachment_path):
-    """Creates an email with an attachement."""
+    """Creates an email with an attachment."""
     # Basic Email formatting
     message = email.message.EmailMessage()
     message["From"] = sender

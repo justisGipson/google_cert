@@ -16,8 +16,7 @@ def data_to_html(title, data):
     """Turns a list of lists into an HTML table"""
 
     # HTML Headers
-    html_content =
-                """
+    html_content =  """
                     <html>
                         <head>
                             <style>
@@ -56,6 +55,7 @@ def data_to_html(title, data):
         html_content += "</tr>"
 
     html_content += """</tr></table></body></html>"""
+
     return html_content
 
 
